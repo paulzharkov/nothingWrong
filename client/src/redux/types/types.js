@@ -1,0 +1,2 @@
+export const ADD_USERS_COOKIE = 'ADD_USERS_COOKIE';
+
