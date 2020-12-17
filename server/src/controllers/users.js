@@ -17,7 +17,7 @@ const userSignup = async (req, res) => {
 
       req.session.user = {
         id: user._id,
-        name: user.name,
+        login: user.login,
       };
 
       return res.sendStatus(200);
@@ -37,7 +37,7 @@ const userSignin = async (req, res) => {
         if (await bcrypt.compare(pass, currentUser.pass)) {
           req.session.user = {
             id: currentUser._id,
-            name: currentUser.name,
+            login: currentUser.login,
           };
           return res.sendStatus(200);
         }
