@@ -1,2 +1,2 @@
-export const ADD_USERS_COOKIE = 'ADD_USERS_COOKIE';
+export const ADD_USERS_LOGIN = 'ADD_USERS_LOGIN';
 

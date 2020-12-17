@@ -1,8 +1,8 @@
-import { ADD_USERS_COOKIE } from '../types/types';
+import { ADD_USERS_LOGIN } from '../types/types';
 
-function usersReducer(state = [], action) {
+function usersReducer(state = '', action) {
   switch (action.type) {
-    case ADD_USERS_COOKIE:
+    case ADD_USERS_LOGIN:
       return action.payload;
 
     default:

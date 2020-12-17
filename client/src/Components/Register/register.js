@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
-import createPersonThunk from '../../redux/creators/users'
+import { createPersonThunk } from '../../redux/creators/users'
 
 function Register() {
 
@@ -22,7 +22,7 @@ function Register() {
 
   return (
     <div>
-      <form onSubmit={handlerReg}>
+      <form>
         <input value={login} onChange={(event) => setLogin(event.target.value)} type="text" placeholder="Введите логин" />
         <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="Введите email" />
         <input value={pass} onChange={(event) => setPass(event.target.value)} type="password" placeholder="Введите пароль" />

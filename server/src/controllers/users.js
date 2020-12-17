@@ -20,7 +20,7 @@ const userSignup = async (req, res) => {
         login: user.login,
       };
 
-      return res.sendStatus(200);
+      return res.json(user.login)
     } catch (error) {
       return res.sendStatus(404);
     }
@@ -39,14 +39,15 @@ const userSignin = async (req, res) => {
             id: currentUser._id,
             login: currentUser.login,
           };
-          return res.sendStatus(200);
+          return res.json(currentUser.login)
         }
       }
     } catch (error) {
       return res.sendStatus(404);
     }
+  } else {
+    return res.sendStatus(404);
   }
-  return res.sendStatus(404);
 };
 
 const userSignout = async (req, res) => {
