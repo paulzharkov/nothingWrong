@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
+import createPersonThunk from '../../redux/creators/users'
 
 function Register() {
 
@@ -14,7 +15,7 @@ function Register() {
 
   function handlerReg(e) {
     e.preventDefault()
-    dispatch(AC.createPerson({ login, email, pass }))
+    dispatch(createPersonThunk({ login, email, pass }))
     history.push('/lk')
   }
 
