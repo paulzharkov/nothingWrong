@@ -1,17 +1,16 @@
 const bcrypt = require('bcrypt');
-// const User = require('../models/user.model');
+const User = require('../models/user.model');
 
 const userSignup = async (req, res) => {
-  const { name, email, pass } = req.body;
+  const { login, email, pass } = req.body;
 
-  if (name && email && pass) {
+  if (login && email && pass) {
     try {
       const hashPass = await bcrypt.hash(pass, 10);
       const user = new User({
-        name,
+        login,
         email,
         pass: hashPass,
-        date: Date.now(),
       });
 
       await user.save();
@@ -21,12 +20,12 @@ const userSignup = async (req, res) => {
         name: user.name,
       };
 
-      // return res.redirect('/secret'); 
+      return res.sendStatus(200);
     } catch (error) {
-      // return res.redirect('/');
+      return res.sendStatus(404);
     }
   }
-  // return res.redirect('/users/signup');
+  return res.sendStatus(404);
 };
 
 const userSignin = async (req, res) => {
@@ -40,15 +39,14 @@ const userSignin = async (req, res) => {
             id: currentUser._id,
             name: currentUser.name,
           };
-
-          // return res.redirect('/secret');
+          return res.sendStatus(200);
         }
       }
     } catch (error) {
-      // return res.redirect('/');
+      return res.sendStatus(404);
     }
   }
-  // return res.redirect('/users/signin');
+  return res.sendStatus(404);
 };
 
 const userSignout = async (req, res) => {
@@ -56,7 +54,7 @@ const userSignout = async (req, res) => {
     if (err) return res.render('error', { error: err });
     res.clearCookie('sid');
 
-    // return res.redirect('/');
+    return res.sendStatus(200);
   });
 };
 
