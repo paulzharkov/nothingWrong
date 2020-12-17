@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
-import createPersonThunk from ('../../redux/creators')
+import createPersonThunk from '../../redux/creators/users'
 
 function Register() {
 
