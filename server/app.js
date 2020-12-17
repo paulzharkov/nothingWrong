@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
 const dbConnect = require('./src/config/db');
+const cors = require('cors')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,10 @@ dbConnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}))
 
 app.use(
   session({
