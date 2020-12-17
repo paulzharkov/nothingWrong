@@ -20,7 +20,7 @@ const userSignup = async (req, res) => {
         login: user.login,
       };
 
-      return res.json(user.login).sendStatus(200);
+      return res.sendStatus(200);
     } catch (error) {
       return res.sendStatus(404);
     }

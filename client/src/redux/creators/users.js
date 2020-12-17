@@ -1,4 +1,3 @@
-
 const createPersonThunk = ({ login, email, pass }) => async (dispatch, getState) => {
   const response = await fetch('http://localhost:3001/users/signup', {
     method: "POST",
