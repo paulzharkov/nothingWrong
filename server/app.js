@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
+const postsRouter = require('./src/routes/posts');
 const dbConnect = require('./src/config/db');
 const cors = require('cors')
 
@@ -34,7 +35,9 @@ app.use(
   })
 );
 
+app.use('/', postsRouter);
 app.use('/users', usersRouter);
+
 
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT);

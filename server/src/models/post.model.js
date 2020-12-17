@@ -19,7 +19,7 @@ const postSchema = new Schema({
   comments: [commentSchema],
   rating: Number, // from 1 to 10
   date: Date, // format: 'YYYY-MM-DD'
-  status: String, // Private or Public
+  state: String, // Private or Public
 })
 
 module.exports = model('Post', postSchema);
