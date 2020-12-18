@@ -15,11 +15,8 @@ router.get('/peoples/subscribers', postsController.peoplesSubscribers);
 router.get('/stats/offended', postsController.statsOffended);
 router.get('/stats/offender', postsController.statsOffender);
 router.get('/advices', postsController.advices);
-router.post('/makewrong', postsController.makewrong);
+router.post('/wrong', postsController.makewrong);
 router.get('/chat/:post', postsController.chat);
 router.post('/chat/:post', postsController.chatSendMessage);
 
 module.exports = router;
-
-
-
