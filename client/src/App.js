@@ -59,7 +59,6 @@ function App() {
           </Grid>
           <Grid item xs={8} >
             <Paper elevation={6} className={classes.paper}  >
-            {/* <Chat /> */}
               {login ?
                 (
                   <Switch>
