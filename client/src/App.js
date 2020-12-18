@@ -1,5 +1,6 @@
 import './App.css';
 import Chat from './ComponentSocket/Chat';
+// import Chat2 from './ComponentSocket/Chat2';
 
 function App() {
   return (
