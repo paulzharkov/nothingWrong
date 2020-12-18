@@ -1,4 +1,4 @@
-import * as TYPES from '../types/types'
+import * as TYPES from '../types/users'
 
 export const createLogin = (log) => ({
   type: TYPES.ADD_USERS_LOGIN,
@@ -6,7 +6,7 @@ export const createLogin = (log) => ({
 })
 
 export const createPersonThunk = ({ login, email, pass }) => async (dispatch) => {
-  const response = await fetch('http://localhost:3001/users/signup', {
+  const response = await fetch('http://localhost:8000/users/signup', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ export const createPersonThunk = ({ login, email, pass }) => async (dispatch) =>
 };
 
 export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
-  const response = await fetch('http://localhost:3001/users//signin', {
+  const response = await fetch('http://localhost:8000/users/signin', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
 };
 
 export const logoutThunk = ({ login }) => async (dispatch) => {
-  const response = await fetch('http://localhost:3001/users/signout', {
+  const response = await fetch('http://localhost:8000/users/signout', {
     credentials: 'include'
   })
   if (response.status === 200) {
