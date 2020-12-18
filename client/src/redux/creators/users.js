@@ -20,7 +20,7 @@ export const createPersonThunk = ({ login, email, pass }) => async (dispatch) =>
 };
 
 export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/users//signin', {
+  const response = await fetch('http://localhost:8000/users/signin', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
