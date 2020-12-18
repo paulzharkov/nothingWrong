@@ -7,17 +7,35 @@ const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
 const postsRouter = require('./src/routes/posts');
 const dbConnect = require('./src/config/db');
-const cors = require('cors')
+const http = require("http");
+const cors = require('cors');
 
 const app = express();
+
+const server = http.createServer(app);
+const socket = require("socket.io");
+const io = socket(server);
+
+
+
+io.on("connection", socket => {
+  // console.log(socket);
+    socket.emit("your id", socket.id);
+    socket.on("send message", body => {
+      // console.log(body);
+        io.emit("message", body)
+    })
+})
+
+
 const PORT = process.env.PORT || 3001;
 dbConnect();
-
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3001',
   credentials: true
 }))
 
@@ -39,6 +57,6 @@ app.use('/', postsRouter);
 app.use('/users', usersRouter);
 
 
-app.listen(PORT, () => {
-  console.log('Server started on port ', PORT);
-});
+
+
+server.listen(3001, () => console.log("server is running on port 3001"));
