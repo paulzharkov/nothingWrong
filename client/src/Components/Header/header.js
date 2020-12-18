@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 
 import {
-  BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
 import Logout from '../Logout/logout';
