@@ -8,6 +8,7 @@ import Logout from '../Logout/logout';
 function Header() {
 
   const login = useSelector(state => state.users)
+  console.log(login);
   return (
     <>
       <div>

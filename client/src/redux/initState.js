@@ -1,5 +1,6 @@
 const initState = {
-  users: ''
+  users: '',
+  posts: [],
 };
 
 export default initState;
