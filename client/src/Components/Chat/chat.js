@@ -12,10 +12,11 @@ function Chat() {
   const socketRef = useRef()
 
   useEffect(() => {
+    console.log('111111111');
     socketRef.current = io.connect('/')
 
     socketRef.current.on("your id", id => {
-      // console.log('-------->>>', id)
+      console.log('-------->>>', id)
       setYourId(id);
     })
 

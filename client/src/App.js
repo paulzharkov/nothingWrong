@@ -22,6 +22,7 @@ function App() {
     <>
       <Router>
         <div>
+        <Chat />
           <Header />
         </div>
         <div>
