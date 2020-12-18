@@ -59,7 +59,7 @@ function App() {
           </Grid>
           <Grid item xs={8} >
             <Paper elevation={6} className={classes.paper}  >
-              {true ?
+              {login ?
                 (
                   <Switch>
                     <Route path="/register">

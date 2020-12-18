@@ -10,23 +10,11 @@ const dbConnect = require('./src/config/db');
 const http = require("http");
 const cors = require('cors');
 
-
-
 const app = express();
-
 
 const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
-
-
-
-
-
-
-
-
-
 
 // const PORT = process.env.PORT || 8000;
 dbConnect();
@@ -59,35 +47,18 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
-  
+
   const session = socket.request.session;
-
-
-  console.log('>>>>>>>>>>>>>', session)
 
   if (session.user) {
     session.connections++;
     session.save();
-
-
-    // console.log(socket);
     socket.emit("your id", socket.id);
     socket.on("send message", body => {
-      // console.log(body);
-        io.emit("message", body)
+      io.emit("message", body)
     })
   }
-
-  
 });
-
-
-
-
-
-
-
-
 
 app.use((req, res, next) => {
   res.locals.login = req.session?.user?.login;
@@ -95,11 +66,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use('/', postsRouter);
 app.use('/users', usersRouter);
-
-
-
 
 server.listen(8000, () => console.log("Server is running on port 8000"));

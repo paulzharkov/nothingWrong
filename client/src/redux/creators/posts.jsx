@@ -1,5 +1,6 @@
 import * as TYPES from '../types/posts'
 
+
 export const createPost = (data) => ({
   type: TYPES.ADD_POST,
   payload: data
@@ -30,3 +31,6 @@ export const createPostThunk = ({ category,
 
     data && dispatch(createPost(data))
   };
+
+
+
