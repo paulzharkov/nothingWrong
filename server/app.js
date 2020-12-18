@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
+const postsRouter = require('./src/routes/posts');
 const dbConnect = require('./src/config/db');
 const http = require("http");
 const cors = require('cors');
@@ -29,10 +30,14 @@ io.on("connection", socket => {
 
 const PORT = process.env.PORT || 3001;
 dbConnect();
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}))
 
 app.use(
   session({
@@ -48,6 +53,7 @@ app.use(
   })
 );
 
+app.use('/', postsRouter);
 app.use('/users', usersRouter);
 
 

@@ -10,9 +10,9 @@ const checkAuth = async (req, res, next) => {
 
       return next();
     }
-    // return res.status(401).redirect('/');
+    return res.sendStatus(404);
   }
-  // return res.status(401).redirect('/');
+  return res.sendStatus(404);
 };
 
 module.exports = {
