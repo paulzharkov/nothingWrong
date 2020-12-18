@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-const createPersonThunk = ({ login, email, pass }) => async (dispatch, getState) => {
-=======
 import * as TYPES from '../types/types'
 
 export const createLogin = (log) => ({
@@ -9,7 +6,6 @@ export const createLogin = (log) => ({
 })
 
 export const createPersonThunk = ({ login, email, pass }) => async (dispatch) => {
->>>>>>> 4e15b8d0941385397ab6858cc57bd23d167848ca
   const response = await fetch('http://localhost:3001/users/signup', {
     method: "POST",
     headers: {

@@ -17,7 +17,3 @@ router.get('/chat/:post', postsController.chat);
 router.post('/chat/:post', postsController.chatSendMessage);
 
 module.exports = router;
-
-
-
-
