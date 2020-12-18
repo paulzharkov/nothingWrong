@@ -32,6 +32,27 @@ const postComment = async (req, res) => { // Добавить try-catch block
   res.sendStatus(200);
 };
 
+const patchPost = async (req, res) => {
+  const { category, postText, postWishText, status, rating, state } = req.body;
+  const soundUpdate = await Post.findByIdAndUpdate({ _id: req.params.id }, { category, postText, postWishText, status, rating, state });
+  res.sendStatus(200);
+};
+
+const deletePost = async (req, res) => {
+  const post = await Post.findByIdAndDelete({ _id: req.params.id });
+  res.sendStatus(200);
+};
+
+const likePost = async (req, res) => {
+  const currentPost = await Post.findOne({ _id: req.params.id })
+  const user = req.session.user.login;
+  if (!currentPost.likes.includes(user)) {
+    currentPost.likes.push(user);
+    await sound.save();
+  }
+  res.json({ likes: sound.likes.length });
+};
+
 const peoplesAll = async (req, res) => {
   const peoplesAll = await User.find();
   res.json(peoplesAll.login);
@@ -92,6 +113,9 @@ module.exports = {
   lenta,
   postId,
   postComment,
+  patchPost,
+  deletePost,
+  likePost,
   peoplesAll,
   peoplesSubscribers,
   statsOffended,
