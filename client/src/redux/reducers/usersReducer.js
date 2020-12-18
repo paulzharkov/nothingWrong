@@ -1,4 +1,4 @@
-import { ADD_USERS_LOGIN } from '../types/types';
+import { ADD_USERS_LOGIN } from '../types/users';
 
 function usersReducer(state = '', action) {
   switch (action.type) {

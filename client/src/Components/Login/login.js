@@ -24,7 +24,7 @@ function Login() {
       <form>
         <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="Введите email" />
         <input value={pass} onChange={(event) => setPass(event.target.value)} type="password" placeholder="Введите пароль" />
-        <button onClick={handlerLogin}>Войти</button>
+        <button onClick={handlerLogin}>Войти=</button>
       </form>
     </div>
   )
