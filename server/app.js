@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
 const postsRouter = require('./src/routes/posts');
 const dbConnect = require('./src/config/db');
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,10 +16,12 @@ dbConnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}))
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 
 app.use(
   session({
@@ -35,9 +37,14 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.locals.login = req.session?.user?.login;
+  res.locals.id = req.session?.user?.id;
+  next();
+});
+
 app.use('/', postsRouter);
 app.use('/users', usersRouter);
-
 
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT);

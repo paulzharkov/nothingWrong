@@ -1,4 +1,4 @@
-import * as TYPES from '../types/types'
+import * as TYPES from '../types/users'
 
 export const createLogin = (log) => ({
   type: TYPES.ADD_USERS_LOGIN,

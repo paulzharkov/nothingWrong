@@ -20,7 +20,7 @@ const userSignup = async (req, res) => {
         login: user.login,
       };
 
-      return res.json(user.login)
+      return res.json(user.login);
     } catch (error) {
       return res.sendStatus(404);
     }
@@ -35,11 +35,13 @@ const userSignin = async (req, res) => {
       const currentUser = await User.findOne({ email });
       if (currentUser) {
         if (await bcrypt.compare(pass, currentUser.pass)) {
+
           req.session.user = {
             id: currentUser._id,
             login: currentUser.login,
           };
-          return res.json(currentUser.login)
+
+          return res.json(currentUser.login);
         }
       }
     } catch (error) {

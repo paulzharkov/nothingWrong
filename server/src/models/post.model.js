@@ -13,12 +13,12 @@ const postSchema = new Schema({
     maxLength: 140, // ограничение по длине поста
   },
   status: String, // open, pending, closed
-  offenderId: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  authorId: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  offenderId: { type: Schema.Types.ObjectId, ref: 'User' },
+  authorId: { type: Schema.Types.ObjectId, ref: 'User' },
   likes: [], // Push userId to array, only use array.length for likes count
   comments: [commentSchema],
   rating: Number, // from 1 to 10
-  date: Date, // format: 'YYYY-MM-DD'
+  date: String, // format: 'YYYY-MM-DD'
   state: String, // Private or Public
 })
 
