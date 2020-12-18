@@ -41,59 +41,105 @@ function App() {
       <div className={classes.root}>
         <Grid container xs={12} spacing={3} style={{ backgroundColor: "green" }} alignItems="stretch" >
           <Grid item xs={4}>
-            <Paper className={classes.paper}><Header /></Paper>
-          </Grid>
-          <Grid item xs={8}>
             <Paper className={classes.paper}>
-              {login ?
-                (
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route path="/lk">
-                      <Lk />
-                    </Route>
-                    <Route path="/lenta">
-                      <Lenta />
-                    </Route>
-                    <Route path="/peoples">
-                      <Peoples />
-                    </Route>
-                    <Route path="/stats">
-                      <Stats />
-                    </Route>
-                    <Route path="/advices">
-                      <Advices />
-                    </Route>
-                    <Route path="/makewrong">
-                      <Makewrong />
-                    </Route>
-                    <Route path="/chat">
-                      <Chat />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                ) : (
-                  <>
-                    <Switch >
-                      <Route path="/register">
-                        <Register />
-                      </Route>
-                      <Route exact path="/">
-                        <Login />
-                      </Route>
-                    </Switch>
-                  </>
-                )
-              }
+            <Header />
             </Paper>
           </Grid>
+
+          {login ?
+            (
+              <Switch>
+                <Route path="/register">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                      <Register />
+                    </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/lk">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                      <Lk />
+                    </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/lenta">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                      <Lenta />
+                    </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/peoples">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                      <Peoples />
+                    </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/stats">
+                <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                  <Stats />
+                  </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/advices">
+                <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                  <Advices />
+                  </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/makewrong">
+                <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                  <Makewrong />
+                  </Paper>
+                  </Grid>
+                </Route>
+                <Route path="/chat">
+                <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                  <Chat />
+                  </Paper>
+                  </Grid>
+                </Route>
+                <Route exact path="/">
+                <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                  <Login />
+                  </Paper>
+                  </Grid>
+                </Route>
+              </Switch>
+            ) : (
+              <>
+                <Switch >
+                  <Route path="/register">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                    <Register />
+                    </Paper>
+                  </Grid>
+                  </Route>
+                  <Route exact path="/">
+                  <Grid item xs={8}>
+                    <Paper className={classes.paper}>
+                    <Login />
+                    </Paper>
+                  </Grid>
+                  </Route>
+                </Switch>
+              </>
+            )
+          }
+         
+            
+         
         </Grid>
-      </div>
-    </Router>
+      </div >
+    </Router >
   );
 }
 
