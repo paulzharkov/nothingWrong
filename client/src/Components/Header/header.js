@@ -20,15 +20,17 @@ function Header() {
             <div><Link to="/advices">Советы</Link></div>
             <div><Link to="/makewrong">Создать обидку</Link></div>
             <div><Link to="/chat">Обсудить</Link></div>
+            <hr />
+            <div><Logout /></div>
           </div>
         ) : (
             <div>
               <div><Link to="/">Войти</Link></div>
               <div><Link to="/register">Регистрация</Link></div>
+              <hr />
             </div>
           )}
-        <hr />
-        <div><Logout /></div>
+
       </div>
     </>
   )

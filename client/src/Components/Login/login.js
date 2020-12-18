@@ -2,8 +2,25 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux"
 import { loginPersonThunk } from '../../redux/creators/users'
+import Input from '@material-ui/core/Input'
+import { makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
 
 function Login() {
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+      button: {
+        margin: theme.spacing(1),
+      }
+    },
+  }));
+
+  const classes = useStyles();
 
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -21,10 +38,18 @@ function Login() {
 
   return (
     <div>
-      <form>
-        <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="Введите email" />
-        <input value={pass} onChange={(event) => setPass(event.target.value)} type="password" placeholder="Введите пароль" />
-        <button onClick={handlerLogin}>Войти=</button>
+      <form className={classes.root} noValidate autoComplete="off">
+        <Input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Введите email" inputProps={{ 'aria-label': 'description' }} />
+        <Input value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Введите пароль" inputProps={{ 'aria-label': 'description' }} />
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          endIcon={<Icon>send</Icon>}
+          onClick={handlerLogin}
+        >
+          Войти
+      </Button>
       </form>
     </div>
   )
