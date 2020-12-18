@@ -1,4 +1,4 @@
-import { ADD_POST } from '../types/posts';
+import { ADD_POST, LOGOUT_POSTS } from '../types/posts';
 
 function postsReducer(state = [], action) {
   switch (action.type) {
