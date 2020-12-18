@@ -30,7 +30,21 @@ function App() {
       padding: theme.spacing(2),
       textAlign: 'center',
       color: theme.palette.text.secondary,
+      height: '100vh',
+      justifyContent: 'center',
+      alignItems: "center",
+      display: 'flex',
     },
+    first: {
+      height: '100vh',
+      justyfy: "space-around",
+      alignItems: "stretch"
+    },
+
+    grid: {
+      // height: '100vh',
+      alignItems: "center"
+    }
   }));
 
   const classes = useStyles();
@@ -39,12 +53,12 @@ function App() {
   return (
     <Router>
       <div className={classes.root}>
-        <Grid container xs={12} spacing={3} style={{ backgroundColor: "green" }} alignItems="stretch" >
-          <Grid item xs={4}>
-            <Paper className={classes.paper}><Header /></Paper>
+        <Grid className={classes.first} container xs={12} spacing={1}>
+          <Grid item xs={4} className={classes.grid}>
+            <Paper elevation={6} className={classes.paper}><Header /></Paper>
           </Grid>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
+          <Grid item xs={8} >
+            <Paper elevation={6} className={classes.paper}  >
               {login ?
                 (
                   <Switch>
