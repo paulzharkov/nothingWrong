@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../Chat/chat.js';
+import { useSelector } from 'react-redux';
+import '../Chat/index.css';
 import io from "socket.io-client";
+
+import LightSpeed from 'react-reveal/LightSpeed';
 
 
 
@@ -8,20 +11,26 @@ function Chat() {
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const user = useSelector((state) => state.users)
+  // console.log('login: ---->>>',user);
 
   const socketRef = useRef()
-
+console.log(socketRef);
   useEffect(() => {
-    console.log('111111111');
+    // console.log('111111111');
     socketRef.current = io.connect('/')
 
     socketRef.current.on("your id", id => {
-      console.log('-------->>>', id)
+      // console.log('-------->>>', id)
       setYourId(id);
     })
 
     socketRef.current.on("message", (message) => {
-      // console.log("here");
+      console.log("here", message);
+      receivedMessage(message);
+    })
+    socketRef.current.on("private message", (message) => {
+      console.log("here2", message);
       receivedMessage(message);
     })
   }, [])
@@ -36,14 +45,26 @@ function Chat() {
       body: message,
       id: yourId,
     };
+    const messageObjectPrivate = {
+      body: message,
+      id: yourId,
+      id2: 9999999,
+      user,
+    };
     setMessage("");
-    socketRef.current.emit("send message", messageObject);
+    if (message !== "") {
+      socketRef.current.emit("send message", messageObject);
+      
+
+        socketRef.current.emit("private message", messageObjectPrivate);
+    }
+    return
   }
 
   const receivedMessage = (message) => {
-    setMessages(oldMsgs => [...oldMsgs, message]);
+      setMessages(oldMsgs => [...oldMsgs, message]);
   }
-
+ 
 
 
 
@@ -51,7 +72,7 @@ function Chat() {
     <>
       <section className="chat">
         {messages.map((message, index) => {
-          return (<div className={`${message.id === yourId ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourId ? 'myMessage' : 'partnerMessage'}`}>{message.body}</div></div>)
+          return (<div className={`${message.id === yourId ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourId ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourId ? (<LightSpeed left>{message.body}</LightSpeed>) : (<LightSpeed right>{message.body}</LightSpeed>)}</div></div>)
         })}
       </section>
 

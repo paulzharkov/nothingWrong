@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:8000',
+  origin: 'http://localhost:3000',
   credentials: true
 }))
 
@@ -55,7 +55,13 @@ io.on('connection', (socket) => {
     session.save();
     socket.emit("your id", socket.id);
     socket.on("send message", body => {
+      console.log(body);
       io.emit("message", body)
+    })
+    socket.on("private message", body => {
+      console.log('_______----______',body);
+      if (body.user === 'Igor') 
+      io.emit("private message", body)
     })
   }
 });
