@@ -9,4 +9,8 @@ router.post('/signin', usersController.userSignin);
 
 router.get('/signout', usersController.userSignout);
 
+router.get('/people/allpeople', usersController.people);
+
+router.get('/people/allpeople/:id', usersController.subscribe);
+
 module.exports = router;
