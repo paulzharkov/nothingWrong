@@ -87,28 +87,29 @@ const advices = async (req, res) => {
 
 const makewrong =
   (checkAuth,
-  async (req, res) => {
-    const { category, reason, solve, rating, state } = req.body;
-    const user = await User.findOne({ login: req.session.user.login });
-    const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
-    if (category && reason && solve && rating && state && user && offender) {
-      const newPost = await new Post({
-        category,
-        reason,
-        solve,
-        status: 'Открыта',
-        rating,
-        state,
-        offenderId: offender._id,
-        authorId: user._id,
-        date: new Date().toLocaleDateString(),
-      });
-      await newPost.save();
-      return res.status(200).json(newPost);
-    } else {
-      return res.sendStatus(406);
-    }
-  });
+    async (req, res) => {
+      console.log(req.body)
+      const { category, reason, solve, rating, state } = req.body;
+      const user = await User.findOne({ login: req.session.user.login });
+      const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
+      if (category && reason && solve && rating && state && user && offender) {
+        const newPost = await new Post({
+          category,
+          reason,
+          solve,
+          status: 'Открыта',
+          rating,
+          state,
+          offenderId: offender._id,
+          authorId: user._id,
+          date: new Date().toLocaleDateString(),
+        });
+        await newPost.save();
+        return res.status(200).json(newPost);
+      } else {
+        return res.sendStatus(406);
+      }
+    });
 
 const chat = async (req, res) => {
   const chat = await Chat.findOne({ postId: req.params.post });

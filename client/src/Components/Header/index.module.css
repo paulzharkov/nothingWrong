@@ -1,5 +1,26 @@
-.header {
+.headerDiv {
   display: flex;
-  align-items: center;
-  background-color: aqua;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+.headerLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50vh;
+  margin-top: 30px;
+}
+.headerLink {
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: space-evenly;
+  margin-top: 170px;
+}
+
+.headerLogo {
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
 }

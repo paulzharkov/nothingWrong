@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
-
+import style from './index.module.css'
 import {
   Link,
 } from 'react-router-dom';
 import Logout from '../Logout/logout';
+import logo from './logo2.jpg'
 
 function Header() {
 
@@ -11,9 +12,12 @@ function Header() {
   console.log(login);
   return (
     <>
-      <div>
+      <div className={style.headerDiv}>
+        <div>
+          <img className={style.headerLogo} src={logo} alt="logo" />
+        </div>
         {login ? (
-          <div >
+          <div className={style.headerLinks} >
             <div><Link to="/lk">Личный кабинет</Link></div>
             <div><Link to="/lenta">Лента</Link></div>
             <div><Link to="/peoples">Люди</Link></div>
@@ -25,7 +29,7 @@ function Header() {
             <div><Logout /></div>
           </div>
         ) : (
-            <div>
+            <div className={style.headerLink}>
               <div><Link to="/">Войти</Link></div>
               <div><Link to="/register">Регистрация</Link></div>
               <hr />

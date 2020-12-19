@@ -34,6 +34,7 @@ function App() {
       justifyContent: 'center',
       alignItems: "center",
       display: 'flex',
+      backgroundImage: 'linearGradient(120deg, #fdfbfb 0%, #ebedee 100%)'
     },
     first: {
       height: '100vh',

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux"
 import { loginPersonThunk } from '../../redux/creators/users'
-import Input from '@material-ui/core/Input'
+import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
@@ -39,8 +39,8 @@ function Login() {
   return (
     <div>
       <form className={classes.root} noValidate autoComplete="off">
-        <Input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Введите email" inputProps={{ 'aria-label': 'description' }} />
-        <Input value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Введите пароль" />
+        <TextField value={email} onChange={(event) => setEmail(event.target.value)} label="Введите email" type='email' required="true" />
+        <TextField value={pass} onChange={(event) => setPass(event.target.value)} label="Введите пароль" type="password" required="true" />
         <Button
           variant="contained"
           color="primary"
