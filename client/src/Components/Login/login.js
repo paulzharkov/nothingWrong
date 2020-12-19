@@ -40,12 +40,12 @@ function Login() {
     <div>
       <form className={classes.root} noValidate autoComplete="off">
         <Input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Введите email" inputProps={{ 'aria-label': 'description' }} />
-        <Input value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Введите пароль" inputProps={{ 'aria-label': 'description' }} />
+        <Input value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Введите пароль" />
         <Button
           variant="contained"
           color="primary"
           className={classes.button}
-          endIcon={<Icon>send</Icon>}
+          endIcon={<Icon>login</Icon>}
           onClick={handlerLogin}
         >
           Войти
