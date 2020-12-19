@@ -6,6 +6,26 @@ export const createPost = (data) => ({
   payload: data
 })
 
+export const setPosts = (postsList) => ({
+  type: TYPES.ADD_ALL,
+  payload: postsList
+})
+
+export const deletePost = (id) => ({
+  type: TYPES.DELETE,
+  payload: id
+})
+
+export const getAllPostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://localhost:8000/lk', {
+    credentials: "include"
+  })
+  const postsList = await response.json()
+  if (postsList) {
+    dispatch(setPosts(postsList))
+  }
+}
+
 export const createPostThunk = ({ category,
   reason,
   solve,
@@ -30,7 +50,14 @@ export const createPostThunk = ({ category,
     const data = await response.json()
 
     data && dispatch(createPost(data))
+    
   };
 
+export const deletePostThunk = (id) => (dispatch) => {
+  fetch(`http://localhost:8000/lenta/${id}`, {
+    method: 'DELETE',
+    credentials: "include"
+  }).then(res => res.status === 200 && dispatch(deletePost(id)))
+}
 
 
