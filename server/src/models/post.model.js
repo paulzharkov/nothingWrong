@@ -4,11 +4,11 @@ const { commentSchema } = require('./comment.model')
 
 const postSchema = new Schema({
   category: String, // бытовые, семейные, финансовые ... - подбирает эмоджи под категорию
-  postText: { // Текст самого поста
+  reason: { // Текст самого поста
     type: String,
     maxLength: 140, // ограничение по длине поста
   },
-  postWishText: { // Текст нашего пожелания, что обидчик должен сделать
+  solve: { // Текст нашего пожелания, что обидчик должен сделать
     type: String,
     maxLength: 140, // ограничение по длине поста
   },
