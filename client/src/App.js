@@ -9,6 +9,7 @@ import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import Chat from './Components/Chat/chat';
+import ChatPrivat from './Components/ChatPrivat';
 import {
   BrowserRouter as Router,
   Switch,
@@ -88,6 +89,9 @@ function App() {
                     </Route>
                     <Route exact path="/">
                       <Login />
+                    </Route>
+                    <Route exact path="/chatprivate">
+                      <ChatPrivat />
                     </Route>
                   </Switch>
                 ) : (

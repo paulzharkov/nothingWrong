@@ -4,10 +4,11 @@ import '../Chat/index.css';
 import io from "socket.io-client";
 
 import LightSpeed from 'react-reveal/LightSpeed';
+import { join } from 'path';
 
 
 
-function Chat() {
+function ChatPrivat() {
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -25,14 +26,10 @@ console.log(socketRef);
       setYourId(id);
     })
 
-    socketRef.current.on("message", (message) => {
-      console.log("here", message);
+    socketRef.current.on("private message", (message) => {
+      console.log("here2", message);
       receivedMessage(message);
     })
-    // socketRef.current.on("private message", (message) => {
-    //   console.log("here2", message);
-    //   receivedMessage(message);
-    // })
   }, [])
 
   const handleChange = (e) => {
@@ -45,18 +42,19 @@ console.log(socketRef);
       body: message,
       id: yourId,
     };
-    // const messageObjectPrivate = {
-    //   body: message,
-    //   id: yourId,
-    //   id2: 9999999,
-    //   user,
-    // };
+    const messageObjectPrivate = {
+      body: message,
+      id: yourId,
+      id2: 9999999,
+      user,
+      offenderId: 'Givi',
+    };
     setMessage("");
     if (message !== "") {
       socketRef.current.emit("send message", messageObject);
       
 
-        // socketRef.current.emit("private message", messageObjectPrivate);
+        socketRef.current.emit("private message", messageObjectPrivate);
     }
     return
   }
@@ -89,5 +87,5 @@ console.log(socketRef);
 }
 
 
-export default Chat;
+export default ChatPrivat;
 
