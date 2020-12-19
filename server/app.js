@@ -69,4 +69,5 @@ app.use((req, res, next) => {
 app.use('/', postsRouter);
 app.use('/users', usersRouter);
 
+
 server.listen(8000, () => console.log("Server is running on port 8000"));

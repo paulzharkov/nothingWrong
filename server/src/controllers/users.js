@@ -29,14 +29,12 @@ const userSignup = async (req, res) => {
 };
 
 const userSignin = async (req, res) => {
-
   const { email, pass } = req.body;
   if (email && pass) {
     try {
       const currentUser = await User.findOne({ email });
       if (currentUser) {
         if (await bcrypt.compare(pass, currentUser.pass)) {
-
           req.session.user = {
             id: currentUser._id,
             login: currentUser.login,
@@ -62,8 +60,33 @@ const userSignout = async (req, res) => {
   });
 };
 
+const people = async (req, res) => {
+  const peopleList = await User.find();
+  let list = peopleList.filter((el) => el.login !== req.session.user.login);
+
+  let list2 = list.map((el) => {
+    delete el._doc.pass;
+    return el;
+  });
+
+  res.json(list2);
+};
+
+const subscribe = async (req, res) => {
+  const { id } = req.params;
+
+  await User.updateOne(
+    { _id: id },
+    { $push: { subscribers: req.session.user.id } }
+  );
+  console.log('server');
+  res.sendStatus(200);
+};
+
 module.exports = {
   userSignup,
   userSignin,
   userSignout,
+  people,
+  subscribe,
 };
