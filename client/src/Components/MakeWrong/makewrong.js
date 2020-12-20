@@ -25,12 +25,10 @@ function Makewrong() {
 
   const handlerReason = (e) => {
     setReason(e.target.value);
-    console.log(reason);
   };
 
   const handlerSolve = (e) => {
     setSolve(e.target.value);
-    console.log(solve);
   };
 
   const handlerOffender = (e) => {

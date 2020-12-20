@@ -6,6 +6,11 @@ export const setUsers = (usersList) => ({
   payload: usersList
 })
 
+export const setFollowersUsers = (followersList) => ({
+  type: TYPES.ADD_FOLLOWERS_USERS,
+  payload: followersList
+})
+
 export const subscribeUser = (id, login) => ({
   type: TYPES.SUBSCRIBE,
   payload: id, login
@@ -19,6 +24,17 @@ export const getAllUsersThunk = () => async (dispatch) => {
 
   if (usersList) {
     dispatch(setUsers(usersList))
+  }
+}
+
+export const getFollowersUsersThunk = () => async (dispatch) => {
+  const response = await fetch('http://localhost:8000/users/people/followers', {
+    credentials: "include"
+  })
+  const followersList = await response.json()
+
+  if (followersList) {
+    dispatch(setFollowersUsers(followersList))
   }
 }
 

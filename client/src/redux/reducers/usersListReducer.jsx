@@ -1,9 +1,12 @@
-import { ADD_ALL_USERS, SUBSCRIBE } from '../types/usersList';
+import { ADD_ALL_USERS, SUBSCRIBE, ADD_FOLLOWERS_USERS } from '../types/usersList';
 
 function usersListReducer(state = [], action) {
   switch (action.type) {
 
     case ADD_ALL_USERS:
+      return action.payload;
+
+    case ADD_FOLLOWERS_USERS:
       return action.payload;
 
     case SUBSCRIBE:
@@ -16,7 +19,6 @@ function usersListReducer(state = [], action) {
         }
         return el
       })
-
     default:
       return state;
   }
