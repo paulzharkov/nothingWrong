@@ -29,7 +29,7 @@ const userSignup = async (req, res) => {
 };
 
 const userSignin = async (req, res) => {
-  console.log(req.body);
+
   const { email, pass } = req.body;
   if (email && pass) {
     try {

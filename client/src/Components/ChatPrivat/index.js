@@ -4,7 +4,7 @@ import '../Chat/index.css';
 import io from "socket.io-client";
 
 import LightSpeed from 'react-reveal/LightSpeed';
-import { join } from 'path';
+
 
 
 
@@ -13,12 +13,13 @@ function ChatPrivat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const user = useSelector((state) => state.users)
-  // console.log('login: ---->>>',user);
+  // const posts = useSelector((state) => state.posts)
 
+  const idOne = useSelector((state) => state.idOne)
   const socketRef = useRef()
-console.log(socketRef);
+  // console.log('id: ---->>>', id);
+
   useEffect(() => {
-    // console.log('111111111');
     socketRef.current = io.connect('/')
 
     socketRef.current.on("your id", id => {
@@ -26,10 +27,21 @@ console.log(socketRef);
       setYourId(id);
     })
 
-    socketRef.current.on("private message", (message) => {
+    // socketRef.current.on("private message", (message) => {
+    //   console.log("here2", message);
+    //   receivedMessage(message);
+    // })
+
+
+
+
+    socketRef.current.on(`${idOne}`, (message) => {
       console.log("here2", message);
       receivedMessage(message);
     })
+
+
+
   }, [])
 
   const handleChange = (e) => {
@@ -38,31 +50,28 @@ console.log(socketRef);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    const messageObject = {
-      body: message,
-      id: yourId,
-    };
+console.log('-----@@@ back',idOne);
     const messageObjectPrivate = {
       body: message,
       id: yourId,
-      id2: 9999999,
       user,
-      offenderId: 'Givi',
+      idOne,
+      offenderId: 'Маша',
     };
     setMessage("");
     if (message !== "") {
-      socketRef.current.emit("send message", messageObject);
       
 
-        socketRef.current.emit("private message", messageObjectPrivate);
+
+      socketRef.current.emit("private message", messageObjectPrivate);
     }
     return
   }
 
   const receivedMessage = (message) => {
-      setMessages(oldMsgs => [...oldMsgs, message]);
+    setMessages(oldMsgs => [...oldMsgs, message]);
   }
- 
+
 
 
 

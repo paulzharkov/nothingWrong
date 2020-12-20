@@ -11,13 +11,13 @@ function Chat() {
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const user = useSelector((state) => state.users)
-  // console.log('login: ---->>>',user);
+  // const user = useSelector((state) => state)
+  const posts = useSelector((state) => state.posts)
+  // console.log('posts: ---->>>',posts);
 
   const socketRef = useRef()
 console.log(socketRef);
   useEffect(() => {
-    // console.log('111111111');
     socketRef.current = io.connect('/')
 
     socketRef.current.on("your id", id => {

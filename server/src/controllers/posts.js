@@ -5,8 +5,8 @@ const Chat = require('../models/chat.model');
 const checkAuth = require('../middleware/auth');
 
 const cabinet = async (req, res) => {
-  const user = req.session.user.login; // Узнаем юзера
-  const userPosts = await Post.find({ authorId: user }).exec();
+  const user = req.session.user.id; // Узнаем юзера
+  const userPosts = await Post.find({ authorId: user });
   res.json(userPosts);
 };
 
@@ -45,7 +45,7 @@ const patchPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete({ _id: req.params.id });
-  res.sendStatus(200);
+  res.status(200);
 };
 
 const likePost = async (req, res) => {
@@ -88,14 +88,14 @@ const advices = async (req, res) => {
 const makewrong =
   (checkAuth,
   async (req, res) => {
-    const { category, postText, postWishText, rating, state } = req.body;
+    const { category, reason, solve, rating, state } = req.body;
     const user = await User.findOne({ login: req.session.user.login });
     const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
-    if (11 == 11) {
+    if (category && reason && solve && rating && state && user && offender) {
       const newPost = await new Post({
         category,
-        postText,
-        postWishText,
+        reason,
+        solve,
         status: 'Открыта',
         rating,
         state,
@@ -103,7 +103,15 @@ const makewrong =
         authorId: user._id,
         date: new Date().toLocaleDateString(),
       });
+      user.myHurt.push(newPost._id)
+      offender.toMeHurt.push(newPost._id)
+
+
+      await user.save();
+      await offender.save();
       await newPost.save();
+
+
       return res.status(200).json(newPost);
     } else {
       return res.sendStatus(406);

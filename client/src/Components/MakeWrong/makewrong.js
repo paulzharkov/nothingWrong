@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../redux/creators/posts';
+import { useHistory } from 'react-router-dom';
 
 function Makewrong() {
   const [category, setCategory] = useState('');
@@ -9,6 +10,8 @@ function Makewrong() {
   const [offender, setOffender] = useState('');
   const [state, setState] = useState('');
   const [rating, setRating] = useState('');
+
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -22,10 +25,12 @@ function Makewrong() {
 
   const handlerReason = (e) => {
     setReason(e.target.value);
+    console.log(reason);
   };
 
   const handlerSolve = (e) => {
     setSolve(e.target.value);
+    console.log(solve);
   };
 
   const handlerOffender = (e) => {
@@ -39,9 +44,11 @@ function Makewrong() {
   const handlerSubmit = (e) => {
     e.preventDefault();
 
+
     dispatch(
       createPostThunk({ category, reason, solve, offender, rating, state })
     );
+    history.push('/lk');
   };
 
   return (
