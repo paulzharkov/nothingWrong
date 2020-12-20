@@ -1,7 +1,11 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFollowersUsersThunk } from '../../redux/creators/usersList';
+import FollowersOption from './FollowersOption/FollowersOption';
+
+
 
 function Makewrong() {
   const [category, setCategory] = useState('');
@@ -12,17 +16,22 @@ function Makewrong() {
   const [rating, setRating] = useState('');
 
   const history = useHistory();
-
   const dispatch = useDispatch();
+
+  const usersList = useSelector((state) => state.usersList);
+
+  useEffect(() => {
+    dispatch(getFollowersUsersThunk());
+  }, [usersList]);
+
+
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
   };
-
   const stateHandler = (e) => {
     setState(e.target.value);
   };
-
   const handlerReason = (e) => {
     setReason(e.target.value);
   };
@@ -30,11 +39,9 @@ function Makewrong() {
   const handlerSolve = (e) => {
     setSolve(e.target.value);
   };
-
   const handlerOffender = (e) => {
     setOffender(e.target.value);
   };
-
   const ratingHandler = (e) => {
     setRating(e.target.value);
   };
@@ -77,8 +84,11 @@ function Makewrong() {
           <option value="" selected disabled hidden>
             Выберите из списка
           </option>
-          <option value="Маша">Маша</option>
-          <option value="Дима">Дима</option>
+          {
+            usersList.length && usersList.map((el) => (
+              <FollowersOption login={el.login} />
+            ))
+          }
         </select>
       </div>
       <div>
