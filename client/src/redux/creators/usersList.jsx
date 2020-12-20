@@ -16,6 +16,11 @@ export const subscribeUser = (id, login) => ({
   payload: id, login
 })
 
+export const unSubscribeUser = (id) => ({
+  type: TYPES.UNSUBSCRIBE,
+  payload: id
+})
+
 export const getAllUsersThunk = () => async (dispatch) => {
   const response = await fetch('http://localhost:8000/users/people/allpeople', {
     credentials: "include"
@@ -46,6 +51,17 @@ export const subscribeThunk = (id, login) => async (dispatch) => {
 
   if (response.status === 200) {
     dispatch(subscribeUser(id, login))
+  }
+}
+
+export const unSubscribeThunk = (id, login) => async (dispatch) => {
+
+  const response = await fetch(`http://localhost:8000/users/people/followers/${id}`, {
+    credentials: "include"
+  })
+
+  if (response.status === 200) {
+    dispatch(unSubscribeUser(id))
   }
 }
 

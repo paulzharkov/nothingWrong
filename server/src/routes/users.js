@@ -15,4 +15,6 @@ router.get('/people/followers', usersController.followers);
 
 router.get('/people/allpeople/:id', usersController.subscribe);
 
+router.get('/people/followers/:id', usersController.unSubscribe);
+
 module.exports = router;

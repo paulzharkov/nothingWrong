@@ -109,6 +109,22 @@ const subscribe = async (req, res) => {
   res.sendStatus(200);
 };
 
+const unSubscribe = async (req, res) => {
+  const { id } = req.params;
+
+  await User.updateOne(
+    { _id: id },
+    { $pull: { subscribers: req.session.user.id } }
+  );
+
+  await User.updateOne(
+    { _id: req.session.user.id },
+    { $pull: { subscribers: id } }
+  );
+
+  res.sendStatus(200);
+};
+
 module.exports = {
   userSignup,
   userSignin,
@@ -116,4 +132,5 @@ module.exports = {
   people,
   subscribe,
   followers,
+  unSubscribe,
 };

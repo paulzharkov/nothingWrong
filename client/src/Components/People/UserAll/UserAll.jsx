@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as AC from '../../../redux/creators/usersList'
 
 
-function User({ login, email, id, subscribers }) {
+function UserAll({ login, email, id, subscribers }) {
 
   const dispatch = useDispatch()
 
@@ -11,10 +11,6 @@ function User({ login, email, id, subscribers }) {
   const subscribeHandler = () => {
     dispatch(AC.subscribeThunk(id, myLogin))
   }
-  // console.log('myLogin', myLogin);
-
-  // console.log('subscribers', subscribers);
-
 
   return (
     <div>
@@ -25,4 +21,4 @@ function User({ login, email, id, subscribers }) {
   )
 }
 
-export default User
+export default UserAll

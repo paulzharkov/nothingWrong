@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getFollowersUsersThunk } from '../../../redux/creators/usersList';
-import User from '../User/User';
+import UserFollowers from '../UserFollowers/UserFollowers';
 
 
 function Followers() {
@@ -14,7 +14,6 @@ function Followers() {
     dispatch(getFollowersUsersThunk());
   }, [usersList]);
 
-
   return (
     <div>
       <h1>Мои подписчики: </h1>
@@ -22,7 +21,7 @@ function Followers() {
 
       {usersList.length ? (
         usersList.map((el) => (
-          <User
+          <UserFollowers
             key={el._id}
             id={el._id}
             login={el.login}

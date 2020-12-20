@@ -3,3 +3,5 @@ export const ADD_ALL_USERS = 'ADD_ALL_USERS'
 export const ADD_FOLLOWERS_USERS = 'ADD_FOLLOWERS_USERS'
 
 export const SUBSCRIBE = 'SUBSCRIBE'
+
+export const UNSUBSCRIBE = 'UNSUBSCRIBE'
