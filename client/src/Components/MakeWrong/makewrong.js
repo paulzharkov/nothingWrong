@@ -14,6 +14,8 @@ function Makewrong() {
   const [offender, setOffender] = useState('');
   const [state, setState] = useState('');
   const [rating, setRating] = useState('');
+  const [counterReason, setCounterReason] = useState(reason.length)
+  const [counterSolve, setCounterSolve] = useState(solve.length.toString())
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ function Makewrong() {
   };
   const handlerReason = (e) => {
     setReason(e.target.value);
+    setCounterReason(reason.length)
   };
 
   const handlerSolve = (e) => {
@@ -73,10 +76,12 @@ function Makewrong() {
       <div>
         <span>Укажите причину (не более 140 символов): </span>
         <input type="text" value={reason} onChange={handlerReason} />
+        <progress value={counterReason} max="140" >{counterReason}</progress>
       </div>
       <div>
         <span>Чего я хочу от обидчика (не более 140 символов): </span>
         <input type="text" value={solve} onChange={handlerSolve} />
+        <div>{counterSolve}</div>
       </div>
       <div>
         <span>Обидчик: </span>
