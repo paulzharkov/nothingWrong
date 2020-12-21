@@ -72,7 +72,7 @@ function Header() {
             <Link to="/chat">Обсудить</Link>,
             <Link to="/chatprivate">Обсудить Приватно</Link>
           ].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={index}>
               <ListItemIcon>{emoji[index]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

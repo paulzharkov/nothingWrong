@@ -3,9 +3,15 @@ import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFollowersUsersThunk } from '../../redux/creators/usersList';
-import FollowersOption from './FollowersOption/FollowersOption';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  InputLabel,
+  Select,
+  FormHelperText,
+  TextField,
+  MenuItem,
+  Button,
+} from '@material-ui/core';
 
 function Makewrong() {
   const [category, setCategory] = useState('');
@@ -14,19 +20,30 @@ function Makewrong() {
   const [offender, setOffender] = useState('');
   const [state, setState] = useState('');
   const [rating, setRating] = useState('');
-  const [counterReason, setCounterReason] = useState(reason.length)
-  const [counterSolve, setCounterSolve] = useState(solve.length.toString())
+  const [counterReason, setCounterReason] = useState(reason.length);
+  const [counterSolve, setCounterSolve] = useState(solve.length);
+
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
 
   const history = useHistory();
+
   const dispatch = useDispatch();
+
+  const classes = useStyles();
 
   const usersList = useSelector((state) => state.usersList);
 
   useEffect(() => {
     dispatch(getFollowersUsersThunk());
-  }, [usersList]);
-
-
+  }, [dispatch]);
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
@@ -36,11 +53,12 @@ function Makewrong() {
   };
   const handlerReason = (e) => {
     setReason(e.target.value);
-    setCounterReason(reason.length)
+    setCounterReason(reason.length);
   };
 
   const handlerSolve = (e) => {
     setSolve(e.target.value);
+    setCounterSolve(solve.length);
   };
   const handlerOffender = (e) => {
     setOffender(e.target.value);
@@ -52,7 +70,6 @@ function Makewrong() {
   const handlerSubmit = (e) => {
     e.preventDefault();
 
-
     dispatch(
       createPostThunk({ category, reason, solve, offender, rating, state })
     );
@@ -62,64 +79,127 @@ function Makewrong() {
   return (
     <form onSubmit={handlerSubmit}>
       <div>
-        <span>Выберите категорию: </span>
-        <select value={category} onChange={categoryHandler}>
-          <option value="" selected disabled hidden>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Выберите категорию:
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={category}
+          onChange={categoryHandler}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value="" disabled>
+            Список
+          </MenuItem>
+          <MenuItem value="Финансовая">Финансовая</MenuItem>
+          <MenuItem value="Невыполненные обещания">
+            Невыполненные обещания
+          </MenuItem>
+          <MenuItem value="Женская">Женская</MenuItem>
+          <MenuItem value="Воспитательная">Воспитательная</MenuItem>
+          <MenuItem value="Бытовая">Бытовая</MenuItem>
+        </Select>
+      </div>
+      <div>
+        <TextField
+          id="outlined-multiline-static"
+          label="Укажите причину"
+          multiline
+          rows={3}
+          value={reason}
+          onChange={handlerReason}
+          maxlength="140"
+          variant="outlined"
+          type="text"
+        />
+        <FormHelperText id="my-helper-text">
+          (не более 140 символов)
+        </FormHelperText>
+        <progress value={counterReason} max="140">
+          {counterReason}
+        </progress>
+      </div>
+      <div>
+        <TextField
+          id="outlined-multiline-static"
+          label="Чего я хочу от обидчика"
+          multiline
+          rows={3}
+          value={solve}
+          onChange={handlerSolve}
+          maxlength="140"
+          variant="outlined"
+          type="text"
+        />
+        <FormHelperText id="my-helper-text">
+          (не более 140 символов)
+        </FormHelperText>
+        <meter max="140" value={counterSolve}>
+          {counterSolve}
+        </meter>
+      </div>
+      <div>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Укажите обидчика:
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={offender}
+          onChange={handlerOffender}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value="" disabled>
             Выберите из списка
-          </option>
-          <option value="Финансовая">Финансовая</option>
-          <option value="Невыполненные обещания">Невыполненные обещания</option>
-          <option value="Женская">Женская</option>
-          <option value="Воспитательная">Воспитательная</option>
-          <option value="Бытовая">Бытовая</option>
-        </select>
+          </MenuItem>
+          {usersList.length &&
+            usersList.map((el) => (
+              <MenuItem value={el.login}>{el.login}</MenuItem>
+            ))}
+        </Select>
       </div>
       <div>
-        <span>Укажите причину (не более 140 символов): </span>
-        <input type="text" value={reason} onChange={handlerReason} />
-        <progress value={counterReason} max="140" >{counterReason}</progress>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Кому будет доступна обидка:
+        </InputLabel>
+        <Select
+          value={state}
+          onChange={stateHandler}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value="" disabled>
+            Стэйт
+          </MenuItem>
+          <MenuItem value="Приватная">Приватная</MenuItem>
+          <MenuItem value="Публичная">Публичная</MenuItem>
+        </Select>
       </div>
       <div>
-        <span>Чего я хочу от обидчика (не более 140 символов): </span>
-        <input type="text" value={solve} onChange={handlerSolve} />
-        <div>{counterSolve}</div>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Уровень злости:
+        </InputLabel>
+        <Select
+          value={rating}
+          onChange={ratingHandler}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value="" disabled>
+            Выберите от 1 до 3
+          </MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="3">3</MenuItem>
+        </Select>
       </div>
-      <div>
-        <span>Обидчик: </span>
-        <select value={offender} onChange={handlerOffender}>
-          <option value="" selected disabled hidden>
-            Выберите из списка
-          </option>
-          {
-            usersList.length && usersList.map((el) => (
-              <FollowersOption login={el.login} />
-            ))
-          }
-        </select>
-      </div>
-      <div>
-        <span>Стэйт: </span>
-        <select value={state} onChange={stateHandler}>
-          <option value="" selected disabled hidden>
-            Выберите из списка
-          </option>
-          <option value="Приватная">Приватная</option>
-          <option value="Публичная">Публичная</option>
-        </select>
-      </div>
-
-      <div>
-        <span>Уровень: </span>
-        <select value={rating} onChange={ratingHandler}>
-          <option value="" selected disabled hidden>
-            Выберите из списка
-          </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-      </div>
-      <button type="submit">Отправить</button>
+      {/* <button type="submit">Отправить</button> */}
+      <Button type="submit" variant="outlined" color="primary">
+        Обидеться!
+      </Button>
     </form>
   );
 }

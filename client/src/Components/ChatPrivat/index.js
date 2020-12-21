@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import '../Chat/index.css';
 import io from "socket.io-client";
 
 import LightSpeed from 'react-reveal/LightSpeed';
@@ -9,6 +8,7 @@ import LightSpeed from 'react-reveal/LightSpeed';
 
 
 function ChatPrivat() {
+  console.log('и сюда');
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -30,13 +30,6 @@ console.log('offenderId', offenderId);
       setYourId(id);
     })
 
-    // socketRef.current.on("private message", (message) => {
-    //   console.log("here2", message);
-    //   receivedMessage(message);
-    // })
-
-
-
 
     socketRef.current.on(`${idOne}`, (message) => {
       console.log("here2", message);
@@ -53,7 +46,7 @@ console.log('offenderId', offenderId);
 
   const sendMessage = (e) => {
     e.preventDefault();
-console.log('-----@@@ back',idOne);
+    console.log('-----@@@ back', idOne);
     const messageObjectPrivate = {
       body: message,
       id: yourId,
@@ -63,9 +56,6 @@ console.log('-----@@@ back',idOne);
     };
     setMessage("");
     if (message !== "") {
-      
-
-
       socketRef.current.emit("private message", messageObjectPrivate);
     }
     return
