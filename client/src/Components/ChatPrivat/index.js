@@ -13,9 +13,12 @@ function ChatPrivat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const user = useSelector((state) => state.users)
+  const state = useSelector((state) => state)
   // const posts = useSelector((state) => state.posts)
-
+  console.log('state',state);
   const idOne = useSelector((state) => state.idOne)
+  const offenderId = state.posts.find((el) => el._id === idOne).offenderName
+console.log('offenderId', offenderId);
   const socketRef = useRef()
   // console.log('id: ---->>>', id);
 
@@ -56,7 +59,7 @@ console.log('-----@@@ back',idOne);
       id: yourId,
       user,
       idOne,
-      offenderId: 'Маша',
+      offenderId,
     };
     setMessage("");
     if (message !== "") {
