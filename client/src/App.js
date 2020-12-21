@@ -10,6 +10,7 @@ import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import Chat from './Components/Chat/chat';
 import ChatPrivat from './Components/ChatPrivat';
+import Fade from 'react-reveal/Fade';
 import {
   BrowserRouter as Router,
   Switch,
@@ -91,7 +92,9 @@ function App() {
                       <Login />
                     </Route>
                     <Route exact path="/chatprivate">
+                    <Fade right>
                       <ChatPrivat />
+                      </Fade>
                     </Route>
                   </Switch>
                 ) : (
