@@ -7,7 +7,9 @@ const checkAuth = require('../middleware/auth');
 const cabinet = async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
   const userPosts = await Post.find({ authorId: user });
-  res.json(userPosts);
+  const toMeWrongs = await Post.find({ offenderId: user })
+  console.log(toMeWrongs)
+  res.json({ userPosts, toMeWrongs });
 };
 
 const lenta = async (req, res) => {
@@ -87,7 +89,6 @@ const advices = async (req, res) => {
 
 const makewrong =
   (checkAuth,
-
     async (req, res) => {
       const { category, reason, solve, rating, state } = req.body;
       const user = await User.findOne({ login: req.session.user.login });
@@ -101,6 +102,7 @@ const makewrong =
           rating,
           state,
           offenderId: offender._id,
+          offenderName: offender.login,
           authorId: user._id,
           date: new Date().toLocaleDateString(),
         });
@@ -110,7 +112,6 @@ const makewrong =
         return res.sendStatus(406);
       }
     });
-
 
 const chat = async (req, res) => {
   const chat = await Chat.findOne({ postId: req.params.post });

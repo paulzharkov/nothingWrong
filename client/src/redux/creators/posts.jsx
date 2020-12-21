@@ -9,6 +9,13 @@ export const createPost = (data) => ({
 export const setPosts = (postsList) => ({
   type: TYPES.ADD_ALL,
   payload: postsList
+
+
+})
+
+export const setOnMePosts = (postsList) => ({
+  type: TYPES.ADD_ON_ME_ALL,
+  payload: postsList
 })
 
 export const deletePost = (id) => ({
@@ -21,15 +28,27 @@ export const addId = (id) => ({
   payload: id
 })
 
-export const getAllPostsThunk = () => async (dispatch) => {
+export const getAllMyPostsThunk = () => async (dispatch) => {
   const response = await fetch('http://localhost:8000/lk', {
     credentials: "include"
   })
   const postsList = await response.json()
   if (postsList) {
-    dispatch(setPosts(postsList))
+    dispatch(setPosts(postsList.userPosts))
   }
 }
+
+export const getAllToMePostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://localhost:8000/lk', {
+    credentials: "include"
+  })
+  const postsList = await response.json()
+  if (postsList) {
+    dispatch(setOnMePosts(postsList.toMeWrongs))
+  }
+}
+
+
 
 export const createPostThunk = ({ category,
   reason,
@@ -53,9 +72,9 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-console.log(data);
+    console.log(data);
     data && dispatch(createPost(data))
-    
+
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
@@ -66,7 +85,7 @@ export const deletePostThunk = (id) => (dispatch) => {
 }
 
 export const chatPrivatThunk = (id) => (dispatch) => {
-  
+
   dispatch(addId(id))
 }
 

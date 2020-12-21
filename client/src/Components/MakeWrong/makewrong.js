@@ -43,7 +43,7 @@ function Makewrong() {
 
   useEffect(() => {
     dispatch(getFollowersUsersThunk());
-  }, [usersList]);
+  }, [dispatch]);
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
