@@ -90,7 +90,6 @@ const advices = async (req, res) => {
 const makewrong =
   (checkAuth,
     async (req, res) => {
-      console.log(req.body)
       const { category, reason, solve, rating, state } = req.body;
       const user = await User.findOne({ login: req.session.user.login });
       const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
