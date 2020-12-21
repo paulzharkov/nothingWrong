@@ -7,16 +7,18 @@ import LightSpeed from 'react-reveal/LightSpeed';
 
 
 
-function Chat() {
+
+function ChatPrivat() {
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  // const user = useSelector((state) => state)
-  const posts = useSelector((state) => state.posts)
-  // console.log('posts: ---->>>',posts);
+  const user = useSelector((state) => state.users)
+  // const posts = useSelector((state) => state.posts)
 
+  const idOne = useSelector((state) => state.idOne)
   const socketRef = useRef()
-console.log(socketRef);
+  // console.log('id: ---->>>', id);
+
   useEffect(() => {
     socketRef.current = io.connect('/')
 
@@ -25,14 +27,21 @@ console.log(socketRef);
       setYourId(id);
     })
 
-    socketRef.current.on("message", (message) => {
-      console.log("here", message);
-      receivedMessage(message);
-    })
     // socketRef.current.on("private message", (message) => {
     //   console.log("here2", message);
     //   receivedMessage(message);
     // })
+
+
+
+
+    socketRef.current.on(`${idOne}`, (message) => {
+      console.log("here2", message);
+      receivedMessage(message);
+    })
+
+
+
   }, [])
 
   const handleChange = (e) => {
@@ -41,30 +50,28 @@ console.log(socketRef);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    const messageObject = {
+console.log('-----@@@ back',idOne);
+    const messageObjectPrivate = {
       body: message,
       id: yourId,
+      user,
+      idOne,
+      offenderId: 'Маша',
     };
-    // const messageObjectPrivate = {
-    //   body: message,
-    //   id: yourId,
-    //   id2: 9999999,
-    //   user,
-    // };
     setMessage("");
     if (message !== "") {
-      socketRef.current.emit("send message", messageObject);
       
 
-        // socketRef.current.emit("private message", messageObjectPrivate);
+
+      socketRef.current.emit("private message", messageObjectPrivate);
     }
     return
   }
 
   const receivedMessage = (message) => {
-      setMessages(oldMsgs => [...oldMsgs, message]);
+    setMessages(oldMsgs => [...oldMsgs, message]);
   }
- 
+
 
 
 
@@ -89,5 +96,5 @@ console.log(socketRef);
 }
 
 
-export default Chat;
+export default ChatPrivat;
 

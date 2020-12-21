@@ -52,6 +52,7 @@ function Makewrong() {
   const handlerSubmit = (e) => {
     e.preventDefault();
 
+
     dispatch(
       createPostThunk({ category, reason, solve, offender, rating, state })
     );
