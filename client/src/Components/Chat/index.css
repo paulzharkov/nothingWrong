@@ -27,13 +27,12 @@
 .partnerMessage {
   width: 45%;
   background-color: transparent;
-  color: lightgray;
-  border: 1px solid lightgray;
+  color: rgb(61, 14, 14);
+  border: 1px solid rgb(199, 128, 128);
   padding: 10px;
   margin-left: 5px;
   text-align: center;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
+  border-radius: 0%;
 }
 
 

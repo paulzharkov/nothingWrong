@@ -9,6 +9,8 @@ import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import Chat from './Components/Chat/chat';
+import ChatPrivat from './Components/ChatPrivat';
+import Fade from 'react-reveal/Fade';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -99,6 +101,11 @@ function App() {
                     </Route>
                     <Route exact path="/">
                       <Login />
+                    </Route>
+                    <Route exact path="/chatprivate">
+                    <Fade right>
+                      <ChatPrivat />
+                      </Fade>
                     </Route>
                   </Switch>
                 </>

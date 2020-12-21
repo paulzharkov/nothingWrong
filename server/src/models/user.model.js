@@ -10,7 +10,9 @@ const userSchema = new Schema({
     type: String,
     unique: true,
   }, 
-  subscribers: Array
+  subscribers: Array,
+  myHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  toMeHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 })
 
 module.exports = model('User', userSchema);

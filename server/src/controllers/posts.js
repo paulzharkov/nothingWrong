@@ -103,7 +103,15 @@ const makewrong =
         authorId: user._id,
         date: new Date().toLocaleDateString(),
       });
+      user.myHurt.push(newPost._id)
+      offender.toMeHurt.push(newPost._id)
+
+
+      await user.save();
+      await offender.save();
       await newPost.save();
+
+
       return res.status(200).json(newPost);
     } else {
       return res.sendStatus(406);

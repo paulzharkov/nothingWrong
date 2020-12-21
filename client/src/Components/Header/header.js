@@ -21,6 +21,7 @@ function Header() {
             <div><Link to="/advices">Советы</Link></div>
             <div><Link to="/makewrong">Создать обидку</Link></div>
             <div><Link to="/chat">Обсудить</Link></div>
+            <div><Link to="/chatprivate">ОбсудитьПриватно</Link></div>
           </div>
         ) : (
             <div>
