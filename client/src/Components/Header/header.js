@@ -9,7 +9,7 @@ import logo from './logo2.jpg'
 function Header() {
 
   const login = useSelector(state => state.users)
-  console.log(login);
+
   return (
     <>
       <div className={style.headerDiv}>
@@ -20,13 +20,14 @@ function Header() {
           <div className={style.headerLinks} >
             <div><Link to="/lk">Личный кабинет</Link></div>
             <div><Link to="/lenta">Лента</Link></div>
-            <div><Link to="/peoples">Люди</Link></div>
+            <div><Link to="/people">Люди</Link></div>
             <div><Link to="/stats">Статистика</Link></div>
             <div><Link to="/advices">Советы</Link></div>
             <div><Link to="/makewrong">Создать обидку</Link></div>
             <div><Link to="/chat">Обсудить</Link></div>
             <hr />
             <div><Logout /></div>
+            <div><Link to="/chatprivate">ОбсудитьПриватно</Link></div>
           </div>
         ) : (
             <div className={style.headerLink}>
