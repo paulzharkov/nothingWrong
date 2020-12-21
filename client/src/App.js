@@ -17,24 +17,26 @@ import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers'
 import Wrongs from './Components/Wrongs/wrongs';
 
+
 function App() {
   const login = useSelector((state) => state.users);
 
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      backgroundColor: '#B0E0E6',
     },
     paper: {
       padding: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
       height: '100vh',
+      width: '100vw',
       justifyContent: 'center',
       alignItems: 'center',
       display: 'flex',
       // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-
-
+      backgroundColor: '#e0ffff	',
     },
     first: {
       height: '100vh',
@@ -46,6 +48,7 @@ function App() {
       // height: '100vh',
       alignItems: 'center',
     },
+    
   }));
 
   const classes = useStyles();
@@ -55,12 +58,16 @@ function App() {
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
-            <Paper elevation={6} className={classes.paper}>
+            
+            <div className={classes.left}>
               <Header />
-            </Paper>
+            </div>
+            
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Paper elevation={6} className={classes.paper}>
+            
+            
               {login ? (
                 <Switch>
                   <Route path="/register">
@@ -87,34 +94,41 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-                  <Route exact path="/chatprivate">
+                    <Route exact path="/chatprivate">
                     <Fade right>
                       <ChatPrivat />
                     </Fade>
                   </Route>
-
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                  <>
-                    <Switch>
-                      <Route path="/register">
-                        <Register />
-                      </Route>
-                      <Route exact path="/">
-                        <Login />
-                      </Route>
-                    </Switch>
-                  </>
-                )}
+                <>
+                  <Switch>
+                    <Route path="/register">
+                      <Register />
+                    </Route>
+                    <Route exact path="/">
+                      <Login />
+                    </Route>
+                  </Switch>
+                </>
+              )}
             </Paper>
           </Grid>
         </Grid>
       </div>
     </Router>
   );
+
+
+
+  
 }
+
+
+
+
 
 export default App;

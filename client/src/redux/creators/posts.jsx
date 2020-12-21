@@ -85,7 +85,6 @@ export const createPostThunk = ({ category,
     const data = await response.json()
     console.log(data);
     data && dispatch(createPost(data))
-
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
