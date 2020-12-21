@@ -96,25 +96,24 @@ function App() {
                     <Route exact path="/chatprivate">
                     <Fade right>
                       <ChatPrivat />
-                      </Fade>
-                    </Route>
-
+                    </Fade>
+                  </Route>
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>

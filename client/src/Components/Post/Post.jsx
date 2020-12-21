@@ -31,6 +31,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
       <div>Лайки: {likes.length}</div>
       <div>Дата создания: {date}</div>
       <div>Комментарии: {comments.length}</div>
+
       {offender ?
         <button type="button" onClick={handlerDelete}>Удалить</button>
         : null}
