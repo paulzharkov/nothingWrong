@@ -1,22 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllPostsThunk } from '../../redux/creators/posts';
-import Post from '../Post/Post';
+import { getAllToMePostsThunk } from '../../../redux/creators/posts';
+import Post from '../../Post/Post';
 
-function Lk() {
+function ToMeWrongs() {
   const login = useSelector((state) => state.users);
-  const posts = useSelector((state) => state.posts);
-
+  const posts = useSelector((state) => state.posts.toMePost);
+  console.log(posts)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllPostsThunk());
-  }, [posts]);
-
+    dispatch(getAllToMePostsThunk());
+  }, [dispatch]);
   return (
     <div>
       <h1>Личный кабинет</h1>
       <h1>{login}</h1>
+
+      <h3>На меня обиделись</h3>
 
       {posts.length ? (
         posts.map((el) => (
@@ -35,10 +36,10 @@ function Lk() {
           />
         ))
       ) : (
-        <div>wasted</div>
-      )}
+          <div>wasted</div>
+        )}
     </div>
   );
 }
 
-export default Lk;
+export default ToMeWrongs;

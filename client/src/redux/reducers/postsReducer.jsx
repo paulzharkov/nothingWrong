@@ -1,4 +1,4 @@
-import { ADD_POST, ADD_ALL, DELETE } from '../types/posts';
+import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL } from '../types/posts';
 
 function postsReducer(state = [], action) {
   switch (action.type) {
@@ -6,7 +6,16 @@ function postsReducer(state = [], action) {
       return [...state, action.payload];
 
     case ADD_ALL:
-      return action.payload;
+      return {
+        ...state,
+        myPost: action.payload
+      }
+
+    case ADD_ON_ME_ALL:
+      return {
+        ...state,
+        toMePost: action.payload
+      }
 
     case DELETE:
       return state.filter(el => el._id !== action.payload)

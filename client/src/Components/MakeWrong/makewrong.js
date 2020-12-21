@@ -24,7 +24,7 @@ function Makewrong() {
 
   useEffect(() => {
     dispatch(getFollowersUsersThunk());
-  }, [usersList]);
+  }, [dispatch]);
 
 
 
