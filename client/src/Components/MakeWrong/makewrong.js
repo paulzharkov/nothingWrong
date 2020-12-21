@@ -1,7 +1,11 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFollowersUsersThunk } from '../../redux/creators/usersList';
+import FollowersOption from './FollowersOption/FollowersOption';
+
+
 
 function Makewrong() {
   const [category, setCategory] = useState('');
@@ -10,33 +14,37 @@ function Makewrong() {
   const [offender, setOffender] = useState('');
   const [state, setState] = useState('');
   const [rating, setRating] = useState('');
+  const [counterReason, setCounterReason] = useState(reason.length)
+  const [counterSolve, setCounterSolve] = useState(solve.length.toString())
 
   const history = useHistory();
-
   const dispatch = useDispatch();
+
+  const usersList = useSelector((state) => state.usersList);
+
+  useEffect(() => {
+    dispatch(getFollowersUsersThunk());
+  }, [usersList]);
+
+
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
   };
-
   const stateHandler = (e) => {
     setState(e.target.value);
   };
-
   const handlerReason = (e) => {
     setReason(e.target.value);
-    console.log(reason);
+    setCounterReason(reason.length)
   };
 
   const handlerSolve = (e) => {
     setSolve(e.target.value);
-    console.log(solve);
   };
-
   const handlerOffender = (e) => {
     setOffender(e.target.value);
   };
-
   const ratingHandler = (e) => {
     setRating(e.target.value);
   };
@@ -69,10 +77,12 @@ function Makewrong() {
       <div>
         <span>Укажите причину (не более 140 символов): </span>
         <input type="text" value={reason} onChange={handlerReason} />
+        <progress value={counterReason} max="140" >{counterReason}</progress>
       </div>
       <div>
         <span>Чего я хочу от обидчика (не более 140 символов): </span>
         <input type="text" value={solve} onChange={handlerSolve} />
+        <div>{counterSolve}</div>
       </div>
       <div>
         <span>Обидчик: </span>
@@ -80,8 +90,11 @@ function Makewrong() {
           <option value="" selected disabled hidden>
             Выберите из списка
           </option>
-          <option value="Маша">Маша</option>
-          <option value="Дима">Дима</option>
+          {
+            usersList.length && usersList.map((el) => (
+              <FollowersOption login={el.login} />
+            ))
+          }
         </select>
       </div>
       <div>

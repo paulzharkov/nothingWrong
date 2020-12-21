@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as AC from '../../../redux/creators/usersList'
 
 
-function User({ login, email, id }) {
+function UserAll({ login, email, id, subscribers }) {
 
   const dispatch = useDispatch()
 
@@ -15,10 +15,10 @@ function User({ login, email, id }) {
   return (
     <div>
       <div>Логин: {login}</div>
-      <div>Имэйл: {email}</div>
+      <div>Email: {email}</div>
       <button type="button" onClick={subscribeHandler}>Подписаться</button>
     </div>
   )
 }
 
-export default User
+export default UserAll

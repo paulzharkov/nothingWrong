@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllUsersThunk } from '../../../redux/creators/usersList';
-import User from '../User/User';
+import UserAll from '../UserAll/UserAll';
 
 
 function AllPeople() {
@@ -22,11 +22,12 @@ function AllPeople() {
 
       {usersList.length ? (
         usersList.map((el) => (
-          <User
+          <UserAll
             key={el._id}
             id={el._id}
             login={el.login}
             email={el.email}
+            subscribers={el.subscribers}
           />
         ))
       ) : (

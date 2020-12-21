@@ -1,18 +1,19 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
-  login:{
+  login: {
     type: String,
     unique: true,
-  }, 
+  },
   pass: String,
-  email:{
+  email: {
     type: String,
     unique: true,
-  }, 
-  subscribers: Array,
+ },
+  subscribers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   myHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   toMeHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 })
+
 
 module.exports = model('User', userSchema);
