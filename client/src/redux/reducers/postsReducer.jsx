@@ -1,4 +1,4 @@
-import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL } from '../types/posts';
+import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL, ADD_ALL_LENTA } from '../types/posts';
 
 function postsReducer(state =
   [], action) {
@@ -10,6 +10,9 @@ function postsReducer(state =
       return action.payload;
 
     case ADD_ON_ME_ALL:
+      return action.payload;
+
+    case ADD_ALL_LENTA:
       return action.payload;
 
     case DELETE:

@@ -10,6 +10,11 @@ export const setPosts = (postsList) => ({
   type: TYPES.ADD_ALL,
   payload: postsList
 
+})
+
+export const setLentaPosts = (postsList) => ({
+  type: TYPES.ADD_ALL_LENTA,
+  payload: postsList
 
 })
 
@@ -27,6 +32,16 @@ export const addId = (id) => ({
   type: TYPES.ADD_ID,
   payload: id
 })
+
+export const getLentaPostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://localhost:8000/lenta', {
+    credentials: "include"
+  })
+  const postsList = await response.json()
+  if (postsList) {
+    dispatch(setLentaPosts(postsList))
+  }
+}
 
 export const getAllMyPostsThunk = () => async (dispatch) => {
   const response = await fetch('http://localhost:8000/lk', {
