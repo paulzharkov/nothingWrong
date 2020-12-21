@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 function Header() {
 
   const login = useSelector(state => state.users)
-  const emoji = ["👺", "🎞", "👨‍👨‍👧‍👧", "📊", "💩", "📝", "🗣", "🗣"];
+  const emoji = ["👺", "🎞", "👨‍👨‍👧‍👧", "📊", "💩", "📝", "🗣"];
   const emoji2 = ["👣",  "🚶‍♂️"];
 
   const classes = useStyles();
@@ -70,7 +70,6 @@ function Header() {
             <Link to="/advices">Советы</Link>,
             <Link to="/makewrong">Создать обидку</Link>,
             <Link to="/chat">Обсудить</Link>,
-            <Link to="/chatprivate">Обсудить Приватно</Link>
           ].map((text, index) => (
             <ListItem button key={index}>
               <ListItemIcon>{emoji[index]}</ListItemIcon>

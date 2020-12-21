@@ -87,21 +87,14 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-    // console.log(data);
     data && dispatch(createPost(data))
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
-
   fetch(`http://localhost:8000/lenta/${id}`, {
     method: 'DELETE',
     credentials: "include"
-  }).then(res => {
-    if (res.status === 200) {
-      console.log(11111111111);
-    }
-    return dispatch(deletePost(id))
-  })
+  }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
 
 export const chatPrivatThunk = (id) => (dispatch) => {
