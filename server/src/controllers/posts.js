@@ -7,7 +7,9 @@ const checkAuth = require('../middleware/auth');
 const cabinet = async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
   const userPosts = await Post.find({ authorId: user });
-  res.json(userPosts);
+  const toMeWrongs = await Post.find({ offenderId: user })
+  console.log(toMeWrongs)
+  res.json({ userPosts, toMeWrongs });
 };
 
 const lenta = async (req, res) => {

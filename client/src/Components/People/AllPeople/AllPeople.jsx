@@ -12,7 +12,7 @@ function AllPeople() {
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
-  }, [usersList]);
+  }, [dispatch]);
 
 
   return (
