@@ -11,7 +11,7 @@ function Lk() {
 
   useEffect(() => {
     dispatch(getUserPostsThunk());
-  }, [posts]);
+  }, [dispatch]);
 
   return (
     <div>

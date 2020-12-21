@@ -63,9 +63,9 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-console.log(data);
+    console.log(data);
     data && dispatch(createPost(data))
-    
+
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
@@ -76,7 +76,7 @@ export const deletePostThunk = (id) => (dispatch) => {
 }
 
 export const chatPrivatThunk = (id) => (dispatch) => {
-  
+
   dispatch(addId(id))
 }
 

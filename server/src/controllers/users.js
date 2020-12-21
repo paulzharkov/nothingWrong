@@ -40,7 +40,6 @@ const userSignin = async (req, res) => {
             id: currentUser._id,
             login: currentUser.login,
           };
-
           return res.json(currentUser.login);
         }
       }
@@ -65,8 +64,8 @@ const people = async (req, res) => {
   const peopleList = await User.find();
   let list = peopleList.filter(
     (el) => {
-      el.login !== '123'
-      // !el.subscribers.includes(req.session.user.id)
+      el.login !== req.session.user.login &&
+      !el.subscribers.includes(req.session.user.id)
     });
 
   let list2 = list.map((el) => {

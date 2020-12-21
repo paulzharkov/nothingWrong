@@ -11,17 +11,13 @@ function Chat() {
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  // const user = useSelector((state) => state)
   const posts = useSelector((state) => state.posts)
-  // console.log('posts: ---->>>',posts);
 
   const socketRef = useRef()
-console.log(socketRef);
   useEffect(() => {
     socketRef.current = io.connect('/')
 
     socketRef.current.on("your id", id => {
-      // console.log('-------->>>', id)
       setYourId(id);
     })
 
@@ -54,17 +50,17 @@ console.log(socketRef);
     setMessage("");
     if (message !== "") {
       socketRef.current.emit("send message", messageObject);
-      
 
-        // socketRef.current.emit("private message", messageObjectPrivate);
+
+      // socketRef.current.emit("private message", messageObjectPrivate);
     }
     return
   }
 
   const receivedMessage = (message) => {
-      setMessages(oldMsgs => [...oldMsgs, message]);
+    setMessages(oldMsgs => [...oldMsgs, message]);
   }
- 
+
 
 
 
