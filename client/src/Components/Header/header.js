@@ -16,7 +16,7 @@ function Header() {
           <div >
             <div><Link to="/lk">Личный кабинет</Link></div>
             <div><Link to="/lenta">Лента</Link></div>
-            <div><Link to="/peoples">Люди</Link></div>
+            <div><Link to="/people">Люди</Link></div>
             <div><Link to="/stats">Статистика</Link></div>
             <div><Link to="/advices">Советы</Link></div>
             <div><Link to="/makewrong">Создать обидку</Link></div>
