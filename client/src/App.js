@@ -1,14 +1,12 @@
 import './App.css';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
-import Lk from './Components/Lk/lk';
 import Login from './Components/Login/login';
 import People from './Components/People/people';
 import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
-import Chat from './Components/Chat/chat';
 import ChatPrivat from './Components/ChatPrivat';
 import Fade from 'react-reveal/Fade';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -16,7 +14,8 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Followers from './Components/People/Followers/Followers';
+import Followers from './Components/People/Followers/Followers'
+import Wrongs from './Components/Wrongs/wrongs';
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -31,6 +30,7 @@ function App() {
       textAlign: 'center',
       color: theme.palette.text.secondary,
       height: '100vh',
+      width: '100vw',
       justifyContent: 'center',
       alignItems: 'center',
       display: 'flex',
@@ -47,6 +47,7 @@ function App() {
       // height: '100vh',
       alignItems: 'center',
     },
+    
   }));
 
   const classes = useStyles();
@@ -56,19 +57,23 @@ function App() {
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
-            <Paper elevation={6} className={classes.paper}>
+            
+            <div className={classes.left}>
               <Header />
-            </Paper>
+            </div>
+            
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Paper elevation={6} className={classes.paper}>
+            
+            
               {login ? (
                 <Switch>
                   <Route path="/register">
                     <Register />
                   </Route>
                   <Route path="/lk">
-                    <Lk />
+                    <Wrongs />
                   </Route>
                   <Route path="/lenta">
                     <Lenta />
@@ -85,17 +90,18 @@ function App() {
                   <Route path="/makewrong">
                     <Makewrong />
                   </Route>
-                  <Route path="/chat">
-                    <Chat />
-                  </Route>
                   <Route exact path="/">
                     <Login />
                   </Route>
-                  <Route exact path="/chatprivate">
+                    <Route exact path="/chatprivate">
                     <Fade right>
                       <ChatPrivat />
-                    </Fade>
-                  </Route>
+                      </Fade>
+                    </Route>
+
+                  {/* <Route>
+                    <Followers exact path="/people/followers" />
+                  </Route> */}
                 </Switch>
               ) : (
                 <>
@@ -115,6 +121,14 @@ function App() {
       </div>
     </Router>
   );
+
+
+
+  
 }
+
+
+
+
 
 export default App;

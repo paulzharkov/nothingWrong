@@ -12,7 +12,7 @@ function Followers() {
 
   useEffect(() => {
     dispatch(getFollowersUsersThunk());
-  }, [usersList]);
+  }, [dispatch]);
 
   return (
     <div>

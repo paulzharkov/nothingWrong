@@ -30,7 +30,7 @@ function Register() {
   const history = useHistory();
 
   function handlerReg(e) {
-    e.preDefault();
+    e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
     history.push('/lk');
   }

@@ -7,7 +7,9 @@ const checkAuth = require('../middleware/auth');
 const cabinet = async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
   const userPosts = await Post.find({ authorId: user });
-  res.json(userPosts);
+  const toMeWrongs = await Post.find({ offenderId: user });
+
+  res.json({ userPosts, toMeWrongs });
 };
 
 const lenta = async (req, res) => {
@@ -45,7 +47,7 @@ const patchPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete({ _id: req.params.id });
-  res.status(200);
+  res.sendStatus(200);
 };
 
 const likePost = async (req, res) => {
@@ -53,7 +55,7 @@ const likePost = async (req, res) => {
   const user = req.session.user.login;
   if (!currentPost.likes.includes(user)) {
     currentPost.likes.push(user);
-    await sound.save();
+    await user.save();
   }
   res.json({ likes: sound.likes.length });
 };
@@ -87,30 +89,29 @@ const advices = async (req, res) => {
 
 const makewrong =
   (checkAuth,
-
-    async (req, res) => {
-      const { category, reason, solve, rating, state } = req.body;
-      const user = await User.findOne({ login: req.session.user.login });
-      const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
-      if (category && reason && solve && rating && state && user && offender) {
-        const newPost = await new Post({
-          category,
-          reason,
-          solve,
-          status: 'Открыта',
-          rating,
-          state,
-          offenderId: offender._id,
-          authorId: user._id,
-          date: new Date().toLocaleDateString(),
-        });
-        await newPost.save();
-        return res.status(200).json(newPost);
-      } else {
-        return res.sendStatus(406);
-      }
-    });
-
+  async (req, res) => {
+    const { category, reason, solve, rating, state } = req.body;
+    const user = await User.findOne({ login: req.session.user.login });
+    const offender = await User.findOne({ login: req.body.offender }); // В форме вводим логин обидчика, здесь делаем поиск по его логину в базе и кладем в пост его монго ID
+    if (category && reason && solve && rating && state && user && offender) {
+      const newPost = await new Post({
+        category,
+        reason,
+        solve,
+        status: 'Открыта',
+        rating,
+        state,
+        offenderId: offender._id,
+        offenderName: offender.login,
+        authorId: user._id,
+        date: new Date().toLocaleDateString(),
+      });
+      await newPost.save();
+      return res.status(200).json(newPost);
+    } else {
+      return res.sendStatus(406);
+    }
+  });
 
 const chat = async (req, res) => {
   const chat = await Chat.findOne({ postId: req.params.post });
