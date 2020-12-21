@@ -22,7 +22,7 @@ export const unSubscribeUser = (id) => ({
 })
 
 export const getAllUsersThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/users/people/allpeople', {
+  const response = await fetch('http://localhost:8000/users/people/allpeople', {
     credentials: "include"
   })
   const usersList = await response.json()
@@ -33,7 +33,7 @@ export const getAllUsersThunk = () => async (dispatch) => {
 }
 
 export const getFollowersUsersThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/users/people/followers', {
+  const response = await fetch('http://localhost:8000/users/people/followers', {
     credentials: "include"
   })
   const followersList = await response.json()
@@ -45,7 +45,7 @@ export const getFollowersUsersThunk = () => async (dispatch) => {
 
 export const subscribeThunk = (id, login) => async (dispatch) => {
 
-  const response = await fetch(`http://127.0.0.1:8000/users/people/allpeople/${id}`, {
+  const response = await fetch(`http://localhost:8000/users/people/allpeople/${id}`, {
     credentials: "include"
   })
 
@@ -56,7 +56,7 @@ export const subscribeThunk = (id, login) => async (dispatch) => {
 
 export const unSubscribeThunk = (id, login) => async (dispatch) => {
 
-  const response = await fetch(`http://127.0.0.1:8000/users/people/followers/${id}`, {
+  const response = await fetch(`http://localhost:8000/users/people/followers/${id}`, {
     credentials: "include"
   })
 

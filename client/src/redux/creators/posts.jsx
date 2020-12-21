@@ -30,7 +30,7 @@ export const addId = (id) => ({
 
 // lentaPosts
 export const getAllPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/lenta', {
+  const response = await fetch('http://localhost:8000/lenta', {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -40,7 +40,7 @@ export const getAllPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllMyPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/lk', {
+  const response = await fetch('http://localhost:8000/lk', {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -50,7 +50,7 @@ export const getAllMyPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllToMePostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/lk', {
+  const response = await fetch('http://localhost:8000/lk', {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -67,7 +67,7 @@ export const createPostThunk = ({ category,
   offender,
   rating,
   state }) => async (dispatch) => {
-    const response = await fetch('http://127.0.0.1:8000/wrong', {
+    const response = await fetch('http://localhost:8000/wrong', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ export const createPostThunk = ({ category,
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
-  fetch(`http://127.0.0.1:8000/lenta/${id}`, {
+  fetch(`http://localhost:8000/lenta/${id}`, {
     method: 'DELETE',
     credentials: "include"
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
