@@ -1,14 +1,15 @@
 const { Schema, model } = require('mongoose');
-const { commentSchema } = require('./comment.model')
-
+const { commentSchema } = require('./comment.model');
 
 const postSchema = new Schema({
   category: String, // бытовые, семейные, финансовые ... - подбирает эмоджи под категорию
-  reason: { // Текст самого поста
+  reason: {
+    // Текст самого поста
     type: String,
     maxLength: 140, // ограничение по длине поста
   },
-  solve: { // Текст нашего пожелания, что обидчик должен сделать
+  solve: {
+    // Текст нашего пожелания, что обидчик должен сделать
     type: String,
     maxLength: 140, // ограничение по длине поста
   },
@@ -21,7 +22,6 @@ const postSchema = new Schema({
   rating: Number, // from 1 to 10
   date: String, // format: 'YYYY-MM-DD'
   state: String, // Private or Public
-})
+});
 
 module.exports = model('Post', postSchema);
-
