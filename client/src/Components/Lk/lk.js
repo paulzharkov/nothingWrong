@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllPostsThunk } from '../../redux/creators/posts';
+import { getUserPostsThunk } from '../../redux/creators/posts';
 import Post from '../Post/Post';
 
 function Lk() {
@@ -10,7 +10,7 @@ function Lk() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllPostsThunk());
+    dispatch(getUserPostsThunk());
   }, [posts]);
 
   return (

@@ -11,7 +11,7 @@ const cabinet = async (req, res) => {
 };
 
 const lenta = async (req, res) => {
-  const lentaPosts = await Post.find(); // Отдаем в ленту все посты из базы
+  const lentaPosts = await Post.find({ state: "Публичная" }); // Отдаем в ленту все публичные посты из базы
   res.json(lentaPosts);
 };
 
