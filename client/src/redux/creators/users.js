@@ -13,7 +13,7 @@ export const logoutUser = () => ({
 export const createPersonThunk = ({ login, email, pass }) => async (
   dispatch
 ) => {
-  const response = await fetch('http://localhost:8000/users/signup', {
+  const response = await fetch('http://127.0.0.1:8000/users/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const createPersonThunk = ({ login, email, pass }) => async (
 };
 
 export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/users/signin', {
+  const response = await fetch('http://127.0.0.1:8000/users/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
 };
 
 export const logoutThunk = ({ login }) => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/users/signout', {
+  const response = await fetch('http://127.0.0.1:8000/users/signout', {
     credentials: 'include',
   });
 };

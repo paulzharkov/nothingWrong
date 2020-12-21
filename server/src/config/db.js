@@ -10,10 +10,10 @@ const options = {
   bufferMaxEntries: 0,
 };
 
-const dbConnectionURL = process.env.DB;
+// const dbConnectionURL = process.env.DB; - добавить позже
 
 function dbConnect() {
-  mongoose.connect('mongodb://localhost:27017/nothingWrongDB', options, (err) => {
+  mongoose.connect('mongodb+srv://Paul:R7WRVKuuz8pMw6a@nothingwrongcluster.nkdm7.mongodb.net/NOTHINGWRONGDB?retryWrites=true&w=majority', options, (err) => {
     if (err) return console.log(err);
     return console.log('Success connected to mongo');
   });

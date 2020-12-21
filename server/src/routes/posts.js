@@ -17,10 +17,6 @@ router.delete('/lenta/:id', postsController.deletePost);
 
 router.post('/lenta/:id/like', postsController.likePost);
 
-router.get('/peoples/all', postsController.peoplesAll);
-
-router.get('/peoples/subscribers', postsController.peoplesSubscribers);
-
 router.get('/stats/offended', postsController.statsOffended);
 
 router.get('/stats/offender', postsController.statsOffender);

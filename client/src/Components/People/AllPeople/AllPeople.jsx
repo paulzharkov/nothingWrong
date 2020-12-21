@@ -12,8 +12,9 @@ function AllPeople() {
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
-  }, [usersList]);
+  }, [dispatch]);
 
+  console.log(usersList)
 
   return (
     <div>

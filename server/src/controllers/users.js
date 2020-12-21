@@ -63,13 +63,15 @@ const userSignout = async (req, res) => {
 
 const people = async (req, res) => {
   const peopleList = await User.find();
+  console.log(peopleList)
   let list = peopleList.filter(
     (el) =>
       el.login !== req.session.user.login &&
       !el.subscribers.includes(req.session.user.id)
   );
-
+  // console.log(list)
   let list2 = list.map((el) => {
+    console.log('seconf list', el)
     delete el._doc.pass;
     return el;
   });

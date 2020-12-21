@@ -4,7 +4,18 @@ const User = require('../models/user.model');
 const faker = require('faker');
 const bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://localhost:27017/nothingWrongDB');
+const options = {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  autoIndex: true,
+  poolSize: 10,
+  bufferMaxEntries: 0,
+};
+
+
+mongoose.connect('mongodb+srv://Paul:R7WRVKuuz8pMw6a@nothingwrongcluster.nkdm7.mongodb.net/NOTHINGWRONGDB?retryWrites=true&w=majority', options);
 
 async function seedBase() {
   for (let i = 0; i < 20; i++) {

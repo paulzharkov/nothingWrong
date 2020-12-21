@@ -58,16 +58,6 @@ const likePost = async (req, res) => {
   res.json({ likes: sound.likes.length });
 };
 
-const peoplesAll = async (req, res) => {
-  const peoplesAll = await User.find();
-  res.json(peoplesAll.login);
-};
-
-const peoplesSubscribers = async (req, res) => {
-  const peoplesSubscribers = await User.find();
-  res.json(peoplesSubscribers.subscribers);
-};
-
 const statsOffended = async (req, res) => {
   const user = await User.findOne({ login: req.session.user.login });
   const statsOffended = await Post.find({ authorId: user._id });
@@ -135,8 +125,6 @@ module.exports = {
   patchPost,
   deletePost,
   likePost,
-  peoplesAll,
-  peoplesSubscribers,
   statsOffended,
   statsOffender,
   advices,

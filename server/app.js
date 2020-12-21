@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://192.168.1.88:3000', 'http://localhost:3000'],
   credentials: true
 }))
 
@@ -105,4 +105,4 @@ app.use('/', postsRouter);
 app.use('/users', usersRouter);
 
 
-server.listen(8000, () => console.log("Server is running on port 8000"));
+server.listen(8000, '127.0.0.1', () => console.log("Server is running on port 8000"));
