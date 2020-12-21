@@ -10,15 +10,7 @@ function usersListReducer(state = [], action) {
       return action.payload;
 
     case SUBSCRIBE:
-      return state.map((el) => {
-        if (el._id === action.payload.id) {
-          return {
-            ...el,
-            subscribers: [...el.subscribers, action.payload.login]
-          }
-        }
-        return el
-      })
+      return state.filter((el) => el._id !== action.payload);
 
     case UNSUBSCRIBE:
       return state.filter((el) => el._id !== action.payload);

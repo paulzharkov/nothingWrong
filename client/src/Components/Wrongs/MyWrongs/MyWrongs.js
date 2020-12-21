@@ -6,7 +6,6 @@ import Post from '../../Post/Post';
 function MyWrongs() {
   const login = useSelector((state) => state.users);
   const posts = useSelector((state) => state.myPost);
-  console.log(posts)
   const dispatch = useDispatch();
 
   useEffect(() => {

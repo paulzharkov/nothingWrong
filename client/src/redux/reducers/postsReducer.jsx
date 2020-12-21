@@ -13,8 +13,7 @@ function postsReducer(state =
       return action.payload;
 
     case DELETE:
-      console.log(state);
-      console.log(action.payload);
+
       return state.filter(el => el._id !== action.payload);
 
     default:

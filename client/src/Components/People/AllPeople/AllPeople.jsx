@@ -27,7 +27,6 @@ function AllPeople() {
             id={el._id}
             login={el.login}
             email={el.email}
-            subscribers={el.subscribers}
           />
         ))
       ) : (
