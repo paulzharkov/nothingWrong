@@ -17,7 +17,6 @@ import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers'
 import Wrongs from './Components/Wrongs/wrongs';
 
-
 function App() {
   const login = useSelector((state) => state.users);
 
@@ -48,7 +47,7 @@ function App() {
       // height: '100vh',
       alignItems: 'center',
     },
-    
+
   }));
 
   const classes = useStyles();
@@ -58,16 +57,16 @@ function App() {
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
-            
+
             <div className={classes.left}>
               <Header />
             </div>
-            
+
           </Grid>
           <Grid item xs={12}>
             <Paper elevation={6} className={classes.paper}>
-            
-            
+
+
               {login ? (
                 <Switch>
                   <Route path="/register">
@@ -94,33 +93,27 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-                    <Route exact path="/chatprivate">
+                  <Route exact path="/chatprivate">
                     <Fade right>
                       <ChatPrivat />
-<<<<<<< HEAD
-                      </Fade>
-                    </Route>
-
-=======
                     </Fade>
                   </Route>
->>>>>>> 5b7f9e054b0e5622f8a3bbeb7b6832971e76390b
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>
@@ -130,7 +123,7 @@ function App() {
 
 
 
-  
+
 }
 
 
