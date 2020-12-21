@@ -31,11 +31,19 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
       <div>Лайки: {likes.length}</div>
       <div>Дата создания: {date}</div>
       <div>Комментарии: {comments.length}</div>
-
+      <button type="button" onClick={(e) => {
+        e.preventDefault();
+        window.location.href = '/lenta/comment'; // id - history push
+      }}>Комменты</button>
       {offender ?
-        <button type="button" onClick={handlerDelete}>Удалить</button>
+        <>
+          <button type="button" onClick={handlerDelete}>Удалить</button>
+
+        </>
         : null}
-      <button type="button" onClick={handlerChatPrivat}>Обсудить Приватно</button>
+      {state ?
+        <button type="button" onClick={handlerChatPrivat}>Обсудить Приватно</button>
+        : null}
     </div>
   )
 }

@@ -9,6 +9,7 @@ const appReducer = combineReducers({
   users: usersReducer,
   myPost: postsReducer,
   toMePost: postsReducer,
+  lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
 });
