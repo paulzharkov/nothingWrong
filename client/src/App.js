@@ -88,6 +88,11 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
+                  <Route exact path="/chatprivate">
+                    <Fade right>
+                      <ChatPrivat />
+                      </Fade>
+                    </Route>
 
                   {/* <Route>
                     <Followers exact path="/people/followers" />
@@ -101,11 +106,6 @@ function App() {
                     </Route>
                     <Route exact path="/">
                       <Login />
-                    </Route>
-                    <Route exact path="/chatprivate">
-                    <Fade right>
-                      <ChatPrivat />
-                      </Fade>
                     </Route>
                   </Switch>
                 </>
