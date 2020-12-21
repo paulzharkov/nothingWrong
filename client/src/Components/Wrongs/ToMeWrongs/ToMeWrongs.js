@@ -5,7 +5,7 @@ import Post from '../../Post/Post';
 
 function ToMeWrongs() {
   const login = useSelector((state) => state.users);
-  const posts = useSelector((state) => state.posts.toMePost);
+  const posts = useSelector((state) => state.toMePost);
   console.log(posts)
   const dispatch = useDispatch();
 

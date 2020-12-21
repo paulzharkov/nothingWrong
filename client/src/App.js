@@ -17,7 +17,6 @@ import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers'
 import Wrongs from './Components/Wrongs/wrongs';
 
-
 function App() {
   const login = useSelector((state) => state.users);
 
@@ -104,17 +103,17 @@ function App() {
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>

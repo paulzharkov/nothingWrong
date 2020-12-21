@@ -7,8 +7,8 @@ const checkAuth = require('../middleware/auth');
 const cabinet = async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
   const userPosts = await Post.find({ authorId: user });
-  const toMeWrongs = await Post.find({ offenderId: user })
-  console.log(toMeWrongs)
+  const toMeWrongs = await Post.find({ offenderId: user });
+
   res.json({ userPosts, toMeWrongs });
 };
 
@@ -47,7 +47,7 @@ const patchPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete({ _id: req.params.id });
-  res.status(200);
+  res.sendStatus(200);
 };
 
 const likePost = async (req, res) => {
@@ -55,7 +55,7 @@ const likePost = async (req, res) => {
   const user = req.session.user.login;
   if (!currentPost.likes.includes(user)) {
     currentPost.likes.push(user);
-    await sound.save();
+    await user.save();
   }
   res.json({ likes: sound.likes.length });
 };
