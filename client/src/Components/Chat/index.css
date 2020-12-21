@@ -1,0 +1,44 @@
+.chat {
+  width: auto;
+  height: 500px;
+  border: 2px solid red;
+}
+
+.myRow {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.myMessage {
+  width: 45%;
+  background-color: pink;
+  color: #46516e;
+  padding: 10px;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 0%;
+  
+}
+.partnerRow {
+  justify-content: flex-start;
+}
+.partnerMessage {
+  width: 45%;
+  background-color: transparent;
+  color: rgb(61, 14, 14);
+  border: 1px solid rgb(199, 128, 128);
+  padding: 10px;
+  margin-left: 5px;
+  text-align: center;
+  border-radius: 0%;
+}
+
+
+
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
