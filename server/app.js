@@ -9,11 +9,14 @@ const postsRouter = require('./src/routes/posts');
 const dbConnect = require('./src/config/db');
 const http = require("http");
 const cors = require('cors');
+const User = require('../server/src/models/user.model')
 
 const app = express();
 
 const server = http.createServer(app);
 const socket = require("socket.io");
+
+
 const io = socket(server);
 
 // const PORT = process.env.PORT || 8000;
@@ -54,8 +57,40 @@ io.on('connection', (socket) => {
     session.connections++;
     session.save();
     socket.emit("your id", socket.id);
+
     socket.on("send message", body => {
       io.emit("message", body)
+    })
+
+    socket.on("private message", async body => {
+
+      console.log(body.user);
+      console.log('-----> server', body.idOne);
+      const myName = await User.findOne({ login: body.user })
+
+      function idToSrting(arr) {
+        return arr.map((e) => {
+          return e.toString()
+          })
+      }
+      const yourName = await User.findOne({ login: body.offenderId})
+      const myNameMyHurt = idToSrting(myName.myHurt)
+      const myNameToMeHurt = idToSrting(myName.toMeHurt)
+      const yourNameMyHurt = idToSrting(yourName.myHurt)
+      const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
+
+      const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
+
+
+
+      const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
+      const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
+      const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
+
+      if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
+        // io.emit("private message", body)
+        io.emit(`${body.idOne}`, body)
+      }
     })
   }
 });
@@ -68,5 +103,6 @@ app.use((req, res, next) => {
 
 app.use('/', postsRouter);
 app.use('/users', usersRouter);
+
 
 server.listen(8000, () => console.log("Server is running on port 8000"));

@@ -16,6 +16,11 @@ export const deletePost = (id) => ({
   payload: id
 })
 
+export const addId = (id) => ({
+  type: TYPES.ADD_ID,
+  payload: id
+})
+
 export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch('http://localhost:8000/lk', {
     credentials: "include"
@@ -48,7 +53,7 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-
+console.log(data);
     data && dispatch(createPost(data))
     
   };
@@ -59,5 +64,11 @@ export const deletePostThunk = (id) => (dispatch) => {
     credentials: "include"
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
+
+export const chatPrivatThunk = (id) => (dispatch) => {
+  
+  dispatch(addId(id))
+}
+
 
 

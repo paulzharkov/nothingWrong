@@ -87,6 +87,7 @@ const advices = async (req, res) => {
 
 const makewrong =
   (checkAuth,
+
     async (req, res) => {
       console.log(req.body)
       const { category, reason, solve, rating, state } = req.body;
@@ -110,6 +111,7 @@ const makewrong =
         return res.sendStatus(406);
       }
     });
+
 
 const chat = async (req, res) => {
   const chat = await Chat.findOne({ postId: req.params.post });
