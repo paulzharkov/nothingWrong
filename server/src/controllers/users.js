@@ -63,36 +63,25 @@ const userSignout = async (req, res) => {
 
 const people = async (req, res) => {
   const peopleList = await User.find();
-  console.log(peopleList)
   let list = peopleList.filter(
-    (el) =>
-      el.login !== req.session.user.login &&
-      !el.subscribers.includes(req.session.user.id)
-  );
-  // console.log(list)
+    (el) => {
+      el.login !== '123'
+      // !el.subscribers.includes(req.session.user.id)
+    });
+
   let list2 = list.map((el) => {
-    console.log('seconf list', el)
     delete el._doc.pass;
     return el;
   });
-
+  console.log(list2);
   res.json(list2);
 };
 
 const followers = async (req, res) => {
-  const peopleList = await User.find();
-  let list = peopleList.filter(
-    (el) =>
-      el.login !== req.session.user.login &&
-      el.subscribers.includes(req.session.user.id)
-  );
-
-  let list2 = list.map((el) => {
-    delete el._doc.pass;
-    return el;
-  });
-
-  res.json(list2);
+  const user = await User.findOne({ login: req.session.user.login });
+  const followersList = user.subscribers
+  console.log(followerList)
+  res.json(followersList);
 };
 
 const subscribe = async (req, res) => {

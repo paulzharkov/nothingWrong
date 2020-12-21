@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: ['http://192.168.1.88:3000', 'http://localhost:3000'],
+  origin: ["http://192.168.1.88:3000", "http://localhost:3000"],
   credentials: true
 }))
 
@@ -68,16 +68,16 @@ io.on('connection', (socket) => {
       console.log('-----> server', body.idOne);
       const myName = await User.findOne({ login: body.user })
 
-      function idToSrting(arr) {
+      function idToString(arr) {
         return arr.map((e) => {
           return e.toString()
           })
       }
       const yourName = await User.findOne({ login: body.offenderId})
-      const myNameMyHurt = idToSrting(myName.myHurt)
-      const myNameToMeHurt = idToSrting(myName.toMeHurt)
-      const yourNameMyHurt = idToSrting(yourName.myHurt)
-      const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
+      const myNameMyHurt = idToString(myName.myHurt)
+      const myNameToMeHurt = idToString(myName.toMeHurt)
+      const yourNameMyHurt = idToString(yourName.myHurt)
+      const yourNameToMeHurt = idToString(yourName.toMeHurt)
 
       const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
 
@@ -98,6 +98,7 @@ io.on('connection', (socket) => {
 app.use((req, res, next) => {
   res.locals.login = req.session?.user?.login;
   res.locals.id = req.session?.user?.id;
+  console.log(req.session)
   next();
 });
 

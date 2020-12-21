@@ -23,7 +23,7 @@ const postId = async (req, res) => {
 const postComment = async (req, res) => {
   // Добавить try-catch block
   const currentPost = await Post.findOne({ _id: req.params.id });
-  const commentAuthor = req.session.user.login;
+  const commentAuthor = req.user.login;
   const commentText = req.body.comment;
   const newComment = await new Comment({
     commentAuthor,

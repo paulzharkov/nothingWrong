@@ -14,8 +14,6 @@ function AllPeople() {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
 
-  console.log(usersList)
-
   return (
     <div>
       <h1>Все пользователи: </h1>
