@@ -27,14 +27,16 @@ function App() {
       flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
       height: '100vh',
       justifyContent: 'center',
       alignItems: "center",
       display: 'flex',
-      backgroundImage: 'linearGradient(120deg, #fdfbfb 0%, #ebedee 100%)'
+      // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
+
+
     },
     first: {
       height: '100vh',
