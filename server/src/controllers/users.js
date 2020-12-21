@@ -121,7 +121,6 @@ const unSubscribe = async (req, res) => {
     { _id: req.session.user.id },
     { $pull: { subscribers: id } }
   );
-
   res.sendStatus(200);
 };
 

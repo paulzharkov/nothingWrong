@@ -24,6 +24,7 @@ function App() {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      backgroundColor: '#B0E0E6',
     },
     paper: {
       padding: theme.spacing(1),
@@ -34,8 +35,7 @@ function App() {
       alignItems: 'center',
       display: 'flex',
       // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-
-
+      backgroundColor: '#e0ffff	',
     },
     first: {
       height: '100vh',
