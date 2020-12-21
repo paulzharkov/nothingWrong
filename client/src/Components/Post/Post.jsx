@@ -31,7 +31,7 @@ function Post({ category, reason, solve, status, rating, state, likes, date, com
       <div>Дата создания: {date}</div>
       <div>Комментарии: {comments.length}</div>
       <button type="button" onClick={handlerDelete}>Удалить</button>
-      <button type="button" onClick={handlerChatPrivat}>ОбсудитьПриватно</button>
+      <button type="button" onClick={handlerChatPrivat}>Обсудить приватно</button>
     </div>
   )
 }

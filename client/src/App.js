@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Followers from './Components/People/Followers/Followers'
+import Followers from './Components/People/Followers/Followers';
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -88,10 +88,11 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-
-                  {/* <Route>
-                    <Followers exact path="/people/followers" />
-                  </Route> */}
+                  <Route exact path="/chatprivate">
+                    <Fade right>
+                      <ChatPrivat />
+                    </Fade>
+                  </Route>
                 </Switch>
               ) : (
                 <>
@@ -101,11 +102,6 @@ function App() {
                     </Route>
                     <Route exact path="/">
                       <Login />
-                    </Route>
-                    <Route exact path="/chatprivate">
-                    <Fade right>
-                      <ChatPrivat />
-                      </Fade>
                     </Route>
                   </Switch>
                 </>
