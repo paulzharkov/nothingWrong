@@ -79,7 +79,7 @@ const people = async (req, res) => {
 const followers = async (req, res) => {
   const user = await User.findOne({ login: req.session.user.login });
   const followersList = user.subscribers
-  console.log(followerList)
+  console.log(followersList)
   res.json(followersList);
 };
 

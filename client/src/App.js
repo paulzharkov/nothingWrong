@@ -1,14 +1,12 @@
 import './App.css';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
-import Lk from './Components/Lk/lk';
 import Login from './Components/Login/login';
 import People from './Components/People/people';
 import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
-import Chat from './Components/Chat/chat';
 import ChatPrivat from './Components/ChatPrivat';
 import Fade from 'react-reveal/Fade';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -17,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers'
+import Wrongs from './Components/Wrongs/wrongs';
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -68,7 +67,7 @@ function App() {
                     <Register />
                   </Route>
                   <Route path="/lk">
-                    <Lk />
+                    <Wrongs />
                   </Route>
                   <Route path="/lenta">
                     <Lenta />
@@ -85,34 +84,31 @@ function App() {
                   <Route path="/makewrong">
                     <Makewrong />
                   </Route>
-                  <Route path="/chat">
-                    <Chat />
-                  </Route>
                   <Route exact path="/">
                     <Login />
                   </Route>
                   <Route exact path="/chatprivate">
                     <Fade right>
                       <ChatPrivat />
-                      </Fade>
-                    </Route>
+                    </Fade>
+                  </Route>
 
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>

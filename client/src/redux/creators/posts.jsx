@@ -9,6 +9,13 @@ export const createPost = (data) => ({
 export const setPosts = (postsList) => ({
   type: TYPES.ADD_ALL,
   payload: postsList
+
+
+})
+
+export const setOnMePosts = (postsList) => ({
+  type: TYPES.ADD_ON_ME_ALL,
+  payload: postsList
 })
 
 export const deletePost = (id) => ({
@@ -21,25 +28,38 @@ export const addId = (id) => ({
   payload: id
 })
 
-export const getUserPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://127.0.0.1:8000/lk', {
-    credentials: "include"
-  })
-  const postsList = await response.json()
-  if (postsList) {
-    dispatch(setPosts(postsList))
-  }
-}
-
+// lentaPosts
 export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch('http://127.0.0.1:8000/lenta', {
     credentials: "include"
   })
   const postsList = await response.json()
   if (postsList) {
-    dispatch(setPosts(postsList))
+    dispatch(setPosts(postsList.lentaPosts))
   }
 }
+
+export const getAllMyPostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://127.0.0.1:8000/lk', {
+    credentials: "include"
+  })
+  const postsList = await response.json()
+  if (postsList) {
+    dispatch(setPosts(postsList.userPosts))
+  }
+}
+
+export const getAllToMePostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://127.0.0.1:8000/lk', {
+    credentials: "include"
+  })
+  const postsList = await response.json()
+  if (postsList) {
+    dispatch(setOnMePosts(postsList.toMeWrongs))
+  }
+}
+
+
 
 export const createPostThunk = ({ category,
   reason,

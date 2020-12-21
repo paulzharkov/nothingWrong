@@ -1,6 +1,10 @@
 const initState = {
   users: '',
-  posts: [],
+  posts: {
+    myPost: [],
+    toMePost: [], 
+    lentaPosts: []
+  },
   idOne: '',
   usersList: [],
 };

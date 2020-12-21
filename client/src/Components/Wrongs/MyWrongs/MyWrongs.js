@@ -1,23 +1,24 @@
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllPostsThunk } from '../../redux/creators/posts';
-import Post from '../Post/Post';
+import { getAllMyPostsThunk } from '../../../redux/creators/posts';
+import Post from '../../Post/Post';
 
-function Lenta() {
+function MyWrongs() {
   const login = useSelector((state) => state.users);
-  const posts = useSelector((state) => state.posts);
-
+  const posts = useSelector((state) => state.posts.myPost);
+  console.log(posts)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllPostsThunk());
+    dispatch(getAllMyPostsThunk());
   }, [dispatch]);
 
   return (
     <div>
-      <h1>Общая лента</h1>
+      <h1>Личный кабинет</h1>
       <h1>{login}</h1>
+
+      <h3>Мои обидки</h3>
 
       {posts.length ? (
         posts.map((el) => (
@@ -33,12 +34,14 @@ function Lenta() {
             comments={el.comments}
             state={el.state}
             category={el.category}
+            offender={el.offenderId}
           />
         ))
       ) : (
-        <div>wasted</div>
-      )}
+          <div>wasted</div>
+        )}
     </div>
   );
 }
-export default Lenta
+
+export default MyWrongs;

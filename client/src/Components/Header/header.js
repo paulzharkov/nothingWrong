@@ -24,10 +24,9 @@ function Header() {
             <div><Link to="/stats">Статистика</Link></div>
             <div><Link to="/advices">Советы</Link></div>
             <div><Link to="/makewrong">Создать обидку</Link></div>
-            <div><Link to="/chat">Обсудить</Link></div>
+            <div><Link to="/chatprivate">Обсудить Приватно</Link></div>
             <hr />
             <div><Logout /></div>
-            <div><Link to="/chatprivate">Обсудить Приватно</Link></div>
           </div>
         ) : (
             <div className={style.headerLink}>
