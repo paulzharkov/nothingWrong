@@ -35,6 +35,7 @@ function MyWrongs() {
             state={el.state}
             category={el.category}
             offender={el.offenderId}
+            offenderName={el.offenderName}
           />
         ))
       ) : (

@@ -14,6 +14,7 @@ const postSchema = new Schema({
   },
   status: String, // open, pending, closed
   offenderId: { type: Schema.Types.ObjectId, ref: 'User' },
+  offenderName: String,
   authorId: { type: Schema.Types.ObjectId, ref: 'User' },
   likes: [], // Push userId to array, only use array.length for likes count
   comments: [commentSchema],

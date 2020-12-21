@@ -103,6 +103,7 @@ const makewrong =
           rating,
           state,
           offenderId: offender._id,
+          offenderName: offender.login,
           authorId: user._id,
           date: new Date().toLocaleDateString(),
         });
