@@ -6,16 +6,7 @@ const initState = {
   idOne: '',
   usersList: [],
   socket: {},
+  comments: [],
 };
 
 export default initState;
-
-// const newState = {
-//   ...initState,
-//   posts: {
-//     initState.posts,
-//     myPost: initState.posts.myPost.filter(() => {
-
-//     })
-//   }
-// }

@@ -1,24 +1,33 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createPersonThunk } from '../../redux/creators/users';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-
+import style from './index.module.css'
 
 function Register() {
+
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+
+    },
+  }))(Button)
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(3),
       },
       button: {
         margin: theme.spacing(1),
       },
     },
   }));
+  const loginRedux = useSelector((state) => state.users.length);
 
   const classes = useStyles();
 
@@ -32,11 +41,14 @@ function Register() {
   function handlerReg(e) {
     e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
-    history.push('/lk');
+    if (loginRedux === true) {
+      history.push('/lk');
+    }
   }
 
   return (
-    <div>
+    <div className={style.regDiv}>
+      <h2>Регистрация</h2>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField
           value={login}
@@ -59,16 +71,14 @@ function Register() {
           type="password"
           required
         />
-        <Button
-          size="small"
-          variant="contained"
-          color="primary"
-          className={classes.button}
+        <RandomButton
+          variant="outlined"
           endIcon={<Icon>how_to_reg</Icon>}
           onClick={handlerReg}
+          size="large"
         >
-          Зарегистрироваться
-        </Button>
+          Продолжить
+        </RandomButton>
       </form>
     </div>
   );
