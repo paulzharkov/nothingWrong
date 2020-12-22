@@ -1,5 +1,9 @@
+import useLinks from '../../helpers/links';
 import * as TYPES from '../types/users';
 import { LOGOUT } from '../types/users';
+
+import links from '../../helpers/links'
+console.log(links)
 
 export const createLogin = (log) => ({
   type: TYPES.ADD_USERS_LOGIN,
@@ -10,10 +14,12 @@ export const logoutUser = () => ({
   type: LOGOUT,
 });
 
+
+
 export const createPersonThunk = ({ login, email, pass }) => async (
   dispatch
 ) => {
-  const response = await fetch('http://localhost:8000/users/signup', {
+  const response = await fetch(`${links.backend}/users/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +33,7 @@ export const createPersonThunk = ({ login, email, pass }) => async (
 };
 
 export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/users/signin', {
+  const response = await fetch(`${links.backend}/users/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,8 +45,16 @@ export const loginPersonThunk = ({ email, pass }) => async (dispatch) => {
   login && dispatch(createLogin(login));
 };
 
+export const checkAuth = () => async (dispatch) => {
+  const response = await fetch (`${links.backend}/users/checkauth`, {credentials: 'include'})
+  if (response.status === 200) {
+    const login = await response.json();
+    login && dispatch(createLogin(login));
+  }
+}
+
 export const logoutThunk = ({ login }) => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/users/signout', {
+  const response = await fetch(`${links.backend}/users/signout`, {
     credentials: 'include',
   });
 };

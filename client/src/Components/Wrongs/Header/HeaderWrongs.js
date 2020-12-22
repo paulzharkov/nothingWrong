@@ -8,6 +8,7 @@ function HeaderWrongs() {
       <div>
         <div><Link to="/lk/myWrongs">Мои обидки</Link></div>
         <div><Link to="/lk/toMeWrongs">Обидки на меня</Link></div>
+        {/* <div><Link to="/chat">Чат</Link></div> */}
       </div>
     </>
   )

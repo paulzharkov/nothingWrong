@@ -5,6 +5,7 @@ import idReducer from './idReducer';
 import usersListReducer from './usersListReducer';
 import commentsReducer from './commentsReducer';
 import { LOGOUT } from '../types/users';
+import socketReducer from './socketReducer';
 
 const appReducer = combineReducers({
   users: usersReducer,
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
   idOne: idReducer,
   usersList: usersListReducer,
   comments: commentsReducer,
+  socket: socketReducer,
 });
 
 const rootReducer = (state, action) => {

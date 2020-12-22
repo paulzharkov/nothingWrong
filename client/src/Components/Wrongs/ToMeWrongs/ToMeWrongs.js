@@ -9,12 +9,15 @@ function ToMeWrongs() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllToMePostsThunk());
+      dispatch(getAllToMePostsThunk())
   }, [dispatch]);
+
+  console.log('111111111111', posts)
   return (
     <div>
       <h1>Личный кабинет</h1>
       <h1>{login}</h1>
+      <h4>Количество обидок {posts.length}</h4>
 
       <h3>На меня обиделись</h3>
 
@@ -32,6 +35,8 @@ function ToMeWrongs() {
             comments={el.comments}
             state={el.state}
             category={el.category}
+            offender={el.offenderId}
+            offenderName={el.offenderName}
           />
         ))
       ) : (

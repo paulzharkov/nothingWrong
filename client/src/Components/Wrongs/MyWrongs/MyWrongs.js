@@ -12,6 +12,8 @@ function MyWrongs() {
     dispatch(getAllMyPostsThunk());
   }, [dispatch]);
 
+  console.log(posts)
+
   return (
     <div>
       <h1>Личный кабинет</h1>
