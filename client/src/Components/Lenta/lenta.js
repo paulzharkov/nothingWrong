@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getLentaPostsThunk } from '../../redux/creators/posts';
+import { getAllPostsThunk } from '../../redux/creators/posts';
 import Post from '../Post/Post';
 
 
@@ -10,7 +10,7 @@ function Lenta() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getLentaPostsThunk());
+    dispatch(getAllPostsThunk());
   }, [dispatch]);
 
 // const comment
