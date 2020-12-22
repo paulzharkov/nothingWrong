@@ -6,6 +6,7 @@ import {
 import MyWrongs from './MyWrongs/MyWrongs';
 import HeaderWrongs from './Header/HeaderWrongs';
 import ToMeWrongs from './ToMeWrongs/ToMeWrongs';
+import ChatPrivat from '../Chat/chats';
 
 
 function Wrongs() {
@@ -21,6 +22,10 @@ function Wrongs() {
 
           <Route exact path='/lk/toMeWrongs'>
             <ToMeWrongs />
+          </Route>
+
+          <Route exact path='/chat/:id'>
+            <ChatPrivat />
           </Route>
 
         </Switch>

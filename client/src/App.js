@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useEffect, useRef } from 'react';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
 import Login from './Components/Login/login';
@@ -7,50 +8,41 @@ import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
-import ChatPrivat from './Components/ChatPrivat';
+import ChatPrivat from './Components/Chat/chats';
 import Fade from 'react-reveal/Fade';
+import io from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers'
 import Wrongs from './Components/Wrongs/wrongs';
+import useStyles from './customHooks/useStyles';
+import { checkAuth } from './redux/creators/users';
+import { setSocket } from './redux/creators/socket';
+
 
 function App() {
   const login = useSelector((state) => state.users);
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: '#B0E0E6',
-    },
-    paper: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-      height: '100vh',
-      width: '100vw',
-      justifyContent: 'center',
-      alignItems: 'center',
-      display: 'flex',
-      // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-      backgroundColor: '#e0ffff	',
-    },
-    first: {
-      height: '100vh',
-      justyfy: 'space-around',
-      alignItems: 'stretch',
-    },
-
-    grid: {
-      // height: '100vh',
-      alignItems: 'center',
-    },
-    
-  }));
+  const dispatch = useDispatch()
 
   const classes = useStyles();
+  // const socketRef = useRef()
+
+  useEffect(() => {
+    dispatch(checkAuth())
+    const mySocket = io.connect('/')
+    console.log(mySocket)
+    dispatch(setSocket(mySocket))
+
+    mySocket.on('hey', body => {
+      console.log(body)
+    })
+
+  }, [])
+
 
   return (
     <Router>
@@ -93,10 +85,8 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-                    <Route exact path="/chatprivate">
-                    <Fade right>
+                    <Route path="/chat/:id">
                       <ChatPrivat />
-                    </Fade>
                   </Route>
                   {/* <Route>
                     <Followers exact path="/people/followers" />

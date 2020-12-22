@@ -4,13 +4,16 @@ import postsReducer from './postsReducer';
 import idReducer from './idReducer';
 import usersListReducer from './usersListReducer';
 import { LOGOUT } from '../types/users';
+import socketReducer from './socketReducer';
 
 const appReducer = combineReducers({
   users: usersReducer,
   myPost: postsReducer,
   toMePost: postsReducer,
+  lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
+  socket: socketReducer,
 });
 
 const rootReducer = (state, action) => {

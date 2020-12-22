@@ -1,4 +1,4 @@
-import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL } from '../types/posts';
+import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL, ADD_ALL_LENTA } from '../types/posts';
 
 function postsReducer(state =
   [], action) {
@@ -12,9 +12,11 @@ function postsReducer(state =
     case ADD_ON_ME_ALL:
       return action.payload;
 
+    case ADD_ALL_LENTA:
+      return action.payload;
+
     case DELETE:
-      console.log(state);
-      console.log(action.payload);
+
       return state.filter(el => el._id !== action.payload);
 
     default:

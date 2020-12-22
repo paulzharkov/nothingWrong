@@ -6,16 +6,18 @@ import Post from '../../Post/Post';
 function ToMeWrongs() {
   const login = useSelector((state) => state.users);
   const posts = useSelector((state) => state.toMePost);
-  console.log(posts)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllToMePostsThunk());
+      dispatch(getAllToMePostsThunk())
   }, [dispatch]);
+
+  console.log('111111111111', posts)
   return (
     <div>
       <h1>Личный кабинет</h1>
       <h1>{login}</h1>
+      <h4>Количество обидок {posts.length}</h4>
 
       <h3>На меня обиделись</h3>
 

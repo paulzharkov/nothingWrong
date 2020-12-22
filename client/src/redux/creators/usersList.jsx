@@ -11,9 +11,9 @@ export const setFollowersUsers = (followersList) => ({
   payload: followersList
 })
 
-export const subscribeUser = (id, login) => ({
+export const subscribeUser = (id) => ({
   type: TYPES.SUBSCRIBE,
-  payload: id, login
+  payload: id
 })
 
 export const unSubscribeUser = (id) => ({
@@ -44,17 +44,16 @@ export const getFollowersUsersThunk = () => async (dispatch) => {
 }
 
 export const subscribeThunk = (id, login) => async (dispatch) => {
-
   const response = await fetch(`http://localhost:8000/users/people/allpeople/${id}`, {
     credentials: "include"
   })
 
   if (response.status === 200) {
-    dispatch(subscribeUser(id, login))
+    dispatch(subscribeUser(id))
   }
 }
 
-export const unSubscribeThunk = (id, login) => async (dispatch) => {
+export const unSubscribeThunk = (id) => async (dispatch) => {
 
   const response = await fetch(`http://localhost:8000/users/people/followers/${id}`, {
     credentials: "include"
