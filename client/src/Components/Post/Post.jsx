@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as AC from '../../redux/creators/posts'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,16 +36,19 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   const dispatch = useDispatch()
   const history = useHistory()
 
+  const login = useSelector((state) => state.users)
 
   const handlerDelete = () => {
     dispatch(AC.deletePostThunk(id))
   }
 
+  const handlerLike = () => {
+    dispatch(AC.likePostThunk({ id, login }))
+  }
+
   const handlerChatPrivat = () => {
     dispatch(AC.chatPrivatThunk(id))
     history.push('/chat')
-    // console.log('сюда пришло');
-
   }
 
   const handlerComments = () => {
@@ -55,7 +58,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   return (
     <Card className={classes.root}>
       <div className={classes.postImage}>
-      
+
         <div>
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="h2">Категория: {category}</Typography>
@@ -68,18 +71,18 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           </CardContent>
         </div>
         <div className={classes.image}>
-        <CardMedia 
-          component="img"
-          alt="Card image"
-          image={sticker}
-          title="Card image"
-        />
+          <CardMedia
+            component="img"
+            alt="Card image"
+            image={sticker}
+            title="Card image"
+          />
         </div>
       </div>
       <CardActions>
         <div className={classes.buttons}>
           <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
-          <Button size="large" color="primary" onClick={(e) => { e.preventDefault(); window.location.href = '/likes'; }}>❤️️{likes.length}</Button>
+          <Button size="large" color="primary" onClick={handlerLike}>{likes.includes(login) ? "❤️" : "🤍"}{likes.length}</Button>
           {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
           {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
         </div>
