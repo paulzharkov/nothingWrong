@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser, logoutThunk } from '../../redux/creators/users';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 
 function Logout() {
@@ -12,11 +12,20 @@ function Logout() {
       '& > *': {
         margin: theme.spacing(1),
       },
-      button: {
-        margin: theme.spacing(1),
-      }
     },
   }));
+
+  const RandomButton = withStyles(() => ({
+    root: {
+      color: '#67a3a3',
+      marginTop: '20px',
+      marginLeft: '65%',
+      "&:hover": {
+        backgroundColor: '#FFE0A1',
+        color: 'white !important'
+      }
+    },
+  }))(Button)
 
   const classes = useStyles();
 
@@ -32,15 +41,13 @@ function Logout() {
 
   return (
     <div>
-      <Button
+      <RandomButton
         variant="outlined"
-        color="primary"
-        className={classes.button}
         endIcon={<Icon>exit_to_app</Icon>}
         onClick={handlerOut}
       >
         Выйти
-      </Button>
+      </RandomButton>
     </div>
   );
 }

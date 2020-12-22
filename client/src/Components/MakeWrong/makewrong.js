@@ -110,7 +110,7 @@ function Makewrong() {
           rows={3}
           value={reason}
           onChange={handlerReason}
-          maxlength="140"
+          maxLength="140"
           variant="outlined"
           type="text"
         />
@@ -129,7 +129,7 @@ function Makewrong() {
           rows={3}
           value={solve}
           onChange={handlerSolve}
-          maxlength="140"
+          maxLength="140"
           variant="outlined"
           type="text"
         />

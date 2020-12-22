@@ -7,7 +7,7 @@ import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
-import ChatPrivat from './Components/ChatPrivat';
+import ChatPrivat from './Components/ChatPrivat/chat';
 import Fade from 'react-reveal/Fade';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -26,16 +26,15 @@ function App() {
       backgroundColor: '#B0E0E6',
     },
     paper: {
-      padding: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
-      height: '100vh',
+      height: '95vh',
       width: '100vw',
-      justifyContent: 'center',
-      alignItems: 'center',
       display: 'flex',
+      padding: '0px',
+
       // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-      backgroundColor: '#e0ffff	',
+      // backgroundColor: '#e0ffff	',
     },
     first: {
       height: '100vh',

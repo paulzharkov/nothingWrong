@@ -11,11 +11,11 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
     dispatch(AC.deletePostThunk(id))
   }
 
-  const handlerChatPrivat = () => {
+  // const handlerChatPrivat = () => {
 
-    dispatch(AC.chatPrivatThunk(id))
-    history.push('/chatprivate')
-  }
+  //   // dispatch(AC.chatPrivatThunk(id))
+
+  // }
 
 
 
@@ -42,7 +42,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         </>
         : null}
       {state ?
-        <button type="button" onClick={handlerChatPrivat}>Обсудить Приватно</button>
+        <button type="button" onClick={() => history.push('/chatprivate')}>Обсудить Приватно</button>
         : null}
     </div>
   )
