@@ -3,6 +3,7 @@ import usersReducer from './usersReducer';
 import postsReducer from './postsReducer';
 import idReducer from './idReducer';
 import usersListReducer from './usersListReducer';
+import commentsReducer from './commentsReducer';
 import { LOGOUT } from '../types/users';
 
 const appReducer = combineReducers({
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
+  comments: commentsReducer,
 });
 
 const rootReducer = (state, action) => {
