@@ -1,12 +1,9 @@
-import { useSelector } from 'react-redux'
-import style from './index.module.css'
-import {
-  Link,
-} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import style from './index.module.css';
+import { Link } from 'react-router-dom';
 import Logout from '../Logout/logout';
-import logo from './logo2.jpg'
-import newLogo from './NothingWrong.png'
-
+import logo from './logo2.jpg';
+import newLogo from './NothingWrong.png';
 
 import React from 'react';
 import clsx from 'clsx';
@@ -18,7 +15,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -29,7 +25,6 @@ const useStyles = makeStyles({
 });
 
 function Header() {
-
   const RandomButton = withStyles(() => ({
     root: {
       color: '#67a3a3',
@@ -38,13 +33,13 @@ function Header() {
       marginTop: '10px',
       marginLeft: '10px',
       border: '2px solid white',
-      width: '100px'
+      width: '100px',
     },
-  }))(Button)
+  }))(Button);
 
-  const login = useSelector(state => state.users)
-  const emoji = ["👺", "🎞", "👨‍👨‍👧‍👧", "📊", "💩", "📝", "🗣", "🗣"];
-  const emoji2 = ["👣", "🚶‍♂️"];
+  const login = useSelector((state) => state.users);
+  const emoji = ['👺', '🎞', '👨‍👨‍👧‍👧', '📊', '💩', '📝', '🗣'];
+  const emoji2 = ['👣', '🚶‍♂️'];
 
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -55,7 +50,10 @@ function Header() {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
       return;
     }
 
@@ -72,7 +70,7 @@ function Header() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {login ? (
-        <div >
+        <div>
           <List className={style.headerDiv}>
             <img className={style.headerLogo} src={logo} alt="pic" />
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
@@ -84,7 +82,7 @@ function Header() {
               <Link to="/stats">Статистика</Link>,
               <Link to="/advices">Советы</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/chatprivate">Обсудить Приватно</Link>
+              <Link to="/chatprivate">Обсудить Приватно</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>{emoji[index]}</ListItemIcon>
@@ -94,42 +92,46 @@ function Header() {
             <Logout className={style.logout_btn} />
           </List>
         </div>
-
       ) : (
-          <div className={style.headerDiv}>
-            <List>
-              <img className={style.headerLogoEnter} src={logo} alt="pic" />
-              {[
-                <Link to="/">Войти</Link>,
-                <Link to="/register">Регистрация</Link>
-              ].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{emoji2[index]}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        )}
+        <div className={style.headerDiv}>
+          <List>
+            <img className={style.headerLogoEnter} src={logo} alt="pic" />
+            {[
+              <Link to="/">Войти</Link>,
+              <Link to="/register">Регистрация</Link>,
+            ].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      )}
     </div>
-
   );
 
   return (
     <>
       {
         <React.Fragment key={'left'}>
-          <RandomButton onClick={toggleDrawer('left', true)}>{'Меню'}</RandomButton>
-          <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+          <RandomButton onClick={toggleDrawer('left', true)}>
+            {'Меню'}
+          </RandomButton>
+          <Drawer
+            anchor={'left'}
+            open={state['left']}
+            onClose={toggleDrawer('left', false)}
+          >
             {list('left')}
           </Drawer>
         </React.Fragment>
       }
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;
 // {/* <div className={style.headerDiv}>
 //         <div>
 //           <img className={style.headerLogo} src={logo} alt="logo" />

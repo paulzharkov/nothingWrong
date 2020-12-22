@@ -1,27 +1,25 @@
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
-import { loginPersonThunk } from '../../redux/creators/users'
-import TextField from '@material-ui/core/TextField'
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginPersonThunk } from '../../redux/creators/users';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import style from './index.module.css'
+import style from './index.module.css';
 
 function Login() {
-
-
   const RandomButton = withStyles(() => ({
     root: {
       color: '#67a3a3',
       marginTop: '20px',
       marginLeft: '65%',
-      "&:hover": {
+      '&:hover': {
         backgroundColor: '#FFE0A1',
-        color: 'white !important'
-      }
+        color: 'white !important',
+      },
     },
-  }))(Button)
+  }))(Button);
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
@@ -51,20 +49,35 @@ function Login() {
 
   return (
     <div className={style.formDiv}>
-
       <h2>Вход</h2>
       <form className={classes.root} autoComplete="off">
-        <TextField size="small" value={email} onChange={(event) => setEmail(event.target.value)} label="Email" type='email' required error={email === " "}
-          helperText={email === " " ? 'Empty!' : ' '} />
-        <TextField size="small" value={pass} onChange={(event) => setPass(event.target.value)} label="Пароль" type="password" required error={pass === " "}
-          helperText={pass === " " ? 'Empty!' : ' '} />
+        <TextField
+          size="small"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          label="Email"
+          type="email"
+          required
+          error={email === ' '}
+          helperText={email === ' ' ? 'Empty!' : ' '}
+        />
+        <TextField
+          size="small"
+          value={pass}
+          onChange={(event) => setPass(event.target.value)}
+          label="Пароль"
+          type="password"
+          required
+          error={pass === ' '}
+          helperText={pass === ' ' ? 'Empty!' : ' '}
+        />
         <RandomButton
           variant="outlined"
           endIcon={<Icon>login</Icon>}
           onClick={handlerLogin}
         >
           Войти
-      </RandomButton>
+        </RandomButton>
       </form>
     </div>
   );
