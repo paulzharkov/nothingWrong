@@ -8,23 +8,21 @@ import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
 import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
-import ChatPrivat from './Components/Chat/chats';
-// import ChatPrivat from './Components/ChatPrivat';
-// import CommentPage from './Components/CommentPage';
+import ChatPrivat from './Components/ChatPrivat';
+import CommentPage from './Components/CommentPage';
 import Fade from 'react-reveal/Fade';
 import io from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import Followers from './Components/People/Followers/Followers';
 import Wrongs from './Components/Wrongs/wrongs';
 import useStyles from './customHooks/useStyles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 
-import CommentPage from './Components/CommentPage';
 
 function App() {
   const login = useSelector((state) => state.users);

@@ -5,8 +5,8 @@ const initState = {
   lentaPosts: [],
   idOne: '',
   usersList: [],
-  socket: {},
   comments: [],
+  socket: {},
 };
 
 export default initState;

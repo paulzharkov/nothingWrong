@@ -1,8 +1,37 @@
 import { useDispatch } from "react-redux"
 import * as AC from '../../redux/creators/posts'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import sticker from './3.jpeg'
+
+const useStyles = makeStyles({
+  root: {
+    // display: 'flex',
+  },
+  postImage: {
+    display: 'flex',
+    flexDirection: 'row',
+    // width: '100px',
+  },
+  buttons: {
+    display: 'flex',
+    alignSelf: 'flex-end',
+  },
+  image: {
+    width: '100%',
+    maxWidth: '180px'
+  }
+});
 
 function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName }) {
+
+  const classes = useStyles();
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -16,77 +45,49 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
     dispatch(AC.chatPrivatThunk(id))
     history.push('/chat')
     // console.log('сюда пришло');
-    
+
   }
 
-  const handlerComment = (e) => {
-    e.preventDefault();
+  const handlerComments = () => {
     history.push(`/lenta/${id}`)
   }
 
-
   return (
-<<<<<<< HEAD
-    <div>
-      <div>Категория: {category}</div>
-      <div>Причина: {reason}</div>
-      <div>Пути Решения: {solve}</div>
-      <div>Статус: {status}</div>
-      <div>Уровень: {rating}</div>
-      <div>Формат: {state}</div>
-      <div>Обидчик: {offenderName}</div>
-      <div>Лайки: {likes.length}</div>
-      <div>Дата создания: {date}</div>
-      <div>Комментарии: {comments.length}</div>
-      <button type="button" onClick={(e) => {
-        e.preventDefault();
-        window.location.href = '/lenta/comment'; // id - history push
-      }}>Комменты</button>
-      {offender ?
-        <>
-          <button type="button" onClick={handlerDelete}>Удалить</button>
-
-        </>
-        : null}
-      {state ?
-        <Link to={`/chat/${id}`}>Обсудить Приватно</Link>
-        : null}
-    </div>
-=======
-    <>
-      <div>
-        <div>Категория: {category}</div>
-        <div>Причина: {reason}</div>
-        <div>Пути Решения: {solve}</div>
-        <div>Статус: {status}</div>
-        <div>Уровень: {rating}</div>
-        <div>Формат: {state}</div>
-
-        {
-          offenderName &&
-          <div>Обидчик: {offenderName}</div>
-        }
-        <div>Лайки: {likes.length}</div>
-        <div>Дата создания: {date}</div>
-        <div>Комментарии: {comments.length}</div>
-        {
-          !state &&
-          <button type="button" onClick={(e) => {
-            e.preventDefault();
-            history.push(`/lenta/${id}`); // id - history push
-          }}>Комменты</button>
-        }
-        {offender ?
-          <>
-            <button type="button" onClick={handlerDelete}>Удалить</button>
-          </>
-          : null}
-        {state ?
-          <button type="button" onClick={handlerChatPrivat}>Обсудить Приватно</button>
-          : null}
+    <Card className={classes.root}>
+      <div className={classes.postImage}>
+      
+        <div>
+          <CardContent>
+            <Typography gutterBottom variant="subtitle1" component="h2">Категория: {category}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Причина: {reason}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Пути Решения: {solve}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Статус: {status}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Уровень: {rating}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Обидчик: {offenderName}</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">Дата создания: {date}</Typography>
+          </CardContent>
+        </div>
+        <div className={classes.image}>
+        <CardMedia 
+          component="img"
+          alt="Card image"
+          image={sticker}
+          title="Card image"
+        />
+        </div>
       </div>
-    </>
->>>>>>> 48ee2b764bc16f6271b6b31468cfb619c6a5fd62
+      <CardActions>
+        <div className={classes.buttons}>
+          <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
+          <Button size="large" color="primary" onClick={(e) => { e.preventDefault(); window.location.href = '/likes'; }}>❤️️{likes.length}</Button>
+          {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
+          {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
+        </div>
+      </CardActions>
+    </Card>
+
+
+
   )
 }
 

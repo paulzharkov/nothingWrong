@@ -14,11 +14,8 @@ const appReducer = combineReducers({
   lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
-<<<<<<< HEAD
   socket: socketReducer,
-=======
   comments: commentsReducer,
->>>>>>> 48ee2b764bc16f6271b6b31468cfb619c6a5fd62
 });
 
 const rootReducer = (state, action) => {

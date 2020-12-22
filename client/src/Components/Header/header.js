@@ -3,6 +3,10 @@ import style from './index.module.css';
 import { Link } from 'react-router-dom';
 import Logout from '../Logout/logout';
 import logo from './logo2.jpg';
+import people from './people.png';
+import news from './new.png';
+import tape from './tape.png';
+import cabinet from './cabinet.png';
 import newLogo from './NothingWrong.png';
 
 import React from 'react';
@@ -38,7 +42,7 @@ function Header() {
   }))(Button);
 
   const login = useSelector((state) => state.users);
-  const emoji = ['👺', '🎞', '👨‍👨‍👧‍👧', '📊', '💩', '📝', '🗣'];
+  const emoji = [cabinet, tape, people, news];
   const emoji2 = ['👣', '🚶‍♂️'];
 
   const classes = useStyles();
@@ -70,23 +74,6 @@ function Header() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {login ? (
-        <List>
-          {[
-            <Link to="/lk">Личный кабинет</Link>,
-            <Link to="/lenta">Лента</Link>,
-            <Link to="/people">Люди</Link>,
-            <Link to="/stats">Статистика</Link>,
-            <Link to="/advices">Советы</Link>,
-            <Link to="/makewrong">Создать обидку</Link>
-          ].map((text, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>{emoji[index]}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          <Logout />
-        </List>
-
         <div>
           <List className={style.headerDiv}>
             <img className={style.headerLogo} src={logo} alt="pic" />
@@ -96,13 +83,10 @@ function Header() {
               <Link to="/lk">Личный кабинет</Link>,
               <Link to="/lenta">Лента</Link>,
               <Link to="/people">Люди</Link>,
-              <Link to="/stats">Статистика</Link>,
-              <Link to="/advices">Советы</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/chatprivate">Обсудить Приватно</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
-                <ListItemIcon>{emoji[index]}</ListItemIcon>
+                <ListItemIcon><img className={style.headerLogo2}  src={emoji[index]}/></ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
