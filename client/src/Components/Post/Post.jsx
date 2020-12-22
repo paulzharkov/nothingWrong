@@ -26,7 +26,10 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         <div>Статус: {status}</div>
         <div>Уровень: {rating}</div>
         <div>Формат: {state}</div>
-        <div>Обидчик: {offenderName}</div>
+        {
+          offenderName &&
+          <div>Обидчик: {offenderName}</div>
+        }
         <div>Лайки: {likes.length}</div>
         <div>Дата создания: {date}</div>
         <div>Комментарии: {comments.length}</div>

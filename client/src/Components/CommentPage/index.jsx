@@ -27,6 +27,7 @@ function CommentPage() {
   function handlerComment(e) {
     e.preventDefault()
     dispatch(addCommentThunk({ id, text }));
+    setText('')
   }
 
   const useStyles = makeStyles((theme) => ({
