@@ -16,8 +16,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers';
-import Wrongs from './Components/Wrongs/wrongs';
-import CommentPage from './Components/CommentPage';
+import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
+import MyWrongs from './Components/Wrongs/MyWrongs/MyWrongs';
+import ToMeWrongs from './Components/Wrongs/ToMeWrongs/ToMeWrongs';
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -70,8 +71,14 @@ function App() {
                   <Route path="/register">
                     <Register />
                   </Route>
-                  <Route path="/lk">
-                    <Wrongs />
+                  <Route exact path="/lk">
+                    <HeaderWrongs />
+                  </Route>
+                  <Route exact path='/lk/myWrongs'>
+                    <MyWrongs />
+                  </Route>
+                  <Route exact path='/lk/toMeWrongs'>
+                    <ToMeWrongs />
                   </Route>
                   <Route path="/lenta/:id">
                     <CommentPage />
@@ -104,17 +111,17 @@ function App() {
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>
