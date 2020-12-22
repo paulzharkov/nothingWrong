@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createPersonThunk } from '../../redux/creators/users';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-
 
 function Register() {
   const useStyles = makeStyles((theme) => ({
@@ -19,6 +18,7 @@ function Register() {
       },
     },
   }));
+  const loginRedux = useSelector((state) => state.users.length);
 
   const classes = useStyles();
 
@@ -32,7 +32,9 @@ function Register() {
   function handlerReg(e) {
     e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
-    history.push('/lk');
+    if (loginRedux === true) {
+      history.push('/lk');
+    }
   }
 
   return (

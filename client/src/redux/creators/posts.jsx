@@ -63,8 +63,6 @@ export const getAllToMePostsThunk = () => async (dispatch) => {
   }
 }
 
-
-
 export const createPostThunk = ({ category,
   reason,
   solve,

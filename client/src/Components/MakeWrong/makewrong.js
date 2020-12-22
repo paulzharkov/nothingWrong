@@ -110,7 +110,7 @@ function Makewrong() {
           rows={3}
           value={reason}
           onChange={handlerReason}
-          maxLength="140"
+          inputProps={{ maxLength: 140 }}
           variant="outlined"
           type="text"
         />
@@ -129,14 +129,14 @@ function Makewrong() {
           rows={3}
           value={solve}
           onChange={handlerSolve}
-          maxLength="140"
+          inputProps={{ maxLength: 140 }}
           variant="outlined"
           type="text"
         />
         <FormHelperText id="my-helper-text">
           (не более 140 символов)
         </FormHelperText>
-        <meter max="140" value={counterSolve}>
+        <meter max="140" value={counterSolve} low="70" high="120">
           {counterSolve}
         </meter>
       </div>
