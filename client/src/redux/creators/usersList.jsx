@@ -28,6 +28,7 @@ export const getAllUsersThunk = () => async (dispatch) => {
   const usersList = await response.json()
 
   if (usersList) {
+    console.log(usersList)
     dispatch(setUsers(usersList))
   }
 }
@@ -39,6 +40,7 @@ export const getFollowersUsersThunk = () => async (dispatch) => {
   const followersList = await response.json()
 
   if (followersList) {
+    console.log(followersList)
     dispatch(setFollowersUsers(followersList))
   }
 }
