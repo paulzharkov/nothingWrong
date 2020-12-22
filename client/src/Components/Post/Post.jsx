@@ -12,10 +12,15 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   }
 
   const handlerChatPrivat = () => {
-
     dispatch(AC.chatPrivatThunk(id))
     history.push('/chatprivate')
   }
+
+  const handlerComment = (e) => {
+    e.preventDefault();
+    history.push(`/lenta/${id}`)
+  }
+
 
   return (
     <>
@@ -26,6 +31,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         <div>Статус: {status}</div>
         <div>Уровень: {rating}</div>
         <div>Формат: {state}</div>
+
         {
           offenderName &&
           <div>Обидчик: {offenderName}</div>

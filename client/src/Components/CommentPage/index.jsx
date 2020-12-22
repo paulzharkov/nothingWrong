@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { useParams } from 'react-router-dom';
+
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
@@ -41,6 +43,7 @@ function CommentPage() {
     },
   }));
   const classes = useStyles();
+
 
   return (
     <>

@@ -13,7 +13,6 @@ function Lenta() {
     dispatch(getLentaPostsThunk());
   }, [dispatch]);
 
-// const comment
   return (
     <div>
       <h1>Общая лента</h1>
