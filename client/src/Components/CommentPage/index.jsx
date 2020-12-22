@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
@@ -28,7 +27,9 @@ function CommentPage() {
   }));
   const classes = useStyles();
   
-  return (<form className={classes.root} noValidate autoComplete="off">
+  return (
+
+  <form className={classes.root} noValidate autoComplete="off">
   <TextField value={comment} onChange={(event) => setComment(event.target.value)} label="Введите комментарий" type='text' required="true" />
   <Button
     variant="contained"
