@@ -17,7 +17,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Followers from './Components/People/Followers/Followers';
 import Wrongs from './Components/Wrongs/wrongs';
-import CommentPage from './Components/CommentPage';
 
 function App() {
   const login = useSelector((state) => state.users);
