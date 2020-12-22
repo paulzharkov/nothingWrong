@@ -16,6 +16,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
     dispatch(AC.chatPrivatThunk(id))
     history.push('/chatprivate')
   }
+
   return (
     <>
       <div>
