@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
@@ -11,6 +12,12 @@ import {
   TextField,
   MenuItem,
   Button,
+  FormControl,
+  FormLabel,
+  Radio,
+  FormControlLabel,
+  RadioGroup,
+
 } from '@material-ui/core';
 
 function Makewrong() {
@@ -30,6 +37,9 @@ function Makewrong() {
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
     },
   }));
 
@@ -89,6 +99,7 @@ function Makewrong() {
           onChange={categoryHandler}
           displayEmpty
           className={classes.selectEmpty}
+
         >
           <MenuItem value="" disabled>
             Список
@@ -162,7 +173,7 @@ function Makewrong() {
         </Select>
       </div>
       <div>
-        <InputLabel id="demo-simple-select-outlined-label">
+        {/* <InputLabel id="demo-simple-select-outlined-label">
           Кому будет доступна обидка:
         </InputLabel>
         <Select
@@ -176,13 +187,22 @@ function Makewrong() {
           </MenuItem>
           <MenuItem value="Приватная">Приватная</MenuItem>
           <MenuItem value="Публичная">Публичная</MenuItem>
-        </Select>
+        </Select> */}
+
+        <FormControl component="stateForm">
+        <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
+          <RadioGroup className={classes.selectEmpty} aria-label="state" name="state" value={state} onChange={stateHandler}>
+            <FormControlLabel value="Приватная" control={<Radio style={{ color: 'blue' }}/>} label="Приватная" />
+            <FormControlLabel value="Публичная" control={<Radio style={{ color: 'black' }}/>} label="Публичная" />
+          </RadioGroup>
+        </FormControl>
+
       </div>
       <div>
-        <InputLabel id="demo-simple-select-outlined-label">
+        {/* <InputLabel id="demo-simple-select-outlined-label">
           Уровень злости:
-        </InputLabel>
-        <Select
+        </InputLabel> */}
+        {/* <Select
           value={rating}
           onChange={ratingHandler}
           displayEmpty
@@ -194,7 +214,17 @@ function Makewrong() {
           <MenuItem value="1">1</MenuItem>
           <MenuItem value="2">2</MenuItem>
           <MenuItem value="3">3</MenuItem>
-        </Select>
+        </Select> */}
+
+        <FormControl component="ratingForm">
+          <FormLabel component="rating">Выберите уровень злости:</FormLabel>
+          <RadioGroup className={classes.selectEmpty} aria-label="rating" name="rating" value={rating} onChange={ratingHandler}>
+            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }}/>} label="1" />
+            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }}/>} label="2" />
+            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }}/>} label="3" />
+          </RadioGroup>
+        </FormControl>
+
       </div>
       {/* <button type="submit">Отправить</button> */}
       <Button type="submit" variant="outlined" color="primary">
