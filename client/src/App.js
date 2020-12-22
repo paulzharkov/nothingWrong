@@ -98,9 +98,6 @@ function App() {
                       <ChatPrivat />
                     </Fade>
                   </Route>
-                  {/* <Route>
-                    <Followers exact path="/people/followers" />
-                  </Route> */}
                 </Switch>
               ) : (
                   <>
