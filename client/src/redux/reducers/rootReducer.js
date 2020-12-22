@@ -7,7 +7,9 @@ import { LOGOUT } from '../types/users';
 
 const appReducer = combineReducers({
   users: usersReducer,
-  posts: postsReducer,
+  myPost: postsReducer,
+  toMePost: postsReducer,
+  lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
 });

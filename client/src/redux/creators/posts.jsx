@@ -10,6 +10,11 @@ export const setPosts = (postsList) => ({
   type: TYPES.ADD_ALL,
   payload: postsList
 
+})
+
+export const setLentaPosts = (postsList) => ({
+  type: TYPES.ADD_ALL_LENTA,
+  payload: postsList
 
 })
 
@@ -83,7 +88,6 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-    console.log(data);
     data && dispatch(createPost(data))
   };
 

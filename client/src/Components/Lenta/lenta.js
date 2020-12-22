@@ -1,26 +1,26 @@
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllPostsThunk } from '../../redux/creators/posts';
+import { getLentaPostsThunk } from '../../redux/creators/posts';
 import Post from '../Post/Post';
 
+
 function Lenta() {
-  const login = useSelector((state) => state.users);
-  const posts = useSelector((state) => state.posts);
+  const lentaPosts = useSelector((state) => state.lentaPosts);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllPostsThunk());
+    dispatch(getLentaPostsThunk());
   }, [dispatch]);
 
+// const comment
   return (
     <div>
       <h1>Общая лента</h1>
-      <h1>{login}</h1>
 
-      {posts.length ? (
-        posts.map((el) => (
+      {lentaPosts.length ? (
+        lentaPosts.map((el) => (
+        
           <Post
             key={el._id}
             id={el._id}
@@ -31,14 +31,16 @@ function Lenta() {
             rating={el.rating}
             date={el.date}
             comments={el.comments}
-            state={el.state}
             category={el.category}
+            offenderName={el.offenderName}
           />
+         
         ))
       ) : (
-        <div>wasted</div>
-      )}
-    </div>
+          <div>wasted</div>
+        )
+      }
+    </div >
   );
 }
 export default Lenta

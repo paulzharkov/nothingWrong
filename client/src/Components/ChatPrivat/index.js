@@ -55,7 +55,7 @@ function ChatPrivat() {
       id: yourId,
       user,
       idOne,
-      offenderId: 'Маша',
+      offenderId: 'sasha',
     };
     setMessage("");
     if (message !== "") {
