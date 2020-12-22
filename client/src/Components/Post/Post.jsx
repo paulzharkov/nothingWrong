@@ -28,9 +28,6 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   }
 
   const handlerChatPrivat = () => {
-
-    dispatch(AC.chatPrivatThunk(id))
-    history.push('/chatprivate')
   }
 
   const handlerComments = () => {
@@ -59,10 +56,10 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
-          <Button size="small" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/likes';}}>❤️️{likes.length}</Button>
-          {offender ? <Button size="small" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
-          {state ? <Button size="small" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
+          <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
+          <Button size="large" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/likes';}}>❤️️{likes.length}</Button>
+          {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
+          {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
         </CardActions>
       </Card>
     </div>

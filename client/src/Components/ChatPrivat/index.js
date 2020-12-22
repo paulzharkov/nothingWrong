@@ -8,6 +8,7 @@ import LightSpeed from 'react-reveal/LightSpeed';
 
 
 function ChatPrivat() {
+  console.log('11111111111111111')
   const [yourId, setYourId] = useState()
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -41,7 +42,7 @@ function ChatPrivat() {
 
 
 
-  }, [])
+  }, [idOne])
 
   const handleChange = (e) => {
     setMessage(e.target.value);
