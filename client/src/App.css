@@ -16,7 +16,8 @@ h3,
 .MuiInputLabel-formControl,
 .MuiInputLabel-marginDense,
 .MuiFormLabel-root.Mui-focused,
-.MuiInputBase-root {
+.MuiInputBase-root{
+  
   color: #67a3a3 !important;
   text-decoration: none;
   font-family: "Balsamiq Sans", cursive !important;

@@ -9,11 +9,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import stiker from './1.jpeg'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 350,
+    width: 375,
+    display: 'flex',
+    justifyContent: 'left',
   },
+  buttons: {
+    flexDirection: 'column',
+  }
 });
 
 function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName }) {
@@ -38,13 +44,13 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
     <div>
       <Card className={classes.root}>
         <CardActionArea>
-          {/* <CardMedia
+          <CardMedia
             component="img"
             alt="Card image"
             width="140"
-            // image="/static/images/cards/contemplative-reptile.jpg"
+            image={stiker}
             title="Card image"
-          /> */}
+          />
           <CardContent>
           <Typography gutterBottom variant="subtitle1" component="h2">Категория: {category}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">Причина: {reason}</Typography>
@@ -56,10 +62,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
-          <Button size="large" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/likes';}}>❤️️{likes.length}</Button>
-          {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
-          {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
+        <div>
+          <Button className={classes.buttons} size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
+          <Button className={classes.buttons} size="large" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/likes';}}>❤️️{likes.length}</Button>
+          {offender ? <Button className={classes.buttons} size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
+          {state ? <Button className={classes.buttons} size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
+          </div>
         </CardActions>
       </Card>
     </div>
