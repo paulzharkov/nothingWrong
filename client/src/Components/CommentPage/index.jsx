@@ -1,19 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useParams } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
+import { getCommentsThunk, addCommentThunk } from '../../redux/creators/comments';
+import OneComment from './OneComment/OneComment'
 
 
 function CommentPage() {
-  const [comment, setComment] = useState('');
+
+  const { id } = useParams();
+
+  const dispatch = useDispatch()
+
+  const commentsList = useSelector((state) => state.comments)
+
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    dispatch(getCommentsThunk({ id }));
+  }, [dispatch]);
+
 
   function handlerComment(e) {
     e.preventDefault()
-    // dispatch(loginPersonThunk({ email, pass }))
-    // history.push('/lk')
+    dispatch(addCommentThunk({ id, text }));
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -27,24 +40,32 @@ function CommentPage() {
     },
   }));
   const classes = useStyles();
-  
-  return (<form className={classes.root} noValidate autoComplete="off">
-  <TextField value={comment} onChange={(event) => setComment(event.target.value)} label="Введите комментарий" type='text' required="true" />
-  <Button
-    variant="contained"
-    color="primary"
-    className={classes.button}
-    // endIcon={<Icon>login</Icon>}
-    onClick={handlerComment}
-  >
-      Click
-  </Button>
-  </form>
+
+  return (
+    <>
+      <div>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField value={text} onChange={(e) => setText(e.target.value)} label="Введите комментарий" type='text' required="true" />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            // endIcon={<Icon>login</Icon>}
+            onClick={handlerComment}
+          >
+            Click
+        </Button>
+        </form>
+        {
+          commentsList.length ? commentsList.map((el) => (
+            <OneComment key={el._id} id={el._id} text={el.text} author={el.author} />
+          )) : <div>Никто еще не комментировал эту обидку.</div>
+        }
+      </div>
+    </>
   )
-  
 }
+
+
 export default CommentPage
-  
-
-
 

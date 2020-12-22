@@ -33,6 +33,10 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
     history.push('/chatprivate')
   }
 
+  const handlerComments = () => {
+    history.push(`/lenta/${id}`)
+  }
+
   return (
     <div>
       <Card className={classes.root}>
@@ -52,11 +56,10 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
             <Typography variant="body2" color="textSecondary" component="p">Уровень: {rating}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">Обидчик: {offenderName}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">Дата создания: {date}</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">Комментарии: {comments.length}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/lenta/comment';}}>💬{comments.length}</Button>
+          <Button size="small" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
           <Button size="small" color="primary" onClick={(e) => {e.preventDefault();window.location.href = '/likes';}}>❤️️{likes.length}</Button>
           {offender ? <Button size="small" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
           {state ? <Button size="small" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}

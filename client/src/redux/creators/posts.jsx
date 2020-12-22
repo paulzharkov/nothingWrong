@@ -40,7 +40,7 @@ export const getAllPostsThunk = () => async (dispatch) => {
   })
   const postsList = await response.json()
   if (postsList) {
-    dispatch(setPosts(postsList.lentaPosts))
+    dispatch(setLentaPosts(postsList))
   }
 }
 
@@ -63,8 +63,6 @@ export const getAllToMePostsThunk = () => async (dispatch) => {
     dispatch(setOnMePosts(postsList.toMeWrongs))
   }
 }
-
-
 
 export const createPostThunk = ({ category,
   reason,
