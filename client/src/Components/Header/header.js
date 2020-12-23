@@ -44,7 +44,7 @@ function Header() {
 
   const login = useSelector((state) => state.users);
   const toMePost = useSelector((state) => state.toMePost);
-  const emoji = [cabinet, tape, people, news];
+  const emoji = [cabinet, tape, people, news, news];
   const emoji2 = ['👣', '🚶‍♂️'];
 
   const classes = useStyles();
@@ -86,6 +86,7 @@ function Header() {
               <Link to="/lenta">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
+              <Link to="/advices">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
