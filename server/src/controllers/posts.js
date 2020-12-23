@@ -4,6 +4,8 @@ const Chat = require('../models/chat.model');
 const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
 const checkAuth = require('../middleware/auth');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 const cabinet = async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
@@ -92,9 +94,29 @@ const statsOffender = async (req, res) => {
 };
 
 const advices = async (req, res) => {
-  const someFetch = { text: 'advice' };
-  res.json(someFetch); // Добавить fetch на какой то сайт с советами
+  let parsingResultArray = []
+  await axios.get('https://www.psychologies.ru/articles/')
+  .then((res) => {
+    const data = res.data.trim();
+    const $ = cheerio.load(data, {xmlMode: true});
+    let titleArray = []
+    let textArray = []
+    let linksArray = []
+    let photosArray = []
+    let title = $('a.rubric-anons_title').each((i, elem) => {
+      titleArray.push($(elem).text())})
+    let text = $('div.rubric-anons_text').each((i, elem) => {
+      textArray.push($(elem).text())})
+    let links = $('a.rubric-anons_title').each((i, elem) => {
+      linksArray.push('https://www.psychologies.ru' + $(elem).attr().href)})
+      let photos = $('img.images').each((i, elem) => {
+        photosArray.push($(elem).attr().src)})
+        // console.log(photosArray)
+    parsingResultArray = titleArray.map((el, i) => [el, textArray[i], linksArray[i], photosArray[i]])})
+  res.json(parsingResultArray); // Добавить fetch на какой то сайт с советами
 };
+
+
 
 const makewrong =
   (checkAuth,
