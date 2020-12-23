@@ -7,7 +7,6 @@ import style from '../index.module.css'
 
 
 function ToMeWrongs() {
-  const login = useSelector((state) => state.users);
   const posts = useSelector((state) => state.toMePost);
   const dispatch = useDispatch();
 
@@ -15,7 +14,6 @@ function ToMeWrongs() {
       dispatch(getAllToMePostsThunk())
   }, [dispatch]);
 
-  console.log('111111111111', posts)
   return (
   
       <div className={style.cabinetPage}>

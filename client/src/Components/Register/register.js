@@ -6,21 +6,20 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import style from './index.module.css'
+import style from './index.module.css';
+
 
 function Register() {
-
   const RandomButton = withStyles(() => ({
     root: {
       backgroundColor: '#FFF',
       color: '#67a3a3',
-
     },
-  }))(Button)
+  }))(Button);
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(3),
+        margin: theme.spacing(2),
       },
       button: {
         margin: theme.spacing(1),
@@ -48,6 +47,7 @@ function Register() {
 
   return (
     <div className={style.regDiv}>
+ 
       <h2>Регистрация</h2>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField
@@ -78,6 +78,16 @@ function Register() {
           size="large"
         >
           Продолжить
+        </RandomButton>
+        <p>Уже есть аккаунт?</p>
+        <RandomButton
+          variant="outlined"
+          endIcon={<Icon>login</Icon>}
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          Войти
         </RandomButton>
       </form>
     </div>

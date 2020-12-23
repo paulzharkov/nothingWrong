@@ -12,6 +12,7 @@ import imgFamily from './family.jpeg'
 import imgHome from './home.jpeg'
 import imgMoney from './money.jpeg'
 import imgShout from './shout.jpeg'
+import style from './index.module.css';
 
 
 const useStyles = makeStyles({
@@ -85,9 +86,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           <div>
             <CardContent>
               <div>
+              {
+                offender &&
                 <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
-                <Typography variant="body1" color="textPrimary" component="p">Причина: {reason}</Typography>
-                <Typography variant="body1" color="textPrimary" component="p">Пути Решения: {solve}</Typography>
+              }
+              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
+              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
               </div>
             </CardContent>
           </div>

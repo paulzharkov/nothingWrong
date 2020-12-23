@@ -39,7 +39,7 @@ function Header() {
         >
           Найти обидчиков
         </RandomButton>
-        {history.location.pathname === '/people' ? <Followers /> : null}
+        {/* {history.location.pathname === '/people' ? <Followers /> : null} */}
       </div>
     </>
   )

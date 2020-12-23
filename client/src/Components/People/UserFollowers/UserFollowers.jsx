@@ -27,7 +27,7 @@ function UserFollowers({ login, email, id }) {
   }))(Button);
 
   return (
-    <div>
+<>
       <Typography variant="h6" component="h1">Логин: {login}</Typography>
       <Typography variant="body1" color="textPrimary" component="p">Email: {email}</Typography>
 
@@ -38,7 +38,7 @@ function UserFollowers({ login, email, id }) {
       >
         Отписаться
         </RandomButton>
-    </div>
+</>
   )
 }
 
