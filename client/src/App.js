@@ -12,7 +12,7 @@ import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import Fade from 'react-reveal/Fade';
 import io from "socket.io-client";
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -23,7 +23,7 @@ import useStyles from './customHooks/useStyles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 import Button from '@material-ui/core/Button';
-import { closeSnackbar, enqueueSnackbar } from './redux/creators/notifier';
+import { closeSnackbar, enqueueSnackbar, enqueueSnackbarThunk } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
 
 
@@ -33,20 +33,17 @@ function App() {
   const dispatch = useDispatch()
 
   const history = useHistory()
-
-
+  const params = useParams()
+  console.log('start', Object.keys(params).length)
   const classes = useStyles();
   // const socketRef = useRef()
 
   useEffect(() => {
-    console.log(history)
     dispatch(checkAuth())
     const mySocket = io.connect('/')
-    console.log(mySocket)
     dispatch(setSocket(mySocket))
 
     mySocket.on("wrong notification", body => {
-      console.log(body)
       dispatch(enqueueSnackbar({
         message: body.title,
         options: {
@@ -67,6 +64,32 @@ function App() {
       }))
     
     })
+
+    mySocket.on("message notification", body => {
+      
+      dispatch(enqueueSnackbarThunk({
+        notification: {
+          message: body.title,
+            options: {
+              key: new Date().getTime() + Math.random(),
+              variant: 'success',
+              autoHideDuration: 2000,
+              action: key => (
+                <>
+                    <Button className={classes.whiteText}  onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key) ) }}>
+                        CHAT
+                    </Button>
+                    <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key) )}}>
+                        Dismiss
+                    </Button>
+                </>
+            )
+          },
+        },
+        wrongID: body.wrongID}))
+    
+    })
+  
 
   }, [])
 

@@ -28,7 +28,7 @@ export const deletePost = (id) => ({
   payload: id
 })
 
-export const addId = (id) => ({
+export const addId = (id = '') => ({
   type: TYPES.ADD_ID,
   payload: id
 })
@@ -94,6 +94,7 @@ export const createPostThunk = ({ category,
         socket.emit('wrong notification', {
           title: 'Вам обидка!',
           wrongID: data.newPost._id,
+          offender: data.newPost.offenderId,
           offenderSocketID: data.offenderSocketID
         })
       }

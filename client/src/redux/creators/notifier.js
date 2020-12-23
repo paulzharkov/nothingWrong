@@ -13,6 +13,10 @@ export const enqueueSnackbar = (notification) => {
     };
 };
 
+export const enqueueSnackbarThunk = ({notification, wrongID}) => (dispatch, getState) => {
+  if (getState().idOne !== wrongID) dispatch(enqueueSnackbar(notification))
+};
+
 export const closeSnackbar = key => ({
     type: CLOSE_SNACKBAR,
     dismissAll: !key, // dismiss all if no key has been defined

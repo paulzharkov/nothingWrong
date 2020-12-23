@@ -59,22 +59,36 @@ io.on('connection', async (socket) => {
     session.connections++;
     session.save();
     socket.emit("your id", socket.id);
+    console.log('<>>>>>>>>>>>>',socket.id)
 
     await User.findOneAndUpdate({_id: session.user.id}, {socketID: socket.id})
 
-    socket.on("send message", body => {
-      io.emit("message", body)
-    })
+
 
     socket.on("wrong notification", async body => {
-      console.log("wrong notification", body)
+      console.log('wrong', body.offenderSocketID)
       io.to(body.offenderSocketID).emit("wrong notification", body);
     })
 
-    socket.on("private message", async body => {
 
-      console.log('body', body);
-      io.to(socket.id).emit("hey", body);
+    socket.on("message notification",  async body => {
+      console.log("message notification", body.offenderSocketID)
+      const wrong = await Post.findById(body.wrongID)
+      // console.log(wrong);
+      const offender = await User.findById(wrong.offenderId);
+      const author = await User.findById(wrong.authorId);
+      console.log(offender.socketID);
+      console.log(author.socketID);
+      if (body.offenderSocketID === offender.socketID) {
+        return io.to(author.socketID).emit("message notification", body)
+      } 
+      return io.to(offender.socketID).emit("message notification", body)
+      })
+
+    socket.on("message", body => {
+      io.emit("private message", body)})
+     
+      // console.log('body', body);
       // const post = await Post.findOne({ _id: body.idOne})
       // post.sms.push({ body: body.body, id: body.id })
       // await post.save()
@@ -108,7 +122,6 @@ io.on('connection', async (socket) => {
       // if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
       //   io.emit(`${body.idOne}`, body)
       // }
-    })
   }
 });
 
