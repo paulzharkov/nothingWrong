@@ -6,6 +6,7 @@ import usersListReducer from './usersListReducer';
 import commentsReducer from './commentsReducer';
 import { LOGOUT } from '../types/users';
 import socketReducer from './socketReducer';
+import notifierReducer from './notifierReducer';
 
 const appReducer = combineReducers({
   users: usersReducer,
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   usersList: usersListReducer,
   socket: socketReducer,
   comments: commentsReducer,
+  notifications: notifierReducer
 });
 
 const rootReducer = (state, action) => {

@@ -12,7 +12,7 @@ import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import Fade from 'react-reveal/Fade';
 import io from "socket.io-client";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -22,58 +22,58 @@ import Wrongs from './Components/Wrongs/wrongs';
 import useStyles from './customHooks/useStyles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
+import Button from '@material-ui/core/Button';
+import { closeSnackbar, enqueueSnackbar } from './redux/creators/notifier';
+import Notifier from './Components/Notifier/Notifier';
 
 
 function App() {
   const login = useSelector((state) => state.users);
 
   const dispatch = useDispatch()
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: '#B0E0E6',
-    },
-    paper: {
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-      height: '95vh',
-      width: '100vw',
-      display: 'flex',
-      padding: '0px',
 
-      // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-      // backgroundColor: '#e0ffff	',
-    },
-    first: {
-      height: '100vh',
-      justyfy: 'space-around',
-      alignItems: 'stretch',
-    },
+  const history = useHistory()
 
-    grid: {
-      // height: '100vh',
-      alignItems: 'center',
-    },
-  }));
 
   const classes = useStyles();
   // const socketRef = useRef()
 
   useEffect(() => {
+    console.log(history)
     dispatch(checkAuth())
     const mySocket = io.connect('/')
     console.log(mySocket)
     dispatch(setSocket(mySocket))
 
-    mySocket.on('hey', body => {
+    mySocket.on("wrong notification", body => {
       console.log(body)
+      dispatch(enqueueSnackbar({
+        message: body.title,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'warning',
+          autoHideDuration: 25000,
+          action: key => (
+            <>
+                <Button className={classes.whiteText}  onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key) ) }}>
+                    CHAT
+                </Button>
+                <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key) )}}>
+                    Dismiss
+                </Button>
+            </>
+        )
+      },
+      }))
+    
     })
 
   }, [])
 
 
   return (
-    <Router>
+    <>
+    <Notifier />
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
@@ -137,7 +137,7 @@ function App() {
           </Grid>
         </Grid>
       </div>
-    </Router>
+    </>
   );
 }
 

@@ -63,14 +63,18 @@ io.on('connection', async (socket) => {
     await User.findOneAndUpdate({_id: session.user.id}, {socketID: socket.id})
 
     socket.on("send message", body => {
-      console.log(body)
       io.emit("message", body)
+    })
+
+    socket.on("wrong notification", async body => {
+      console.log("wrong notification", body)
+      io.to(body.offenderSocketID).emit("wrong notification", body);
     })
 
     socket.on("private message", async body => {
 
       console.log('body', body);
-      io.to(socket.id).emit("hey", "I just met you");
+      io.to(socket.id).emit("hey", body);
       // const post = await Post.findOne({ _id: body.idOne})
       // post.sms.push({ body: body.body, id: body.id })
       // await post.save()
