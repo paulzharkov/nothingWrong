@@ -38,7 +38,7 @@ export const disLikePost = (data) => ({
   payload: data
 })
 
-export const addId = (id) => ({
+export const addId = (id = '') => ({
   type: TYPES.ADD_ID,
   payload: id
 })
@@ -78,7 +78,7 @@ export const createPostThunk = ({ category,
   solve,
   offender,
   rating,
-  state }) => async (dispatch) => {
+  state }) => async (dispatch, getState) => {
     const response = await fetch('http://localhost:8000/wrong', {
       method: "POST",
       headers: {
@@ -95,7 +95,20 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-    data && dispatch(createPost(data))
+    if (data.newPost) {
+      console.log('Create wrong', data.newPost)
+      dispatch(createPost(data.newPost))
+      const {socket} = getState()
+      console.log('Socket', socket)
+      if (Object.keys(socket).length) {
+        socket.emit('wrong notification', {
+          title: 'Вам обидка!',
+          wrongID: data.newPost._id,
+          offender: data.newPost.offenderId,
+          offenderSocketID: data.offenderSocketID
+        })
+      }
+    }
   };
 
 export const deletePostThunk = (id) => (dispatch) => {

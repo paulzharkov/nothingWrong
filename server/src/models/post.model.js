@@ -22,6 +22,7 @@ const postSchema = new Schema({
   rating: Number, // from 1 to 10
   date: String, // format: 'YYYY-MM-DD'
   state: String, // Private or Public
+  sms: [],
 });
 
 module.exports = model('Post', postSchema);

@@ -9,6 +9,8 @@ router.post('/signin', usersController.userSignin);
 
 router.get('/signout', usersController.userSignout);
 
+router.get('/checkauth', usersController.checkAuth);
+
 router.get('/people/allpeople', usersController.people);
 
 router.get('/people/followers', usersController.followers);

@@ -116,7 +116,7 @@ const makewrong =
         date: new Date().toLocaleDateString(),
       });
       await newPost.save();
-      return res.status(200).json(newPost);
+      return res.json({newPost, offenderSocketID: offender.socketID});
     } else {
       return res.sendStatus(406);
     }

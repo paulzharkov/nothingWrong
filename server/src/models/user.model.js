@@ -10,6 +10,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
  },
+  socketID: String,
   subscribers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   myHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   toMeHurt: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
