@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
 import Login from './Components/Login/login';
@@ -10,14 +10,12 @@ import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
-import Fade from 'react-reveal/Fade';
 import io from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Followers from './Components/People/Followers/Followers';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 
@@ -37,13 +35,13 @@ function App() {
     },
     paper: {
       textAlign: 'center',
-      color: theme.palette.text.secondary,
-      height: '95vh',
+      // color: theme.palette.text.secondary,
+      height: '93vh',
       width: '100vw',
       display: 'flex',
-      padding: '0px',
+      // padding: '0px',
 
-      // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
+      // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)',
       // backgroundColor: '#e0ffff	',
     },
     first: {
@@ -53,13 +51,11 @@ function App() {
     },
 
     grid: {
-      // height: '100vh',
       alignItems: 'center',
     },
   }));
 
   const classes = useStyles();
-  // const socketRef = useRef()
 
   useEffect(() => {
     dispatch(checkAuth())
@@ -71,7 +67,7 @@ function App() {
       console.log(body)
     })
 
-  }, [])
+  }, [dispatch])
 
 
   return (
@@ -125,9 +121,6 @@ function App() {
                     <Route path="/chat/:id">
                       <ChatPrivat />
                   </Route>
-                  {/* <Route>
-                    <Followers exact path="/people/followers" />
-                  </Route> */}
                 </Switch>
               ) : (
                   <>
