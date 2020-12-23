@@ -64,6 +64,7 @@ const likePost = async (req, res) => {
     await currentPost.save();
     res.sendStatus(200);
   } else {
+    await Post.updateOne({ _id: req.params.id }, { $pull: { likes: user } });
     res.sendStatus(404);
   }
 };

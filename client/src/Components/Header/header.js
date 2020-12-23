@@ -15,7 +15,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import WrongIs from '../Header/WrongIs.png';
 
-
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -86,7 +85,7 @@ function Header() {
               <Link to="/stats">Статистика</Link>,
               <Link to="/advices">Советы</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/chatprivate">Обсудить Приватно</Link>,
+              <Link to="/chatprivate">Обсудить приватно</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>{emoji[index]}</ListItemIcon>
@@ -97,22 +96,22 @@ function Header() {
           </List>
         </div>
       ) : (
-          <div className={style.headerDiv}>
-            <List>
-              <img className={style.headerLogoEnter} src={logo} alt="pic" />
-              <img className={style.headerNewLogo} src={newLogo} alt="pic" />
-              {[
-                <Link to="/">Войти</Link>,
-                <Link to="/register">Регистрация</Link>,
-              ].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{emoji2[index]}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        )}
+        <div className={style.headerDiv}>
+          <List>
+            <img className={style.headerLogoEnter} src={logo} alt="pic" />
+            <img className={style.headerNewLogo} src={newLogo} alt="pic" />
+            {[
+              <Link to="/">Войти</Link>,
+              <Link to="/register">Регистрация</Link>,
+            ].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      )}
     </div>
   );
 
@@ -126,11 +125,19 @@ function Header() {
                 {'Меню'}
               </RandomButton>
             </div>
-            {
-              !(login && toMePost) ?
-                <img className={style.forImg} src={WrongIs} width="180" height="35" alt="pic" />
-                : <div className={style.bell}>{login}, {toMePost.length}🔔</div>
-            }
+            {!(login && toMePost) ? (
+              <img
+                className={style.forImg}
+                src={WrongIs}
+                width="180"
+                height="35"
+                alt="pic"
+              />
+            ) : (
+              <div className={style.bell}>
+                {login}, {toMePost.length}🔔
+              </div>
+            )}
           </div>
           <Drawer
             anchor={'left'}

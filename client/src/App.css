@@ -1,6 +1,5 @@
 body {
   height: 100vh;
- 
   font-family: 'Balsamiq Sans', cursive !important;
 }
 
@@ -45,4 +44,8 @@ a:focus {
   color: rgb(0, 0, 0) !important;
   min-width: 40px !important;
   margin-top: -5px;
+}
+
+.MuiPaper-elevation6 {
+  box-shadow: none !important;
 }

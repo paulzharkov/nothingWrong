@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-import Followers from '../Followers/Followers'
 
 function Header() {
   const history = useHistory()
