@@ -104,7 +104,7 @@ export const likePostThunk = ({ id, login }) => (dispatch) => {
   fetch(`http://localhost:8000/lenta/${id}`, {
     method: 'PATCH',
     credentials: "include"
-  }).then(res => res.status === 200 && dispatch(likePost({id, login})))
+  }).then(res => res.status === 200 && dispatch(likePost({ id, login })))
 }
 
 export const chatPrivatThunk = (id) => (dispatch) => {

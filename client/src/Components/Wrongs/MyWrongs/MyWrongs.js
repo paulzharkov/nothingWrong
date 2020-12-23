@@ -14,8 +14,6 @@ function MyWrongs() {
     dispatch(getAllMyPostsThunk());
   }, [dispatch]);
 
-  console.log(posts)
-
   return (
     <>
       <div className={style.cabinetPage}>

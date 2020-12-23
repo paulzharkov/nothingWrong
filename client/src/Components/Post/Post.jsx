@@ -12,6 +12,7 @@ import imgFamily from './family.jpeg'
 import imgHome from './home.jpeg'
 import imgMoney from './money.jpeg'
 import imgShout from './shout.jpeg'
+import style from './index.module.css';
 
 
 const useStyles = makeStyles({
@@ -62,6 +63,8 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
 
   let picture = imgShout
 
+  // let props = [category,reason,solve,status,rating]
+
 
   return (
     <>
@@ -75,13 +78,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         <div className={classes.postImage}>
           <div>
             <CardContent>
-              <Typography gutterBottom variant="subtitle1" component="h2">Категория: {category}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Причина: {reason}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Пути Решения: {solve}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Статус: {status}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Уровень: {rating}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Обидчик: {offenderName}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Дата создания: {date}</Typography>
+              <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
+              <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
+              {
+                offender &&
+                <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Обидчик:</span> {offenderName}</Typography>
+              }
             </CardContent>
           </div>
           <div className={classes.imageStyle}>
