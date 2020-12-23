@@ -17,7 +17,7 @@ function ToMeWrongs() {
 
   console.log('111111111111', posts)
   return (
-    <>
+  
       <div className={style.cabinetPage}>
         <HeaderWrongs />
         <div>
@@ -44,7 +44,7 @@ function ToMeWrongs() {
             )}
         </div>
       </div>
-    </>
+  
   );
 }
 

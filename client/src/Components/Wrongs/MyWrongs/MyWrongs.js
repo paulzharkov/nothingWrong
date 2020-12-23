@@ -17,7 +17,7 @@ function MyWrongs() {
   console.log(posts)
 
   return (
-    <>
+  
       <div className={style.cabinetPage}>
 
         <HeaderWrongs />
@@ -49,7 +49,7 @@ function MyWrongs() {
 
         </div>
       </div>
-    </>
+  
   );
 }
 

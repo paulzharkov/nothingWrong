@@ -1,0 +1,11 @@
+.lkLinks {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+.cabinetPage {
+  height: 50vh;
+}

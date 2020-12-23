@@ -15,9 +15,16 @@ import imgShout from './shout.jpeg'
 
 
 const useStyles = makeStyles({
-  root: {
-    // border: '1px solid',
+  root1: {
     boxShadow: '0 4px 0 #67a3a3',
+    marginBottom: '7px',
+  },
+  root2: {
+    boxShadow: '6px 6px 6px #FFA500',
+    marginBottom: '7px',
+  },
+  root3: {
+    boxShadow: '6px 6px 6px red',
     marginBottom: '7px',
   },
   postImage: {
@@ -62,7 +69,6 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
 
   let picture = imgShout
 
-
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -71,17 +77,18 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         {category === 'Бытовая' ? picture = imgHome : null}
       </div>
 
-      <Card className={classes.root}>
+      <Card className={`
+      ${rating === 1 ? classes.root1 : null} 
+      ${rating === 2 ? classes.root2 : null} 
+      ${rating === 3 ? classes.root3 : null}`}>
         <div className={classes.postImage}>
           <div>
             <CardContent>
-              <Typography gutterBottom variant="subtitle1" component="h2">Категория: {category}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Причина: {reason}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Пути Решения: {solve}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Статус: {status}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Уровень: {rating}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Обидчик: {offenderName}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p">Дата создания: {date}</Typography>
+              <div>
+                <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
+                <Typography variant="body1" color="textPrimary" component="p">Причина: {reason}</Typography>
+                <Typography variant="body1" color="textPrimary" component="p">Пути Решения: {solve}</Typography>
+              </div>
             </CardContent>
           </div>
           <div className={classes.imageStyle}>
