@@ -1,7 +1,7 @@
 body {
   height: 100vh;
-
-  font-family: "Balsamiq Sans", cursive !important;
+ 
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiInput-underline:after {
@@ -19,13 +19,13 @@ h3,
 .MuiInputBase-root {
   color: #67a3a3 !important;
   text-decoration: none;
-  font-family: "Balsamiq Sans", cursive !important;
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiInputBase-input,
 .MuiInput-input,
 .MuiButton-label {
-  font-family: "Balsamiq Sans", cursive !important;
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiListItem-root {
