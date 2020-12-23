@@ -28,7 +28,6 @@ function People() {
         </Switch>
 
       </Router>
-
     </div>
   )
 }

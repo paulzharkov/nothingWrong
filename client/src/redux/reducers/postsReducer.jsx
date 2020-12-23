@@ -1,24 +1,33 @@
-import { ADD_POST, ADD_ALL, DELETE, ADD_ON_ME_ALL, ADD_ALL_LENTA } from '../types/posts';
+import * as AC from '../types/posts';
 
-function postsReducer(state =
-  [], action) {
+function postsReducer(state = [], action) {
   switch (action.type) {
-    case ADD_POST:
+    case AC.ADD_POST:
       return [...state, action.payload];
 
-    case ADD_ALL:
+    case AC.ADD_ALL:
       return action.payload;
 
-    case ADD_ON_ME_ALL:
+    // case AC.ADD_ON_ME_ALL:
+    //   return action.payload;
+
+    case AC.ADD_ALL_LENTA:
       return action.payload;
 
-    case ADD_ALL_LENTA:
-      return action.payload;
-
-    case DELETE:
-
+    case AC.DELETE:
       return state.filter(el => el._id !== action.payload);
 
+    case AC.LIKE:
+      return state.map((el) => {
+        console.log(1,state);
+        if (el._id === action.payload.id) {
+          return {
+            ...el, likes: [...el.likes, action.payload.login]
+          }
+        } else {
+          return el
+        }
+      });
     default:
       return state;
   }

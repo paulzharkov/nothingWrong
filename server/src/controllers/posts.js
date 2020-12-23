@@ -61,9 +61,11 @@ const likePost = async (req, res) => {
   const user = req.session.user.login;
   if (!currentPost.likes.includes(user)) {
     currentPost.likes.push(user);
-    await user.save();
+    await currentPost.save();
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
   }
-  res.json({ likes: sound.likes.length });
 };
 
 const peoplesAll = async (req, res) => {

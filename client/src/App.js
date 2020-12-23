@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useEffect, useRef } from 'react';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
 import Login from './Components/Login/login';
@@ -10,17 +11,24 @@ import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import Fade from 'react-reveal/Fade';
+import io from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import Followers from './Components/People/Followers/Followers';
-import Wrongs from './Components/Wrongs/wrongs';
-import CommentPage from './Components/CommentPage';
+import { checkAuth } from './redux/creators/users';
+import { setSocket } from './redux/creators/socket';
+
+import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
+import MyWrongs from './Components/Wrongs/MyWrongs/MyWrongs';
+import ToMeWrongs from './Components/Wrongs/ToMeWrongs/ToMeWrongs';
 
 function App() {
   const login = useSelector((state) => state.users);
+
+  const dispatch = useDispatch()
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,6 +59,20 @@ function App() {
   }));
 
   const classes = useStyles();
+  // const socketRef = useRef()
+
+  useEffect(() => {
+    dispatch(checkAuth())
+    const mySocket = io.connect('/')
+    console.log(mySocket)
+    dispatch(setSocket(mySocket))
+
+    mySocket.on('hey', body => {
+      console.log(body)
+    })
+
+  }, [])
+
 
   return (
     <Router>
@@ -70,8 +92,14 @@ function App() {
                   <Route path="/register">
                     <Register />
                   </Route>
-                  <Route path="/lk">
-                    <Wrongs />
+                  <Route exact path="/lk">
+                    <HeaderWrongs />
+                  </Route>
+                  <Route exact path='/lk/myWrongs'>
+                    <MyWrongs />
+                  </Route>
+                  <Route exact path='/lk/toMeWrongs'>
+                    <ToMeWrongs />
                   </Route>
                   <Route path="/lenta/:id">
                     <CommentPage />
@@ -94,27 +122,25 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-                  <Route exact path="/chatprivate">
-                    <Fade right>
+                    <Route path="/chat/:id">
                       <ChatPrivat />
-                    </Fade>
                   </Route>
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>
