@@ -17,13 +17,15 @@ function UserAll({ login, email, id }) {
 
   const RandomButton = withStyles(() => ({
     root: {
-      backgroundColor: '#FFCCA1',
-      color: '#216A6A',
-      width: '50vw',
-      height: '3vh',
       marginTop: '10px',
       marginBottom: '10px',
-      boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+      boxShadow: '0px 10px 15px #0000003d',
+      color: 'rgb(111 78 44)',
+      width: '50vw',
+      height: '4vh',
+      backgroundColor: '#FFCCA1',
+      border: '1px solid rgb(220 181 141)',
+      padding: '5px 15px',
     },
   }))(Button);
 
@@ -47,5 +49,19 @@ export default UserAll
 
 
 
+// .MuiButton-outlined {
+//   color: #56422d;
+//   width: 50vw;
+//   height: 5vh;
+
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   background-color: #FFCCA1;
+// }
+
+// .MuiButton-outlined {
+//     border: 1px solid rgb(220 181 141)!important;
+//     padding: 5px 15px!important;
+//   }
 
 

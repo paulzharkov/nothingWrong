@@ -49,3 +49,16 @@ a:focus {
 .MuiPaper-elevation6 {
   box-shadow: none !important;
 }
+
+.formaHuerma {
+  width: 100vw;
+  height: 93vh;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-items: center;
+  padding: 25px 0;
+}
+

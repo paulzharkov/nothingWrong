@@ -41,7 +41,7 @@ function Register() {
     e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
     if (loginRedux === true) {
-      history.push('/lk');
+      history.push('/makewrong');
     }
   }
 
