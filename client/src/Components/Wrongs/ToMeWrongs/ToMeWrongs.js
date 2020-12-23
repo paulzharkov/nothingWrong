@@ -15,7 +15,7 @@ function ToMeWrongs() {
   }, [dispatch]);
 
   return (
-    <>
+  
       <div className={style.cabinetPage}>
         <HeaderWrongs />
         <div>
@@ -42,7 +42,7 @@ function ToMeWrongs() {
             )}
         </div>
       </div>
-    </>
+  
   );
 }
 

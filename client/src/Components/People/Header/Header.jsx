@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-
 import Followers from '../Followers/Followers'
 
 function Header() {
@@ -37,9 +36,10 @@ function Header() {
         >
           Найти обидчиков
         </RandomButton>
-        {history.location.pathname === '/people' ? <Followers /> : null}
+        {/* {history.location.pathname === '/people' ? <Followers /> : null} */}
       </div>
     </>
   )
 }
 export default Header
+

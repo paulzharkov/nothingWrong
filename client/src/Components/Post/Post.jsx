@@ -16,9 +16,16 @@ import style from './index.module.css';
 
 
 const useStyles = makeStyles({
-  root: {
-    // border: '1px solid',
+  root1: {
     boxShadow: '0 4px 0 #67a3a3',
+    marginBottom: '7px',
+  },
+  root2: {
+    boxShadow: '6px 6px 6px #FFA500',
+    marginBottom: '7px',
+  },
+  root3: {
+    boxShadow: '6px 6px 6px red',
     marginBottom: '7px',
   },
   postImage: {
@@ -63,9 +70,6 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
 
   let picture = imgShout
 
-  // let props = [category,reason,solve,status,rating]
-
-
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -74,16 +78,21 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         {category === 'Бытовая' ? picture = imgHome : null}
       </div>
 
-      <Card className={classes.root}>
+      <Card className={`
+      ${rating === 1 ? classes.root1 : null} 
+      ${rating === 2 ? classes.root2 : null} 
+      ${rating === 3 ? classes.root3 : null}`}>
         <div className={classes.postImage}>
           <div>
             <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
-              <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
+              <div>
               {
                 offender &&
-                <Typography variant="body2" color="textSecondary" component="p"><span className={style.colortext}>Обидчик:</span> {offenderName}</Typography>
+                <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
               }
+              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
+              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
+              </div>
             </CardContent>
           </div>
           <div className={classes.imageStyle}>

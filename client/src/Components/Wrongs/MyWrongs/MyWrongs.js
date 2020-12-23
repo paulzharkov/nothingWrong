@@ -15,7 +15,7 @@ function MyWrongs() {
   }, [dispatch]);
 
   return (
-    <>
+  
       <div className={style.cabinetPage}>
 
         <HeaderWrongs />
@@ -47,7 +47,7 @@ function MyWrongs() {
 
         </div>
       </div>
-    </>
+  
   );
 }
 
