@@ -61,7 +61,9 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
 
   const handlerChatPrivat = () => {
     dispatch(AC.chatPrivatThunk(id))
-    history.push('/chat')
+    history.push(`/chat/${id}`)
+    // console.log('сюда пришло');
+
   }
 
   const handlerComments = () => {
@@ -113,6 +115,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         </CardActions>
       </Card>
     </>
+
 
   )
 }

@@ -6,7 +6,7 @@ import {
 import MyWrongs from './MyWrongs/MyWrongs';
 import HeaderWrongs from './Header/HeaderWrongs';
 import ToMeWrongs from './ToMeWrongs/ToMeWrongs';
-import ChatPrivat from '../Chat/chats';
+import ChatPrivat from '../ChatPrivat/index.js';
 
 
 function Wrongs() {

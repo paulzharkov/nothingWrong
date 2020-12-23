@@ -10,11 +10,13 @@ const dbConnect = require('./src/config/db');
 const http = require("http");
 const cors = require('cors');
 const User = require('../server/src/models/user.model')
+const Post = require('../server/src/models/post.model')
 
 const app = express();
 
 const server = http.createServer(app);
 const socket = require("socket.io");
+
 
 
 const io = socket(server);
@@ -49,7 +51,7 @@ io.use((socket, next) => {
   // connections, as 'socket.request.res' will be undefined in that case
 });
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 
   const session = socket.request.session;
 
@@ -57,41 +59,69 @@ io.on('connection', (socket) => {
     session.connections++;
     session.save();
     socket.emit("your id", socket.id);
+    console.log('<>>>>>>>>>>>>',socket.id)
 
-    socket.on("send message", body => {
-      io.emit("message", body)
+    await User.findOneAndUpdate({_id: session.user.id}, {socketID: socket.id})
+
+
+
+    socket.on("wrong notification", async body => {
+      console.log('wrong', body.offenderSocketID)
+      io.to(body.offenderSocketID).emit("wrong notification", body);
     })
 
-    socket.on("private message", async body => {
 
-      console.log(body.user);
-      console.log('-----> server', body.idOne);
-      const myName = await User.findOne({ login: body.user })
+    socket.on("message notification",  async body => {
+      console.log("message notification", body.offenderSocketID)
+      const wrong = await Post.findById(body.wrongID)
+      // console.log(wrong);
+      const offender = await User.findById(wrong.offenderId);
+      const author = await User.findById(wrong.authorId);
+      console.log(offender.socketID);
+      console.log(author.socketID);
+      if (body.offenderSocketID === offender.socketID) {
+        return io.to(author.socketID).emit("message notification", body)
+      } 
+      return io.to(offender.socketID).emit("message notification", body)
+      })
 
-      function idToSrting(arr) {
-        return arr.map((e) => {
-          return e.toString()
-          })
-      }
-      const yourName = await User.findOne({ login: body.offenderId})
-      const myNameMyHurt = idToSrting(myName.myHurt)
-      const myNameToMeHurt = idToSrting(myName.toMeHurt)
-      const yourNameMyHurt = idToSrting(yourName.myHurt)
-      const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
+    socket.on("message", body => {
+      io.emit("private message", body)})
+     
+      // console.log('body', body);
+      // const post = await Post.findOne({ _id: body.idOne})
+      // post.sms.push({ body: body.body, id: body.id })
+      // await post.save()
 
-      const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
+      // const myName = await User.findOne({ _id: body.userId })
+      // const yourName = await User.findOne({ _id: body.authorId})
+
+      // function idToSrting(arr) {
+      //   return arr.map((e) => {
+      //     return e.toString()
+      //     })
+      // }
+      // const myNameMyHurt = idToSrting(myName.myHurt)
+      // const myNameToMeHurt = idToSrting(myName.toMeHurt)
+      // const yourNameMyHurt = idToSrting(yourName.myHurt)
+      // const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
+
+      // const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
 
 
+      // console.log('yourName', yourName);
+      // console.log('myName', myName);
+      // // const body2 = [{}, {}]
 
-      const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
-      const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
-      const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
 
-      if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
-        // io.emit("private message", body)
-        io.emit(`${body.idOne}`, body)
-      }
-    })
+      // const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
+      // const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
+      // const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
+      
+      // io.emit("private message", post.sms)
+      // if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
+      //   io.emit(`${body.idOne}`, body)
+      // }
   }
 });
 
