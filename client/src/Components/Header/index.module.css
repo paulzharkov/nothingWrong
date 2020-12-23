@@ -18,9 +18,9 @@
 .headerLogoEnter {
   width: 100px;
   height: 100px;
-  margin-left: 40%;
+  margin-left: 70px;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .btnMenu {
   color: #67a3a3;
@@ -30,7 +30,7 @@
 }
 
 .headerNewLogo {
-  width: 240px;
-  height: 60px;
-  margin-left: 5px;
+  width: 200px;
+  margin-left: 25px;
+  margin-bottom: 20px;
 }

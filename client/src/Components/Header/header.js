@@ -34,6 +34,7 @@ function Header() {
       marginLeft: '10px',
       border: '2px solid white',
       width: '100px',
+      paddingTop: '10px'
     },
   }))(Button);
 
@@ -76,7 +77,7 @@ function Header() {
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
 
             {[
-              <Link to="/lk">Личный кабинет</Link>,
+              <Link to="/lk">Все обидки</Link>,
               <Link to="/lenta">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/stats">Статистика</Link>,
@@ -93,21 +94,22 @@ function Header() {
           </List>
         </div>
       ) : (
-        <div className={style.headerDiv}>
-          <List>
-            <img className={style.headerLogoEnter} src={logo} alt="pic" />
-            {[
-              <Link to="/">Войти</Link>,
-              <Link to="/register">Регистрация</Link>,
-            ].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{emoji2[index]}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      )}
+          <div className={style.headerDiv}>
+            <List>
+              <img className={style.headerLogoEnter} src={logo} alt="pic" />
+              <img className={style.headerNewLogo} src={newLogo} alt="pic" />
+              {[
+                <Link to="/">Войти</Link>,
+                <Link to="/register">Регистрация</Link>,
+              ].map((text, index) => (
+                <ListItem button key={text}>
+                  <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+            </List>
+          </div>
+        )}
     </div>
   );
 
