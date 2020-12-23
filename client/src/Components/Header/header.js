@@ -5,6 +5,7 @@ import Logout from '../Logout/logout';
 import logo from './logo2.jpg';
 import people from './people.png';
 import news from './new.png';
+import advice from './advice.png';
 import tape from './tape.png';
 import cabinet from './cabinet.png';
 import newLogo from './NothingWrong.png';
@@ -44,7 +45,7 @@ function Header() {
 
   const login = useSelector((state) => state.users);
   const toMePost = useSelector((state) => state.toMePost);
-  const emoji = [cabinet, tape, people, news, news];
+  const emoji = [cabinet, tape, people, news, advice];
   const emoji2 = ['👣', '🚶‍♂️'];
 
   const classes = useStyles();
