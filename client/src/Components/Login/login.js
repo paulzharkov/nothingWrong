@@ -42,7 +42,7 @@ function Login() {
   function handlerLogin(e) {
     e.preventDefault();
     dispatch(loginPersonThunk({ email, pass }));
-    history.push('/lk');
+    history.push('/makewrong');
   }
 
   return (

@@ -8,6 +8,8 @@ export const DELETE = 'DELETE'
 
 export const LIKE = 'LIKE'
 
+export const DISLIKE = 'DISLIKE'
+
 export const ADD_ID = 'ADD_ID'
 
 export const ADD_ON_ME_ALL = 'ADD_ON_ME_ALL'
