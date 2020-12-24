@@ -39,11 +39,11 @@ function App() {
 
   useEffect(() => {
     if(login) {
+      const mySocket = io.connect('/')
+      dispatch(setSocket(mySocket))
     dispatch(checkAuth())
     dispatch(getAllMyPostsThunk())
     dispatch(getAllToMePostsThunk())
-    const mySocket = io.connect('/')
-    dispatch(setSocket(mySocket))
 
     mySocket.on("wrong notification", body => {
       dispatch(enqueueSnackbar({
@@ -93,7 +93,7 @@ function App() {
     })
   
   }
-  }, [])
+  }, [login])
 
 
 

@@ -52,18 +52,16 @@ io.use((socket, next) => {
 });
 
 io.on('connection', async (socket) => {
+  console.log('9999999999999999999999')
 
   const session = socket.request.session;
 
   if (session.user) {
-    console.log('9999999999999999999999')
+    console.log('88888888888888888')
     session.connections++;
     session.save();
-    socket.emit("your id", socket.id);
-    console.log('<>>>>>>>>>>>>', socket.id)
 
     await User.findOneAndUpdate({ _id: session.user.id }, { socketID: socket.id })
-
 
 
     socket.on("wrong notification", async body => {
