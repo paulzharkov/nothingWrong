@@ -113,13 +113,8 @@ function Chat() {
         </RandomButton>
         </form>
       </div>
-      <section className="chat">
-        {messages.map((message, index) => {
-          
-          return (<div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>{message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
-        })}
-      </section>
-</>
+    </>
+
   )
 
 }
