@@ -14,6 +14,8 @@ function MyWrongs() {
     dispatch(getAllMyPostsThunk());
   }, [dispatch]);
 
+  console.log('>>>>>>>', posts)
+
   return (
   
       <div className={style.cabinetPage}>
@@ -39,6 +41,7 @@ function MyWrongs() {
                 category={el.category}
                 offender={el.offenderId}
                 offenderName={el.offenderName}
+                // authorName={el.authorName}
               />
             ))
           ) : (

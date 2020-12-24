@@ -7,6 +7,12 @@
   margin: 0;
 }
 
+.headerDiv a {
+  color: #67a3a3 !important;
+  font-weight: bold;
+  font-size: 22px !important;
+}
+
 .headerLogo {
   width: 100px;
   height: 100px;

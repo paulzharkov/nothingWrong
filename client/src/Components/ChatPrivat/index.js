@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './index.css'
 import LightSpeed from 'react-reveal/LightSpeed';
 import { useParams } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import { chatPrivatThunk, getWrongThunk } from '../../redux/creators/posts';

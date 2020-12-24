@@ -10,10 +10,8 @@ import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
-import Fade from 'react-reveal/Fade';
 import io from 'socket.io-client';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   useHistory,
@@ -22,7 +20,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
@@ -78,9 +75,10 @@ function App() {
       }))
 
     })
+    if(login) {
 
+   
     mySocket.on("message notification", body => {
-
       dispatch(enqueueSnackbarThunk({
         notification: {
           message: body.title,
@@ -104,6 +102,7 @@ function App() {
       }))
 
     })
+  }
   }, [login])
 
 

@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName }) {
+function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName, authorName }) {
 
   const classes = useStyles();
 
@@ -72,7 +72,6 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         {category === 'Финансовая' ? picture = imgMoney : null}
         {category === 'Бытовая' ? picture = imgHome : null}
       </div>
-
       <Card className={`
       ${rating === 1 ? classes.root1 : null} 
       ${rating === 2 ? classes.root2 : null} 
@@ -82,8 +81,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
             <CardContent>
               <div>
                 {
-                  offender &&
-                  <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
+                  authorName &&
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обиженный:</span> {authorName}</Typography>
+                }
+                {
+                  offenderName &&
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обидчик:</span> {offenderName}</Typography>
                 }
                 <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
                 <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
@@ -100,7 +103,11 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         </div>
         <CardActions>
           <div className={classes.buttons}>
-            <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button>
+            {
+              date ?
+                <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button> :
+                null
+            }
             <Button size="large" color="primary" onClick={handlerLike}>{likes.includes(login) ? "❤️" : "🤍"}{likes.length}</Button>
             {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
             {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}

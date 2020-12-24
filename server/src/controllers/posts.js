@@ -154,6 +154,7 @@ const makewrong =
         offenderId: offender._id,
         offenderName: req.body.offender,
         authorId: user._id,
+        authorName: req.session.user.login,
         date: new Date().toLocaleDateString(),
         authorName: req.session.user.login,
       });

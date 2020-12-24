@@ -48,6 +48,11 @@ a:focus {
 
 .makeStyles-paper {
   height: 91.4vh !important;
+ 
+}
+
+.makeStyles-paper-3 {
+  color: #67a3a3 !important;
 }
 
 .MuiPaper-elevation6 {
@@ -64,6 +69,13 @@ a:focus {
   align-self: center;
   justify-items: center;
   padding: 25px 0;
+}
+
+.formaObidka .MuiFormLabel-root {
+  color: #67a3a3;
+  font-family: 'Balsamiq Sans' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
 }
 
 .chatForm {
