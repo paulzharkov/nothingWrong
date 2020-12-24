@@ -151,5 +151,21 @@ export const chatPrivatThunk = (id) => (dispatch) => {
   dispatch(addId(id))
 }
 
+export const changeAnswer = ({id, answer, user}) => async (dispatch) => {
+  const response = await fetch(`http://localhost:8000/wrong/answer/${id}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        answer,
+        id,
+        user
+      }),
+      credentials: 'include'
+    })
+
+}
+
 
 

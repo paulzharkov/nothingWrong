@@ -69,6 +69,20 @@ io.on('connection', async (socket) => {
       io.to(body.offenderSocketID).emit("wrong notification", body);
     })
 
+    socket.on("stop machine", async body => {
+      const wrong = await Post.findById(body.wrongID)
+      const offender = await User.findById(wrong.offenderId);
+      const author = await User.findById(wrong.authorId);
+      io.to(author.socketID).emit("stop machine", body);
+    })
+
+    socket.on("stop machine 2", async body => {
+      const wrong = await Post.findById(body.wrongID)
+      const offender = await User.findById(wrong.offenderId);
+      const author = await User.findById(wrong.authorId);
+      io.to(offender.socketID).emit("stop machine 2", body);
+    })
+
 
     socket.on("message notification", async body => {
       console.log("message notification", body.offenderSocketID)
@@ -127,11 +141,11 @@ io.on('connection', async (socket) => {
   }
 });
 
-app.use((req, res, next) => {
-  res.locals.login = req.session?.user?.login;
-  res.locals.id = req.session?.user?.id;
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.login = req.session?.user?.login;
+//   res.locals.id = req.session?.user?.id;
+//   next();
+// });
 
 app.use('/', postsRouter);
 app.use('/users', usersRouter);
