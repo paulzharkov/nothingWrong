@@ -5,6 +5,8 @@ import { makeStyles, TextField, Button } from '@material-ui/core';
 import { getCommentsThunk, addCommentThunk } from '../../redux/creators/comments';
 import OneComment from './OneComment/OneComment'
 import Post from '../Post/Post'
+import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
 
 
 function CommentPage() {
@@ -42,6 +44,14 @@ function CommentPage() {
   }));
   const classes = useStyles();
 
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+      alignItems: 'start',
+      border: '1px solid #d6d6d6',
+    },
+  }))(Button);
 
   return (
     <>
@@ -60,14 +70,15 @@ function CommentPage() {
 
         <form className={classes.root} noValidate autoComplete="off">
           <TextField value={text} onChange={(e) => setText(e.target.value)} label="Введите комментарий" type='text' />
-          <Button
+
+        <RandomButton
             variant="contained"
             color="primary"
             className={classes.button}
             onClick={handlerComment}
-          >
-            Click
-        </Button>
+            endIcon={<Icon>comment</Icon>}>
+            Comment!
+        </RandomButton>
         </form>
         {
           commentsList.length ? commentsList.map((el) => (
