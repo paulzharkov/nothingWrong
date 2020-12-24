@@ -41,7 +41,7 @@ const userSignin = async (req, res) => {
             login: currentUser.login,
           };
 
-          console.log(req.session)
+          console.log('00000000000000000',req.session)
 
           return res.json(currentUser.login);
         }

@@ -33,5 +33,7 @@ router.get('/post/:id', postsController.allMessages);
 
 router.get('/wrong/:id', postsController.oneWrong);
 
+router.post('/wrong/answer/:id', postsController.changeAnswer);
+
 
 module.exports = router;
