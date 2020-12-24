@@ -40,9 +40,7 @@ function Register() {
   function handlerReg(e) {
     e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
-    if (loginRedux === true) {
-      history.push('/makewrong');
-    }
+    history.push('/makewrong');
   }
 
   return (
