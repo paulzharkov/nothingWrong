@@ -60,6 +60,8 @@ function Chat() {
   }
   console.log(messages)
   console.log('wrong',wrong)
+  console.log('user',user)
+  console.log('offenderName',wrong.offenderName)
 
   const RandomButton = withStyles(() => ({
     root: {
@@ -69,6 +71,33 @@ function Chat() {
       border: '1px solid #d6d6d6',
     },
   }))(Button);
+
+  function stopMachine() {
+    if(user !== wrong.offenderName) {
+      socket.emit('stop machine', {
+        title: `Вас устраивает как обидка решена?`,
+        wrongID: id,
+        offenderSocketID: socket.id
+      })
+      socket.emit('stop machine 2', {
+        title: `Юзер ${user} хочет заврешить обидку. Вы решили проблему?`,
+        wrongID: id,
+        offenderSocketID: socket.id
+      })
+  } else {
+    socket.emit('stop machine', {
+      title: `Юзер ${user} хочет заврешить обидку. Вы решили проблему?`,
+      wrongID: id,
+      offenderSocketID: socket.id
+    })
+    socket.emit('stop machine 2', {
+        title: `Вас устраивает как обидка решена?`,
+        wrongID: id,
+        offenderSocketID: socket.id
+    })
+  }
+}
+
 
   return (
     <>
@@ -111,6 +140,13 @@ function Chat() {
             endIcon={<Icon>send</Icon>}>
             Отправить!
         </RandomButton>
+        {messages.length >= 10 ?
+        <RandomButton
+        onClick={stopMachine}
+            type="submit" variant="outlined" color="secondary"
+            endIcon={<Icon>send</Icon>}>
+            Заврешить
+        </RandomButton> : null }
         </form>
       </div>
     </>

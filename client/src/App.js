@@ -34,7 +34,8 @@ import {
 } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
 import useStyles from './customHooks/useStyles';
-import { getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
+import { changeAnswer, getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
+import Answer from './Components/Answer/answer';
 
 
 function App() {
@@ -43,8 +44,7 @@ function App() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const params = useParams();
-  console.log('start', Object.keys(params).length);
+  console.log('login', login);
   const classes = useStyles();
 
   useEffect(() => {
@@ -64,10 +64,10 @@ function App() {
           action: key => (
             <>
               <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
-                CHAT
+                В чат
                 </Button>
               <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
-                Dismiss
+                Отклонить
                 </Button>
             </>
           )
@@ -75,7 +75,7 @@ function App() {
       }))
 
     })
-    if(login) {
+    // if(login) {
 
    
     mySocket.on("message notification", body => {
@@ -89,10 +89,10 @@ function App() {
             action: key => (
               <>
                 <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
-                  CHAT
+                  В чат
                     </Button>
                 <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
-                  Dismiss
+                  Отклонить
                     </Button>
               </>
             )
@@ -102,7 +102,52 @@ function App() {
       }))
 
     })
-  }
+
+    mySocket.on("stop machine", body => {
+      dispatch(enqueueSnackbar({
+        message: body.title,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'info',
+          autoHideDuration: 25000,
+          action: key => (
+            <>
+              <Button className={classes.whiteText} onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: true, user: login})); dispatch(closeSnackbar(key)) }}>
+                Да
+                </Button>
+              <Button color="secondary" onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: false, user: login})); dispatch(closeSnackbar(key)) }}>
+                Нет
+                </Button>
+            </>
+          )
+        },
+      }))
+
+    })
+
+    mySocket.on("stop machine 2", body => {
+      dispatch(enqueueSnackbar({
+        message: body.title,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'info',
+          autoHideDuration: 25000,
+          action: key => (
+            <>
+            <Button className={classes.whiteText} onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: true, user: login})); dispatch(closeSnackbar(key)) }}>
+              Да
+              </Button>
+            <Button color="secondary" onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: false, user: login})); dispatch(closeSnackbar(key)) }}>
+              Нет
+              </Button>
+          </>
+          )
+        },
+      }))
+
+    })
+
+
   }, [login])
 
 
@@ -156,6 +201,9 @@ function App() {
                   </Route>
                   <Route path="/chat/:id">
                     <ChatPrivat />
+                  </Route>
+                  <Route path="/wrong/answer/:id">
+                    <Answer />
                   </Route>
                 </Switch>
               ) : (
