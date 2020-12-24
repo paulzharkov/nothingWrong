@@ -203,7 +203,7 @@ function App() {
                     <ChatPrivat />
                   </Route>
                   <Route path="/wrong/answer/:id">
-                    <Answer />
+                    <HeaderWrongs />
                   </Route>
                 </Switch>
               ) : (
