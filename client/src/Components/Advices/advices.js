@@ -25,7 +25,7 @@ function Advices() {
           />
         ))
       ) : (
-        <div>wasted</div>
+        <div>Ваша лента советов загружается</div>
       )}
     </div>
   );

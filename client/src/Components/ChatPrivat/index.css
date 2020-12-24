@@ -5,6 +5,10 @@
   overflow-y: scroll;
 }
 
+/* display: flex;
+align-items: bottom; */
+
+
 .myRow {
   width: 100%;
   display: flex;
@@ -13,8 +17,8 @@
   margin-bottom: 10px;
 }
 .partnerRow{
-  margin-top: 5px;
   justify-content: flex-start;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 

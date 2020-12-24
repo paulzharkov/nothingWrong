@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './index.css'
 import LightSpeed from 'react-reveal/LightSpeed';
 import { useParams } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import { chatPrivatThunk, getWrongThunk } from '../../redux/creators/posts';
@@ -113,13 +113,8 @@ function Chat() {
         </RandomButton>
         </form>
       </div>
-      <section className="chat">
-        {messages.map((message, index) => {
-          
-          return (<div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>{message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
-        })}
-      </section>
-</>
+    </>
+
   )
 
 }

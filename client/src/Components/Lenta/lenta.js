@@ -43,11 +43,12 @@ function Lenta() {
             comments={el.comments}
             category={el.category}
             offenderName={el.offenderName}
+            authorName={el.authorName}
           />
 
         ))
       ) : (
-          <div>wasted</div>
+          <div>Добавьте друзей, чтобы увидеть их публичные посты</div>
         )
       }
     </div >

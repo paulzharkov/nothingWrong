@@ -30,7 +30,7 @@ function AllPeople() {
           />
         ))
       ) : (
-          <div>wasted</div>
+          <div>Ой, кажется в базе нет людей</div>
         )}
     </div>
   );

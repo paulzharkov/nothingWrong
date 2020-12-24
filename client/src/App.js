@@ -10,10 +10,8 @@ import Advices from './Components/Advices/advices';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
-import Fade from 'react-reveal/Fade';
 import io from 'socket.io-client';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   useHistory,
@@ -22,7 +20,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
@@ -51,83 +48,60 @@ function App() {
   const classes = useStyles();
 
   useEffect(() => {
-    if(login) {
-      const mySocket = io.connect('/')
-      dispatch(setSocket(mySocket))
+
+    const mySocket = io.connect('/')
+    dispatch(setSocket(mySocket))
     dispatch(checkAuth())
     dispatch(getAllMyPostsThunk())
     dispatch(getAllToMePostsThunk())
+    mySocket.on("wrong notification", body => {
+      dispatch(enqueueSnackbar({
+        message: body.title,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'warning',
+          autoHideDuration: 25000,
+          action: key => (
+            <>
+              <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
+                CHAT
+                </Button>
+              <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
+                Dismiss
+                </Button>
+            </>
+          )
+        },
+      }))
 
-    mySocket.on('wrong notification', (body) => {
-      dispatch(
-        enqueueSnackbar({
+    })
+    if(login) {
+
+   
+    mySocket.on("message notification", body => {
+      dispatch(enqueueSnackbarThunk({
+        notification: {
           message: body.title,
           options: {
             key: new Date().getTime() + Math.random(),
-            variant: 'warning',
-            autoHideDuration: 25000,
-            action: (key) => (
+            variant: 'success',
+            autoHideDuration: 10000,
+            action: key => (
               <>
-                <Button
-                  className={classes.whiteText}
-                  onClick={() => {
-                    history.push(`/chat/${body.wrongID}`);
-                    dispatch(closeSnackbar(key));
-                  }}
-                >
+                <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
                   CHAT
-                </Button>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    dispatch(closeSnackbar(key));
-                  }}
-                >
+                    </Button>
+                <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
                   Dismiss
-                </Button>
+                    </Button>
               </>
-            ),
+            )
           },
-        })
-      );
-    });
+        },
+        wrongID: body.wrongID
+      }))
 
-    mySocket.on('message notification', (body) => {
-      dispatch(
-        enqueueSnackbarThunk({
-          notification: {
-            message: body.title,
-            options: {
-              key: new Date().getTime() + Math.random(),
-              variant: 'success',
-              autoHideDuration: 10000,
-              action: key => (
-                <>
-                  <Button
-                    className={classes.whiteText}
-                    onClick={() => {
-                      history.push(`/chat/${body.wrongID}`);
-                      dispatch(closeSnackbar(key));
-                    }}
-                  >
-                    CHAT
-                  </Button>
-                  <Button
-                    color="secondary"
-                    onClick={() => {
-                      dispatch(closeSnackbar(key));
-                    }}
-                  >
-                    Dismiss
-                  </Button>
-                </>
-              ),
-            },
-          },
-        wrongID: body.wrongID}))
-    
     })
-  
   }
   }, [login])
 
@@ -185,17 +159,17 @@ function App() {
                   </Route>
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>
