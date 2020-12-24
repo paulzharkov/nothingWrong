@@ -1,35 +1,48 @@
-.chat {
-  width: 400px;
-  border: 3px solid green;
+.chatMessages {
+  width: 369px;
+  height: 600px;
+  border-bottom: 1px solid #d6d6d6;
+  overflow-y: scroll;
 }
 
 .myRow {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
-.partnerRow {
+.partnerRow{
+  margin-top: 5px;
   justify-content: flex-start;
+  margin-bottom: 10px;
 }
+
+.myRow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .myMessage {
   width: 45%;
-  background-color: pink;
-  color: #46516e;
+  background-color: #d7eef19c;
+  color: #46516ec7;
   padding: 10px;
-  margin-right: 5px;
-  text-align: center;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
+  margin-right: 10px;
+  text-align: end;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 .partnerMessage {
   width: 45%;
-  background-color: transparent;
-  color: lightgray;
-  border: 1px solid lightgray;
+  background-color: powderblue;
+  color: #ffffff;
   padding: 10px;
-  margin-left: 5px;
-  text-align: center;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
+  margin-left: 10px;
+  text-align: start;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
