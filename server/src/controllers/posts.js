@@ -155,6 +155,7 @@ const makewrong =
         offenderName: req.body.offender,
         authorId: user._id,
         date: new Date().toLocaleDateString(),
+        authorName: req.session.user.login,
       });
       await newPost.save();
       return res.json({ newPost, offenderSocketID: offender.socketID });
