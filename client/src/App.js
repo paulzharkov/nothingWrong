@@ -38,68 +38,69 @@ function App() {
   // const socketRef = useRef()
 
   useEffect(() => {
-    if(login) {
+    if (login) {
       const mySocket = io.connect('/')
       dispatch(setSocket(mySocket))
-    dispatch(checkAuth())
-    dispatch(getAllMyPostsThunk())
-    dispatch(getAllToMePostsThunk())
+      dispatch(checkAuth())
+      dispatch(getAllMyPostsThunk())
+      dispatch(getAllToMePostsThunk())
 
-    mySocket.on("wrong notification", body => {
-      dispatch(enqueueSnackbar({
-        message: body.title,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'warning',
-          autoHideDuration: 25000,
-          action: key => (
-            <>
-                <Button className={classes.whiteText}  onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key) ) }}>
-                    CHAT
-                </Button>
-                <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key) )}}>
-                    Dismiss
-                </Button>
-            </>
-        )
-      },
-      }))
-    
-    })
-
-    mySocket.on("message notification", body => {
-      
-      dispatch(enqueueSnackbarThunk({
-        notification: {
+      mySocket.on("wrong notification", body => {
+        dispatch(enqueueSnackbar({
           message: body.title,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'warning',
+            autoHideDuration: 25000,
+            action: key => (
+              <>
+                <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
+                  CHAT
+                </Button>
+                <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
+                  Dismiss
+                </Button>
+              </>
+            )
+          },
+        }))
+
+      })
+
+      mySocket.on("message notification", body => {
+
+        dispatch(enqueueSnackbarThunk({
+          notification: {
+            message: body.title,
             options: {
               key: new Date().getTime() + Math.random(),
               variant: 'success',
               autoHideDuration: 10000,
               action: key => (
                 <>
-                    <Button className={classes.whiteText}  onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key) ) }}>
-                        CHAT
+                  <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
+                    CHAT
                     </Button>
-                    <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key) )}}>
-                        Dismiss
+                  <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
+                    Dismiss
                     </Button>
                 </>
-            )
+              )
+            },
           },
-        },
-        wrongID: body.wrongID}))
-    
-    })
-  
-  }
+          wrongID: body.wrongID
+        }))
+
+      })
+
+    }
   }, [login])
 
 
 
   return (
     <>
-    <Notifier />
+      <Notifier />
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
@@ -140,25 +141,25 @@ function App() {
                   <Route exact path="/">
                     <Login />
                   </Route>
-                    <Route path="/chat/:id">
-                      <ChatPrivat />
+                  <Route path="/chat/:id">
+                    <ChatPrivat />
                   </Route>
                   {/* <Route>
                     <Followers exact path="/people/followers" />
                   </Route> */}
                 </Switch>
               ) : (
-                <>
-                  <Switch>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route exact path="/">
-                      <Login />
-                    </Route>
-                  </Switch>
-                </>
-              )}
+                  <>
+                    <Switch>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route exact path="/">
+                        <Login />
+                      </Route>
+                    </Switch>
+                  </>
+                )}
             </Paper>
           </Grid>
         </Grid>
