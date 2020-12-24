@@ -4,41 +4,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import './index.css'
 import LightSpeed from 'react-reveal/LightSpeed';
 import { useParams } from 'react-router-dom';
-import { chatPrivatThunk } from '../../redux/creators/posts';
+import { chatPrivatThunk, getWrongThunk } from '../../redux/creators/posts';
+import { allOurMessagesThunk, setAllMessages } from '../../redux/creators/messages';
 
 
 
 
 function Chat() {
 
-  const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const { id } = useParams()
+  const user = useSelector(state => state.users)
   const dispatch = useDispatch()
-  const posts = useSelector((state) => state)
   const socket = useSelector(state => state.socket)
-  console.log('posts', posts.socket.id);
-  const ID = posts.socket.id
+  console.log('socket',socket)
+  const messages = useSelector(state => state.messages)
+  const wrong = useSelector(state => state.oneWrong)
 
   useEffect(() => {
-
-
+    dispatch(getWrongThunk(id))
+    dispatch(allOurMessagesThunk(id))
     dispatch(chatPrivatThunk(id))
 
+
     socket.on("private message", async (allMessages) => {
-      hashMessege(allMessages)
+      dispatch(setAllMessages(allMessages))
     })
 
 
     return () => {
       dispatch(chatPrivatThunk())
+      dispatch(setAllMessages([]))
     }
   }, [])
 
 
-  function hashMessege(someMessage) {
-    setMessages(oldMsgs => [...oldMsgs, someMessage])
-  }
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -49,7 +49,7 @@ function Chat() {
     const messageObjectPrivate = {
       message: message,
       id: id,
-      yourId: socket.id,
+      login: user
     }
     setMessage('')
     socket.emit('message notification', {
@@ -60,6 +60,8 @@ function Chat() {
     socket.emit("message", messageObjectPrivate)
 
   }
+  console.log(messages)
+  console.log('wrong',wrong)
 
 
   return (
@@ -67,7 +69,7 @@ function Chat() {
       <section className="chat">
         {messages.map((message, index) => {
           
-          return (<div className={`${message.yourId === ID ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.yourId === ID ? 'myMessage' : 'partnerMessage'}`}>{message.yourId === ID ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
+          return (<div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>{message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
         })}
       </section>
 

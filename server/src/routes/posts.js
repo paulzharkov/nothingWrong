@@ -33,4 +33,9 @@ router.get('/chat/:post', postsController.chat);
 
 router.post('/chat/:post', postsController.chatSendMessage);
 
+router.get('/post/:id', postsController.allMessages);
+
+router.get('/wrong/:id', postsController.oneWrong);
+
+
 module.exports = router;

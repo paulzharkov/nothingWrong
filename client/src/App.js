@@ -25,6 +25,7 @@ import { setSocket } from './redux/creators/socket';
 import Button from '@material-ui/core/Button';
 import { closeSnackbar, enqueueSnackbar, enqueueSnackbarThunk } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
+import { getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
 
 
 function App() {
@@ -33,13 +34,14 @@ function App() {
   const dispatch = useDispatch()
 
   const history = useHistory()
-  const params = useParams()
-  console.log('start', Object.keys(params).length)
   const classes = useStyles();
   // const socketRef = useRef()
 
   useEffect(() => {
+    if(login) {
     dispatch(checkAuth())
+    dispatch(getAllMyPostsThunk())
+    dispatch(getAllToMePostsThunk())
     const mySocket = io.connect('/')
     dispatch(setSocket(mySocket))
 
@@ -73,7 +75,7 @@ function App() {
             options: {
               key: new Date().getTime() + Math.random(),
               variant: 'success',
-              autoHideDuration: 2000,
+              autoHideDuration: 10000,
               action: key => (
                 <>
                     <Button className={classes.whiteText}  onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key) ) }}>
@@ -90,8 +92,9 @@ function App() {
     
     })
   
-
+  }
   }, [])
+
 
 
   return (
