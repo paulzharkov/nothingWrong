@@ -46,6 +46,10 @@ a:focus {
   margin-top: -5px;
 }
 
+.makeStyles-paper {
+  height: 91.4vh !important;
+}
+
 .MuiPaper-elevation6 {
   box-shadow: none !important;
 }
@@ -64,7 +68,6 @@ a:focus {
 
 .chatForm {
   width: 100%;
-  height: 85vh;
   display: flex;
   text-align: center;
   flex-direction: column;

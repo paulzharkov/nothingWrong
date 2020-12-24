@@ -62,71 +62,32 @@ function Chat() {
 
   return (
     <>
-      <section className="chat">
-        {messages.map((message, index) => {
+      <div className="chatPage">
+        <section className="chatMessages">
+          {messages.map((message, index) => {
+            return (
+              <div className={`${message.yourId === ID ? 'myRow' : 'partnerRow'}`} key={index}>
+                <div className={`${message.yourId === ID ? 'myMessage' : 'partnerMessage'}`}>
+                  {message.yourId === ID ? (<LightSpeed left>{message.message}</LightSpeed>)
+                    : (<LightSpeed right>{message.message}</LightSpeed>)}</div>
+              </div>
+            )
+          })}
+        </section>
 
-          return (<div className=
-            {`${message.yourId === ID ? 'myRow' : 'partnerRow'}`}
-            key={index}>
-            <div className={`${message.yourId === ID ? 'myMessage' : 'partnerMessage'}`}>
-              {message.yourId === ID ? (<LightSpeed left>{message.message}</LightSpeed>)
-                : (<LightSpeed right>{message.message}</LightSpeed>)}</div>
-          </div>
-          )
-        })}
-      </section>
-
-      <form onSubmit={submitHandler} name="chatForm">
-        <label>
-          Сообщение:
+        <form onSubmit={submitHandler} name="chatForm" className="chatForm">
+          <label>
+            Сообщение:
             <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-        </label>
-        <button>Отправить</button>
-      </form>
+          </label>
+          <button>Отправить</button>
+        </form>
+      </div>
     </>
+
   )
 
 }
 
 
 export default Chat;
-
-//  {/* <>
-//         {/* <h1>1111111111111111</h1> */}
-//         {/* <section className="chat">
-//           {messages.map((message, index) => {
-//             return (<div className={`${message.id === yourId ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourId ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourId ? (<LightSpeed left>{message.body}</LightSpeed>) : (<LightSpeed right>{message.body}</LightSpeed>)}</div></div>)
-//           })}
-//         </section> */}
-//         {/* <section className="chat">
-//           {messages.map((message, index) => {
-//             return (
-
-//             <div>
-//               {message.message}
-//             </div>
-//             )
-//           })}
-//         </section>
-
-//         <form onSubmit={submitHandler} name="chatForm">
-//           <label>
-//             Сообщение:
-//             <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-//           </label>
-//           <button>Отправить</button>
-//         </form>
-//       </> */} */}
-// {/* <section className="chat">
-//         {messages.map((message, index) => {
-//           return (<div className={`${message.id === yourID ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourID ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourID ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
-//         })}
-//       </section>
-
-//       <form onSubmit={submitHandler} name="chatForm">
-//         <label>
-//           Сообщение:
-//           <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-//         </label>
-//         <button>Отправить</button>
-//       </form> */}

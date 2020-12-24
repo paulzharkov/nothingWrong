@@ -1,35 +1,62 @@
-.chat {
-  width: 400px;
+.chatPage {
+
+}
+
+
+
+.chatMessages {
+  width: 369px;
+  height: 600px;
   border: 3px solid green;
 }
 
+.chatForm {
+
+}
+
 .myRow {
-  width: 100%;
   display: flex;
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
   justify-content: flex-end;
-  margin-top: 10px;
 }
 .partnerRow{
+  border: 2px solid #dedede;
+  background-color: #ddd;
+  border-color: #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
   justify-content: flex-start;
 }
+
+.myRow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .myMessage {
   width: 45%;
-  background-color: pink;
-  color: #46516e;
-  padding: 10px;
-  margin-right: 5px;
-  text-align: center;
+  /* background-color: pink; */
+  /* color: #46516e; */
+  /* padding: 10px; */
+  /* margin-right: 5px; */
+  text-align: end;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 }
 .partnerMessage {
   width: 45%;
-  background-color: transparent;
-  color: lightgray;
-  border: 1px solid lightgray;
-  padding: 10px;
-  margin-left: 5px;
-  text-align: center;
+  /* background-color: transparent; */
+  /* color: #46516e; */
+  /* border: 1px solid lightgray; */
+  /* padding: 10px; */
+  /* margin-left: 5px; */
+  text-align: start;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
 }
