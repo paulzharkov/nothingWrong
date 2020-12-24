@@ -92,38 +92,6 @@ io.on('connection', async (socket) => {
 
       io.emit("private message", wrong.sms)
     })
-
-    // console.log('body', body);
-
-    // const myName = await User.findOne({ _id: body.userId })
-    // const yourName = await User.findOne({ _id: body.authorId})
-
-    // function idToSrting(arr) {
-    //   return arr.map((e) => {
-    //     return e.toString()
-    //     })
-    // }
-    // const myNameMyHurt = idToSrting(myName.myHurt)
-    // const myNameToMeHurt = idToSrting(myName.toMeHurt)
-    // const yourNameMyHurt = idToSrting(yourName.myHurt)
-    // const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
-
-    // const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
-
-
-    // console.log('yourName', yourName);
-    // console.log('myName', myName);
-    // // const body2 = [{}, {}]
-
-
-    // const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
-    // const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
-    // const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
-
-    // io.emit("private message", post.sms)
-    // if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
-    //   io.emit(`${body.idOne}`, body)
-    // }
   }
 });
 

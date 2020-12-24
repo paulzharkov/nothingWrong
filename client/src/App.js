@@ -78,9 +78,10 @@ function App() {
       }))
 
     })
+    if(login) {
 
+   
     mySocket.on("message notification", body => {
-
       dispatch(enqueueSnackbarThunk({
         notification: {
           message: body.title,
@@ -104,6 +105,7 @@ function App() {
       }))
 
     })
+  }
   }, [login])
 
 

@@ -33,13 +33,15 @@ function Header() {
   const RandomButton = withStyles(() => ({
     root: {
       color: '#67a3a3',
-      fontWeight: 'bold',
-      fontSize: '16px',
-      marginTop: '10px',
-      marginLeft: '10px',
-      border: '2px solid white',
       width: '100px',
+      border: '2px solid white',
+      fontSize: '16px',
+      boxShadow: '0 0 10px #0000007d',
+      marginTop: '10px',
+      fontWeight: 'bold',
+      marginLeft: '10px',
       paddingTop: '10px',
+      backgroundColor: '#FFF',
     },
   }))(Button);
 
@@ -139,7 +141,7 @@ function Header() {
               />
             ) : (
               <div className={style.bell}>
-                {login}, {toMePost.length}🔔
+                {login}, 🔔{toMePost.length}
               </div>
             )}
           </div>
@@ -157,29 +159,3 @@ function Header() {
 }
 
 export default Header;
-// {/* <div className={style.headerDiv}>
-//         <div>
-//           <img className={style.headerLogo} src={logo} alt="logo" />
-//         </div>
-//         {login ? (
-//           <div className={style.headerLinks} >
-//             <div><Link to="/lk">Личный кабинет</Link></div>
-//             <div><Link to="/lenta">Лента</Link></div>
-//             <div><Link to="/people">Люди</Link></div>
-//             <div><Link to="/stats">Статистика</Link></div>
-//             <div><Link to="/advices">Советы</Link></div>
-//             <div><Link to="/makewrong">Создать обидку</Link></div>
-//             <div><Link to="/chat">Обсудить</Link></div>
-//             <hr />
-//             <div><Logout /></div>
-//             <div><Link to="/chatprivate">Обсудить Приватно</Link></div>
-//           </div>
-//         ) : (
-//             <div className={style.headerLink}>
-//               <div><Link to="/">Войти</Link></div>
-//               <div><Link to="/register">Регистрация</Link></div>
-//               <hr />
-//             </div>
-//           )}
-
-//       </div> */}
