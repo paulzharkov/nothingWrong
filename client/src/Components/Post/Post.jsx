@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName }) {
+function Post({ category, reason, solve, status, rating, state, offender, likes, date, comments, id, offenderName, authorName }) {
 
   const classes = useStyles();
 
@@ -82,9 +82,15 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
             <CardContent>
               <div>
                 {
-                  offender &&
-                  <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
+                  authorName &&
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обиженный:</span> {authorName}</Typography>
                 }
+                {
+                  offenderName &&
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обидчик:</span> {offenderName}</Typography>
+                }
+                
+                
                 <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
                 <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
               </div>

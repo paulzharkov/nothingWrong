@@ -17,8 +17,9 @@ const postSchema = new Schema({
   offenderId: { type: Schema.Types.ObjectId, ref: 'User' },
   offenderName: String,
   authorId: { type: Schema.Types.ObjectId, ref: 'User' },
+  authorName: '',
   likes: [], // Push userId to array, only use array.length for likes count
-  comments: [],
+  comments: { type: Array, default: [] },
   rating: Number, // from 1 to 10
   date: String, // format: 'YYYY-MM-DD'
   state: String, // Private or Public

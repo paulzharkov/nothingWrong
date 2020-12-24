@@ -7,8 +7,6 @@ import { getFollowersUsersThunk } from '../../redux/creators/usersList';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
-  Typography,
-  InputLabel,
   Select,
   FormHelperText,
   TextField,
@@ -182,9 +180,9 @@ function Makewrong() {
         <FormControl component="ratingForm">
           <FormLabel component="rating">Выберите уровень злости:</FormLabel>
           <RadioGroup className={classes.selectEmpty} aria-label="rating" name="rating" value={rating} onChange={ratingHandler}>
-            <FormControlLabel value="😠" control={<Radio style={{ color: 'green' }} />} label="😠" />
-            <FormControlLabel value="😡" control={<Radio style={{ color: 'yellow' }} />} label="😡" />
-            <FormControlLabel value="🤬" control={<Radio style={{ color: 'red' }} />} label="🤬" />
+            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }} />} label="😠" />
+            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }} />} label="😡" />
+            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }} />} label="🤬" />
           </RadioGroup>
         </FormControl>
       </div>

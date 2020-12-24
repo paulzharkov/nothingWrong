@@ -93,7 +93,7 @@ function Header() {
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
-                  <img className={style.headerLogo2} src={emoji[index]} />
+                  <img className={style.headerLogo2} src={emoji[index]} alt="pic"/>
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

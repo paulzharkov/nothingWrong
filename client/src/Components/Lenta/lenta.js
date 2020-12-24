@@ -43,6 +43,7 @@ function Lenta() {
             comments={el.comments}
             category={el.category}
             offenderName={el.offenderName}
+            authorName={el.authorName}
           />
 
         ))
