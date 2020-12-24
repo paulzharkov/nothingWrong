@@ -42,7 +42,7 @@ function ToMeWrongs() {
             />
           ))
         ) : (
-            <div>wasted</div>
+            <div>На вас никто не обиделся😅</div>
           )}
       </div>
     </div>
