@@ -110,9 +110,8 @@ const advices = async (req, res) => {
       linksArray.push('https://www.psychologies.ru' + $(elem).attr().href)})
       let photos = $('img.images').each((i, elem) => {
         photosArray.push($(elem).attr().src)})
-        // console.log(photosArray)
     parsingResultArray = titleArray.map((el, i) => [el, textArray[i], linksArray[i], photosArray[i]])})
-  res.json(parsingResultArray); // Добавить fetch на какой то сайт с советами
+  res.json(parsingResultArray); 
 };
 
 
