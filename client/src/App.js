@@ -38,62 +38,59 @@ function App() {
   // const socketRef = useRef()
 
   useEffect(() => {
-    if (login) {
-      const mySocket = io.connect('/')
-      dispatch(setSocket(mySocket))
-      dispatch(checkAuth())
-      dispatch(getAllMyPostsThunk())
-      dispatch(getAllToMePostsThunk())
 
-      mySocket.on("wrong notification", body => {
-        dispatch(enqueueSnackbar({
+    const mySocket = io.connect('/')
+    dispatch(setSocket(mySocket))
+    dispatch(checkAuth())
+    dispatch(getAllMyPostsThunk())
+    dispatch(getAllToMePostsThunk())
+    mySocket.on("wrong notification", body => {
+      dispatch(enqueueSnackbar({
+        message: body.title,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'warning',
+          autoHideDuration: 25000,
+          action: key => (
+            <>
+              <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
+                CHAT
+                </Button>
+              <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
+                Dismiss
+                </Button>
+            </>
+          )
+        },
+      }))
+
+    })
+
+    mySocket.on("message notification", body => {
+
+      dispatch(enqueueSnackbarThunk({
+        notification: {
           message: body.title,
           options: {
             key: new Date().getTime() + Math.random(),
-            variant: 'warning',
-            autoHideDuration: 25000,
+            variant: 'success',
+            autoHideDuration: 10000,
             action: key => (
               <>
                 <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
                   CHAT
-                </Button>
+                    </Button>
                 <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
                   Dismiss
-                </Button>
+                    </Button>
               </>
             )
           },
-        }))
+        },
+        wrongID: body.wrongID
+      }))
 
-      })
-
-      mySocket.on("message notification", body => {
-
-        dispatch(enqueueSnackbarThunk({
-          notification: {
-            message: body.title,
-            options: {
-              key: new Date().getTime() + Math.random(),
-              variant: 'success',
-              autoHideDuration: 10000,
-              action: key => (
-                <>
-                  <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
-                    CHAT
-                    </Button>
-                  <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
-                    Dismiss
-                    </Button>
-                </>
-              )
-            },
-          },
-          wrongID: body.wrongID
-        }))
-
-      })
-
-    }
+    })
   }, [login])
 
 
