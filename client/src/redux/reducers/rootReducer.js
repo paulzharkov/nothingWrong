@@ -7,6 +7,10 @@ import toMePostsReducer from './toMePosts';
 import commentsReducer from './commentsReducer';
 import { LOGOUT } from '../types/users';
 import socketReducer from './socketReducer';
+import notifierReducer from './notifierReducer';
+import advicesReducer from './advices';
+import messageReducer from './messageReducer';
+import wrongReducer from './wrongReducer';
 
 const appReducer = combineReducers({
   users: usersReducer,
@@ -15,8 +19,12 @@ const appReducer = combineReducers({
   lentaPosts: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
-  comments: commentsReducer,
   socket: socketReducer,
+  comments: commentsReducer,
+  notifications: notifierReducer,
+  advicesList: advicesReducer,
+  messages: messageReducer,
+  oneWrong: wrongReducer,
 });
 
 const rootReducer = (state, action) => {

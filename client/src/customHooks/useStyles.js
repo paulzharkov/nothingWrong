@@ -6,17 +6,19 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: '#B0E0E6',
   },
+  whiteText: {
+    color: "white"
+  },
   paper: {
-    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: '100vh',
+    height: '95vh',
     width: '100vw',
-    justifyContent: 'center',
-    alignItems: 'center',
     display: 'flex',
+    padding: '0px',
+
     // background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)'
-    backgroundColor: '#e0ffff	',
+    // backgroundColor: '#e0ffff	',
   },
   first: {
     height: '100vh',
@@ -28,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     // height: '100vh',
     alignItems: 'center',
   },
-  
 }));
 
 export default useStyles

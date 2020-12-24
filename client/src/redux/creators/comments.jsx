@@ -8,7 +8,6 @@ export const createComment = (data) => ({
 export const setComments = (commentsList) => ({
   type: TYPES.ADD_ALL_COMMENTS,
   payload: commentsList
-
 })
 
 export const addCommentThunk = ({ text, id }) => async (dispatch) => {

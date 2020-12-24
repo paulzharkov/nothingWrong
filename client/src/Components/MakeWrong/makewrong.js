@@ -7,6 +7,7 @@ import { getFollowersUsersThunk } from '../../redux/creators/usersList';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
+  Typography,
   InputLabel,
   Select,
   FormHelperText,
@@ -48,6 +49,7 @@ function Makewrong() {
     root: {
       backgroundColor: '#FFF',
       color: '#67a3a3',
+      alignItems: 'start',
     },
   }))(Button);
 
@@ -95,11 +97,9 @@ function Makewrong() {
   };
 
   return (
-    <form className="formaHuerma" onSubmit={handlerSubmit}>
-      <div style={{marginTop: '50px'}}>
-        <InputLabel id="demo-simple-select-outlined-label">
-          Выберите категорию:
-        </InputLabel>
+    <form className="formaObidka" onSubmit={handlerSubmit}>
+      <div style={{ marginTop: '50px' }}>
+      <h1>Создайте свою обидку:</h1>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -107,10 +107,9 @@ function Makewrong() {
           onChange={categoryHandler}
           displayEmpty
           className={classes.selectEmpty}
-
         >
           <MenuItem value="" disabled>
-            Список
+          Выберите категорию:
           </MenuItem>
           <MenuItem value="Финансовая">Финансовая</MenuItem>
           <MenuItem value="Невыполненные обещания">
@@ -121,12 +120,13 @@ function Makewrong() {
           <MenuItem value="Бытовая">Бытовая</MenuItem>
         </Select>
       </div>
-      <div>
+      <div style={{ marginTop: '10px' }}>
         <TextField
           id="outlined-multiline-static"
           label="Укажите причину"
           multiline
-          rows={3}
+          width="100%"
+          // rows={3}
           value={reason}
           onChange={handlerReason}
           inputProps={{ maxLength: 140 }}
@@ -134,13 +134,11 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)
+          (не более 140 символов)  <progress value={counterReason} max="140">{counterReason}</progress>
         </FormHelperText>
-        <progress value={counterReason} max="140">
-          {counterReason}
-        </progress>
+
       </div>
-      <div>
+      <div style={{ marginTop: '10px', marginBottom: '10px'}}>
         <TextField
           id="outlined-multiline-static"
           label="Чего я хочу от обидчика"
@@ -153,11 +151,8 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)
+          (не более 140 символов) <meter max="140" value={counterSolve} low="70" high="120">{counterSolve}</meter>
         </FormHelperText>
-        <meter max="140" value={counterSolve} low="70" high="120">
-          {counterSolve}
-        </meter>
       </div>
       <div>
         <InputLabel id="demo-simple-select-outlined-label">
@@ -182,10 +177,10 @@ function Makewrong() {
       </div>
       <div>
         <FormControl component="stateForm">
-        <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
+          <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
           <RadioGroup className={classes.selectEmpty} aria-label="state" name="state" value={state} onChange={stateHandler}>
-            <FormControlLabel value="Приватная" control={<Radio style={{ color: 'blue' }}/>} label="Приватная" />
-            <FormControlLabel value="Публичная" control={<Radio style={{ color: 'black' }}/>} label="Публичная" />
+            <FormControlLabel value="Приватная" control={<Radio style={{ color: 'blue' }} />} label="Приватная" />
+            <FormControlLabel value="Публичная" control={<Radio style={{ color: 'black' }} />} label="Публичная" />
           </RadioGroup>
         </FormControl>
 
@@ -194,16 +189,16 @@ function Makewrong() {
         <FormControl component="ratingForm">
           <FormLabel component="rating">Выберите уровень злости:</FormLabel>
           <RadioGroup className={classes.selectEmpty} aria-label="rating" name="rating" value={rating} onChange={ratingHandler}>
-            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }}/>} label="1" />
-            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }}/>} label="2" />
-            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }}/>} label="3" />
+            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }} />} label="1" />
+            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }} />} label="2" />
+            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }} />} label="3" />
           </RadioGroup>
         </FormControl>
       </div>
       <RandomButton
-          type="submit" variant="outlined" color="primary"
-          endIcon={<Icon>send</Icon>}>
-          Обидеться!
+        type="submit" variant="outlined" color="primary"
+        endIcon={<Icon>send</Icon>}>
+        Обидеться!
         </RandomButton>
     </form>
   );

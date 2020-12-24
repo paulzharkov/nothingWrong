@@ -41,6 +41,8 @@ const userSignin = async (req, res) => {
             login: currentUser.login,
           };
 
+          console.log(req.session)
+
           return res.json(currentUser.login);
         }
       }
@@ -124,6 +126,19 @@ const unSubscribe = async (req, res) => {
   res.sendStatus(200);
 };
 
+const checkAuth = async (req, res) => {
+  console.log(req.session)
+  const userID = req.session?.user?.id
+  if (userID) {
+    const currentUser = await User.findById(userID)
+    if (currentUser) {
+      return res.json(currentUser.login)
+    }
+    return res.sendStatus(401)
+  }
+  return res.sendStatus(401)
+}
+
 module.exports = {
   userSignup,
   userSignin,
@@ -132,4 +147,5 @@ module.exports = {
   subscribe,
   followers,
   unSubscribe,
+  checkAuth
 };

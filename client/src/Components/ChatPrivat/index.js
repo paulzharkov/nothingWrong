@@ -1,100 +1,127 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import io from "socket.io-client";
-
+import React, { useState, useEffect, } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './index.css'
 import LightSpeed from 'react-reveal/LightSpeed';
+import { useParams } from 'react-router-dom';
+import { TextField, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import { chatPrivatThunk, getWrongThunk } from '../../redux/creators/posts';
+import { allOurMessagesThunk, setAllMessages } from '../../redux/creators/messages';
 
 
 
 
-function ChatPrivat() {
-  console.log('11111111111111111')
-  const [yourId, setYourId] = useState()
-  const [messages, setMessages] = useState([]);
+function Chat() {
+
   const [message, setMessage] = useState("");
-  const user = useSelector((state) => state.users)
-  // const posts = useSelector((state) => state.posts)
-
-  const idOne = useSelector((state) => state.idOne)
-  const socketRef = useRef()
-  // console.log('id: ---->>>', id);
+  const { id } = useParams()
+  const user = useSelector(state => state.users)
+  const dispatch = useDispatch()
+  const socket = useSelector(state => state.socket)
+  console.log('socket',socket)
+  const messages = useSelector(state => state.messages)
+  const wrong = useSelector(state => state.oneWrong)
 
   useEffect(() => {
-    socketRef.current = io.connect('/')
+    dispatch(getWrongThunk(id))
+    dispatch(allOurMessagesThunk(id))
+    dispatch(chatPrivatThunk(id))
 
-    socketRef.current.on("your id", id => {
-      // console.log('-------->>>', id)
-      setYourId(id);
+
+    socket.on("private message", async (allMessages) => {
+      dispatch(setAllMessages(allMessages))
     })
+    return () => {
+      dispatch(chatPrivatThunk())
+      dispatch(setAllMessages([]))
+    }
+  }, [])
 
-    // socketRef.current.on("private message", (message) => {
-    //   console.log("here2", message);
-    //   receivedMessage(message);
-    // })
-
-
-
-
-    socketRef.current.on(`${idOne}`, (message) => {
-      console.log("here2", message);
-      receivedMessage(message);
-    })
-
-
-
-  }, [idOne])
 
   const handleChange = (e) => {
     setMessage(e.target.value);
   }
 
-  const sendMessage = (e) => {
-    e.preventDefault();
-    console.log('-----@@@ back', idOne);
+  const submitHandler = (e) => {
+    e.preventDefault()
     const messageObjectPrivate = {
-      body: message,
-      id: yourId,
-      user,
-      idOne,
-      offenderId: 'sasha',
-    };
-    setMessage("");
-    if (message !== "") {
-
-
-
-      socketRef.current.emit("private message", messageObjectPrivate);
+      message: message,
+      id: id,
+      login: user
     }
-    return
+    setMessage('')
+    socket.emit('message notification', {
+      title: 'Вам пришло сообщение!',
+      wrongID: id,
+      offenderSocketID: socket.id
+    })
+    socket.emit("message", messageObjectPrivate)
   }
+  console.log(messages)
+  console.log('wrong',wrong)
 
-  const receivedMessage = (message) => {
-    setMessages(oldMsgs => [...oldMsgs, message]);
-  }
-
-
-
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+      alignItems: 'start',
+      border: '1px solid #d6d6d6',
+    },
+  }))(Button);
 
   return (
     <>
+      <div className="chatPage">
+        <section className="chatMessages">
+          {messages.map((message, index) => {
+            return (
+              <div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}>
+                <div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>
+                  {message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>)
+                    : (<LightSpeed right>{message.message}</LightSpeed>)}</div>
+              </div>
+            )
+          })}
+        </section>
+
+        <form onSubmit={submitHandler} name="chatForm" className="chatForm">
+          <input style={{
+            width: "80%",
+            height: "50px",
+            marginBottom: "10px",
+            cursor: 'text',
+            display: 'inline-flex',
+            position: 'relative',
+            fontSize: '1rem',
+            alignItems: 'center',
+            borderRadius: '4px',
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontWeight: '400',
+            lineHeight: '1.1876em',
+            letterSpacing: '0.00938em',
+            color: '#67a3a3',
+            border: '1px solid #d6d6d6',
+            padding: '0px 10px',
+          }}
+          value={message} required onChange={handleChange} name="message2" type="text" placeholder="Say something..."
+          />
+          <RandomButton
+            type="submit" variant="outlined" color="primary"
+            endIcon={<Icon>send</Icon>}>
+            Отправить!
+        </RandomButton>
+        </form>
+      </div>
       <section className="chat">
         {messages.map((message, index) => {
-          return (<div className={`${message.id === yourId ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourId ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourId ? (<LightSpeed left>{message.body}</LightSpeed>) : (<LightSpeed right>{message.body}</LightSpeed>)}</div></div>)
+          
+          return (<div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>{message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
         })}
       </section>
-
-      <form onSubmit={sendMessage} name="chatForm">
-        <label>
-          Сообщение:
-          <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-        </label>
-        <button>Отправить</button>
-      </form>
-    </>
+</>
   )
 
 }
 
-
-export default ChatPrivat;
-
+export default Chat;

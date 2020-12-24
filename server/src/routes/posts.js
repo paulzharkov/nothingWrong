@@ -29,8 +29,9 @@ router.get('/advices', postsController.advices);
 
 router.post('/wrong', postsController.makewrong);
 
-router.get('/chat/:post', postsController.chat);
+router.get('/post/:id', postsController.allMessages);
 
-router.post('/chat/:post', postsController.chatSendMessage);
+router.get('/wrong/:id', postsController.oneWrong);
+
 
 module.exports = router;

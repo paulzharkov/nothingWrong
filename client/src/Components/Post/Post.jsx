@@ -1,19 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import * as AC from '../../redux/creators/posts'
 import { useHistory } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import imgFamily from './family.jpeg'
 import imgHome from './home.jpeg'
 import imgMoney from './money.jpeg'
 import imgShout from './shout.jpeg'
 import style from './index.module.css';
-
 
 const useStyles = makeStyles({
   root1: {
@@ -61,7 +54,9 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
 
   const handlerChatPrivat = () => {
     dispatch(AC.chatPrivatThunk(id))
-    history.push('/chat')
+    history.push(`/chat/${id}`)
+    // console.log('сюда пришло');
+
   }
 
   const handlerComments = () => {
@@ -86,12 +81,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           <div>
             <CardContent>
               <div>
-              {
-                offender &&
-                <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
-              }
-              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
-              <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
+                {
+                  offender &&
+                  <Typography variant="h6" component="h1">Обидчик: {offenderName}</Typography>
+                }
+                <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
+                <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
               </div>
             </CardContent>
           </div>
@@ -113,6 +108,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
         </CardActions>
       </Card>
     </>
+
 
   )
 }
