@@ -8,9 +8,6 @@ function postsReducer(state = [], action) {
     case AC.ADD_ALL:
       return action.payload;
 
-    // case AC.ADD_ON_ME_ALL:
-    //   return action.payload;
-
     case AC.ADD_ALL_LENTA:
       return action.payload;
 
@@ -19,10 +16,20 @@ function postsReducer(state = [], action) {
 
     case AC.LIKE:
       return state.map((el) => {
-        console.log(1,state);
         if (el._id === action.payload.id) {
           return {
             ...el, likes: [...el.likes, action.payload.login]
+          }
+        } else {
+          return el
+        }
+      });
+
+    case AC.DISLIKE:
+      return state.map((el) => {
+        if (el._id === action.payload.id) {
+          return {
+            ...el, likes: [...el.likes.filter((el) => el !== action.payload.login)]
           }
         } else {
           return el

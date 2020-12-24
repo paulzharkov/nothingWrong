@@ -66,6 +66,7 @@ const likePost = async (req, res) => {
     await currentPost.save();
     res.sendStatus(200);
   } else {
+    await Post.updateOne({ _id: req.params.id }, { $pull: { likes: user } });
     res.sendStatus(404);
   }
 };
@@ -93,28 +94,35 @@ const statsOffender = async (req, res) => {
 };
 
 const advices = async (req, res) => {
-  let parsingResultArray = []
-  await axios.get('https://www.psychologies.ru/articles/')
-  .then((res) => {
+  let parsingResultArray = [];
+  await axios.get('https://www.psychologies.ru/articles/').then((res) => {
     const data = res.data.trim();
-    const $ = cheerio.load(data, {xmlMode: true});
-    let titleArray = []
-    let textArray = []
-    let linksArray = []
-    let photosArray = []
+    const $ = cheerio.load(data, { xmlMode: true });
+    let titleArray = [];
+    let textArray = [];
+    let linksArray = [];
+    let photosArray = [];
     let title = $('a.rubric-anons_title').each((i, elem) => {
-      titleArray.push($(elem).text())})
+      titleArray.push($(elem).text());
+    });
     let text = $('div.rubric-anons_text').each((i, elem) => {
-      textArray.push($(elem).text())})
+      textArray.push($(elem).text());
+    });
     let links = $('a.rubric-anons_title').each((i, elem) => {
-      linksArray.push('https://www.psychologies.ru' + $(elem).attr().href)})
-      let photos = $('img.images').each((i, elem) => {
-        photosArray.push($(elem).attr().src)})
-    parsingResultArray = titleArray.map((el, i) => [el, textArray[i], linksArray[i], photosArray[i]])})
-  res.json(parsingResultArray); 
+      linksArray.push('https://www.psychologies.ru' + $(elem).attr().href);
+    });
+    let photos = $('img.images').each((i, elem) => {
+      photosArray.push($(elem).attr().src);
+    });
+    parsingResultArray = titleArray.map((el, i) => ({
+      title: el,
+      text: textArray[i],
+      link: linksArray[i],
+      img: photosArray[i],
+    }));
+  });
+  res.json(parsingResultArray); // Добавить fetch на какой то сайт с советами
 };
-
-
 
 const makewrong =
   (checkAuth,
@@ -136,7 +144,7 @@ const makewrong =
         date: new Date().toLocaleDateString(),
       });
       await newPost.save();
-      return res.json({newPost, offenderSocketID: offender.socketID});
+      return res.json({ newPost, offenderSocketID: offender.socketID });
     } else {
       return res.sendStatus(406);
     }

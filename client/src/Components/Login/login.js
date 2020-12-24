@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginPersonThunk } from '../../redux/creators/users';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import { Button, Link } from '@material-ui/core';
+import {
+  makeStyles,
+  Button,
+  withStyles,
+  TextField,
+  Icon,
+} from '@material-ui/core';
 import style from './index.module.css';
 
 function Login() {

@@ -33,7 +33,12 @@ export const likePost = (data) => ({
   payload: data
 })
 
-export const addId = (id) => ({
+export const disLikePost = (data) => ({
+  type: TYPES.DISLIKE,
+  payload: data
+})
+
+export const addId = (id = '') => ({
   type: TYPES.ADD_ID,
   payload: id
 })
@@ -113,11 +118,16 @@ export const deletePostThunk = (id) => (dispatch) => {
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
 
-export const likePostThunk = ({ id, login }) => (dispatch) => {
-  fetch(`http://localhost:8000/lenta/${id}`, {
+export const likePostThunk = ({ id, login }) => async (dispatch) => {
+  const response = await fetch(`http://localhost:8000/lenta/${id}`, {
     method: 'PATCH',
     credentials: "include"
-  }).then(res => res.status === 200 && dispatch(likePost({ id, login })))
+  })
+  if (response.status === 200) {
+    dispatch(likePost({ id, login }))
+  } else {
+    dispatch(disLikePost({ id, login }))
+  }
 }
 
 export const chatPrivatThunk = (id) => (dispatch) => {

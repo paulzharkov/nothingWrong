@@ -1,22 +1,34 @@
-import { useState, useEffect} from 'react'
-
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as AC from '../../redux/creators/advices';
+import OneAdvice from './OneAdvice/OneAdvice';
 
 function Advices() {
+  const dispatch = useDispatch();
 
-  const [advices, setAdvices] = useState([])
-
-  // Ира здесь Fetch для тебя на /articles
-  // Он отдает массив массивов с советами
+  const advicesList = useSelector((state) => state.advicesList);
 
   useEffect(() => {
-    setAdvices();
+    dispatch(AC.addAdvicesThunk());
   }, []);
 
   return (
     <div>
-      <h1>Советы</h1>
+      {advicesList.length ? (
+        advicesList.map((el, i) => (
+          <OneAdvice
+            key={i}
+            text={el.text}
+            title={el.title}
+            img={el.img}
+            link={el.link}
+          />
+        ))
+      ) : (
+        <div>wasted</div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Advices
+export default Advices;

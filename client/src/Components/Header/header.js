@@ -5,6 +5,7 @@ import Logout from '../Logout/logout';
 import logo from './logo2.jpg';
 import people from './people.png';
 import news from './new.png';
+import advice from './advice.png';
 import tape from './tape.png';
 import cabinet from './cabinet.png';
 import newLogo from './NothingWrong.png';
@@ -18,7 +19,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import WrongIs from '../Header/WrongIs.png';
-
 
 const useStyles = makeStyles({
   list: {
@@ -44,7 +44,8 @@ function Header() {
   }))(Button);
 
   const login = useSelector((state) => state.users);
-  const emoji = [cabinet, tape, people, news];
+  const toMePost = useSelector((state) => state.toMePost);
+  const emoji = [cabinet, tape, people, news, advice];
   const emoji2 = ['👣', '🚶‍♂️'];
 
   const classes = useStyles();
@@ -86,9 +87,12 @@ function Header() {
               <Link to="/lenta">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
+              <Link to="/advices">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
-                <ListItemIcon><img className={style.headerLogo2}  src={emoji[index]}/></ListItemIcon>
+                <ListItemIcon>
+                  <img className={style.headerLogo2} src={emoji[index]} />
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
@@ -96,22 +100,22 @@ function Header() {
           </List>
         </div>
       ) : (
-          <div className={style.headerDiv}>
-            <List>
-              <img className={style.headerLogoEnter} src={logo} alt="pic" />
-              <img className={style.headerNewLogo} src={newLogo} alt="pic" />
-              {[
-                <Link to="/">Войти</Link>,
-                <Link to="/register">Регистрация</Link>,
-              ].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{emoji2[index]}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        )}
+        <div className={style.headerDiv}>
+          <List>
+            <img className={style.headerLogoEnter} src={logo} alt="pic" />
+            <img className={style.headerNewLogo} src={newLogo} alt="pic" />
+            {[
+              <Link to="/">Войти</Link>,
+              <Link to="/register">Регистрация</Link>,
+            ].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      )}
     </div>
   );
 
@@ -125,11 +129,19 @@ function Header() {
                 {'Меню'}
               </RandomButton>
             </div>
-            {
-              !(login) ?
-                <img className={style.forImg} src={WrongIs} width="180" height="35" alt="pic" />
-                : <div className={style.bell}>{login}, 🔔</div>
-            }
+            {!(login && toMePost) ? (
+              <img
+                className={style.forImg}
+                src={WrongIs}
+                width="180"
+                height="35"
+                alt="pic"
+              />
+            ) : (
+              <div className={style.bell}>
+                {login}, {toMePost.length}🔔
+              </div>
+            )}
           </div>
           <Drawer
             anchor={'left'}
