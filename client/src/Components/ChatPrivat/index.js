@@ -1,9 +1,11 @@
 import React, { useState, useEffect, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import io from "socket.io-client";
 import './index.css'
 import LightSpeed from 'react-reveal/LightSpeed';
 import { useParams } from 'react-router-dom';
+import { TextField, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
 import { chatPrivatThunk, getWrongThunk } from '../../redux/creators/posts';
 import { allOurMessagesThunk, setAllMessages } from '../../redux/creators/messages';
 
@@ -30,14 +32,11 @@ function Chat() {
     socket.on("private message", async (allMessages) => {
       dispatch(setAllMessages(allMessages))
     })
-
-
     return () => {
       dispatch(chatPrivatThunk())
       dispatch(setAllMessages([]))
     }
   }, [])
-
 
 
   const handleChange = (e) => {
@@ -58,72 +57,71 @@ function Chat() {
       offenderSocketID: socket.id
     })
     socket.emit("message", messageObjectPrivate)
-
   }
   console.log(messages)
   console.log('wrong',wrong)
 
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+      alignItems: 'start',
+      border: '1px solid #d6d6d6',
+    },
+  }))(Button);
 
   return (
     <>
+      <div className="chatPage">
+        <section className="chatMessages">
+          {messages.map((message, index) => {
+            return (
+              <div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}>
+                <div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>
+                  {message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>)
+                    : (<LightSpeed right>{message.message}</LightSpeed>)}</div>
+              </div>
+            )
+          })}
+        </section>
+
+        <form onSubmit={submitHandler} name="chatForm" className="chatForm">
+          <input style={{
+            width: "80%",
+            height: "50px",
+            marginBottom: "10px",
+            cursor: 'text',
+            display: 'inline-flex',
+            position: 'relative',
+            fontSize: '1rem',
+            alignItems: 'center',
+            borderRadius: '4px',
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontWeight: '400',
+            lineHeight: '1.1876em',
+            letterSpacing: '0.00938em',
+            color: '#67a3a3',
+            border: '1px solid #d6d6d6',
+            padding: '0px 10px',
+          }}
+          value={message} required onChange={handleChange} name="message2" type="text" placeholder="Say something..."
+          />
+          <RandomButton
+            type="submit" variant="outlined" color="primary"
+            endIcon={<Icon>send</Icon>}>
+            Отправить!
+        </RandomButton>
+        </form>
+      </div>
       <section className="chat">
         {messages.map((message, index) => {
           
           return (<div className={`${message.login === user ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.login === user ? 'myMessage' : 'partnerMessage'}`}>{message.login === user ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
         })}
       </section>
-
-      <form onSubmit={submitHandler} name="chatForm">
-        <label>
-          Сообщение:
-            <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-        </label>
-        <button>Отправить</button>
-      </form>
-    </>
+</>
   )
 
 }
 
-
 export default Chat;
-
-//  {/* <>
-//         {/* <h1>1111111111111111</h1> */}
-//         {/* <section className="chat">
-//           {messages.map((message, index) => {
-//             return (<div className={`${message.id === yourId ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourId ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourId ? (<LightSpeed left>{message.body}</LightSpeed>) : (<LightSpeed right>{message.body}</LightSpeed>)}</div></div>)
-//           })}
-//         </section> */}
-//         {/* <section className="chat">
-//           {messages.map((message, index) => {
-//             return (
-
-//             <div>
-//               {message.message}
-//             </div>
-//             )
-//           })}
-//         </section>
-
-//         <form onSubmit={submitHandler} name="chatForm">
-//           <label>
-//             Сообщение:
-//             <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-//           </label>
-//           <button>Отправить</button>
-//         </form>
-//       </> */} */}
-// {/* <section className="chat">
-//         {messages.map((message, index) => {
-//           return (<div className={`${message.id === yourID ? 'myRow' : 'partnerRow'}`} key={index}><div className={`${message.id === yourID ? 'myMessage' : 'partnerMessage'}`}>{message.id === yourID ? (<LightSpeed left>{message.message}</LightSpeed>) : (<LightSpeed right>{message.message}</LightSpeed>)}</div></div>)
-//         })}
-//       </section>
-
-//       <form onSubmit={submitHandler} name="chatForm">
-//         <label>
-//           Сообщение:
-//           <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-//         </label>
-//         <button>Отправить</button>
-//       </form> */}

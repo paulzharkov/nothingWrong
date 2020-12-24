@@ -1,18 +1,9 @@
 import * as AC from '../types/posts';
 
-function postsReducer(state = [], action) {
+function toMePostsReducer(state = [], action) {
   switch (action.type) {
-    case AC.ADD_POST:
-      return [...state, action.payload];
-
-    case AC.ADD_ALL:
+    case AC.ADD_ON_ME_ALL:
       return action.payload;
-
-    case AC.ADD_ALL_LENTA:
-      return action.payload;
-
-    case AC.DELETE:
-      return state.filter(el => el._id !== action.payload);
 
     case AC.LIKE:
       return state.map((el) => {
@@ -40,4 +31,4 @@ function postsReducer(state = [], action) {
   }
 }
 
-export default postsReducer;
+export default toMePostsReducer;

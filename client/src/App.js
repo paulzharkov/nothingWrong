@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Components/Header/header';
 import Lenta from './Components/Lenta/lenta';
 import Login from './Components/Login/login';
@@ -11,31 +11,44 @@ import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import Fade from 'react-reveal/Fade';
-import io from "socket.io-client";
-import { BrowserRouter as Router, Switch, Route, useHistory, useParams } from 'react-router-dom';
+import io from 'socket.io-client';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  useParams,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Followers from './Components/People/Followers/Followers';
-import Wrongs from './Components/Wrongs/wrongs';
-import useStyles from './customHooks/useStyles';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
+import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
+import MyWrongs from './Components/Wrongs/MyWrongs/MyWrongs';
+import ToMeWrongs from './Components/Wrongs/ToMeWrongs/ToMeWrongs';
+// import sky from './Components/sky.png';
 import Button from '@material-ui/core/Button';
-import { closeSnackbar, enqueueSnackbar, enqueueSnackbarThunk } from './redux/creators/notifier';
+import {
+  closeSnackbar,
+  enqueueSnackbar,
+  enqueueSnackbarThunk,
+} from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
+import useStyles from './customHooks/useStyles';
 import { getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
 
 
 function App() {
   const login = useSelector((state) => state.users);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const history = useHistory()
+  const history = useHistory();
+  const params = useParams();
+  console.log('start', Object.keys(params).length);
   const classes = useStyles();
-  // const socketRef = useRef()
 
   useEffect(() => {
 
@@ -101,11 +114,9 @@ function App() {
       <div className={classes.root}>
         <Grid className={classes.first} container xs={12} spacing={1}>
           <Grid item xs={4} className={classes.grid}>
-
             <div className={classes.left}>
               <Header />
             </div>
-
           </Grid>
           <Grid item xs={12}>
             <Paper elevation={6} className={classes.paper}>
@@ -114,8 +125,14 @@ function App() {
                   <Route path="/register">
                     <Register />
                   </Route>
-                  <Route path="/lk">
-                    <Wrongs />
+                  <Route exact path="/lk">
+                    <HeaderWrongs />
+                  </Route>
+                  <Route exact path="/lk/myWrongs">
+                    <MyWrongs />
+                  </Route>
+                  <Route exact path="/lk/toMeWrongs">
+                    <ToMeWrongs />
                   </Route>
                   <Route path="/lenta/:id">
                     <CommentPage />
@@ -141,9 +158,6 @@ function App() {
                   <Route path="/chat/:id">
                     <ChatPrivat />
                   </Route>
-                  {/* <Route>
-                    <Followers exact path="/people/followers" />
-                  </Route> */}
                 </Switch>
               ) : (
                   <>

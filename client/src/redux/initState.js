@@ -8,6 +8,7 @@ const initState = {
   comments: [],
   socket: {},
   notifications: [],
+  advicesList: [],
   messages: [],
   oneWrong: {},
 };

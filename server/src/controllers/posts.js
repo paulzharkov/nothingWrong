@@ -4,6 +4,8 @@ const Chat = require('../models/chat.model');
 const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
 const checkAuth = require('../middleware/auth');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 const cabinet = (checkAuth, async (req, res) => {
   const user = req.session.user.id; // Узнаем юзера
@@ -66,9 +68,12 @@ const likePost = (checkAuth, async (req, res) => {
   const user = req.session.user.login;
   if (!currentPost.likes.includes(user)) {
     currentPost.likes.push(user);
-    await user.save();
+    await currentPost.save();
+    res.sendStatus(200);
+  } else {
+    await Post.updateOne({ _id: req.params.id }, { $pull: { likes: user } });
+    res.sendStatus(404);
   }
-  res.json({ likes: sound.likes.length });
 });
 
 const peoplesAll = async (req, res) => {
@@ -94,8 +99,34 @@ const statsOffender = (checkAuth, async (req, res) => {
 });
 
 const advices = async (req, res) => {
-  const someFetch = { text: 'advice' };
-  res.json(someFetch); // Добавить fetch на какой то сайт с советами
+  let parsingResultArray = [];
+  await axios.get('https://www.psychologies.ru/articles/').then((res) => {
+    const data = res.data.trim();
+    const $ = cheerio.load(data, { xmlMode: true });
+    let titleArray = [];
+    let textArray = [];
+    let linksArray = [];
+    let photosArray = [];
+    let title = $('a.rubric-anons_title').each((i, elem) => {
+      titleArray.push($(elem).text());
+    });
+    let text = $('div.rubric-anons_text').each((i, elem) => {
+      textArray.push($(elem).text());
+    });
+    let links = $('a.rubric-anons_title').each((i, elem) => {
+      linksArray.push('https://www.psychologies.ru' + $(elem).attr().href);
+    });
+    let photos = $('img.images').each((i, elem) => {
+      photosArray.push($(elem).attr().src);
+    });
+    parsingResultArray = titleArray.map((el, i) => ({
+      title: el,
+      text: textArray[i],
+      link: linksArray[i],
+      img: photosArray[i],
+    }));
+  });
+  res.json(parsingResultArray); // Добавить fetch на какой то сайт с советами
 };
 
 const makewrong =
@@ -118,7 +149,7 @@ const makewrong =
         date: new Date().toLocaleDateString(),
       });
       await newPost.save();
-      return res.json({newPost, offenderSocketID: offender.socketID});
+      return res.json({ newPost, offenderSocketID: offender.socketID });
     } else {
       return res.sendStatus(406);
     }

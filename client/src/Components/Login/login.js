@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginPersonThunk } from '../../redux/creators/users';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import {
+  makeStyles,
+  Button,
+  withStyles,
+  TextField,
+  Icon,
+} from '@material-ui/core';
 import style from './index.module.css';
 
 function Login() {
@@ -23,7 +26,7 @@ function Login() {
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(1.5),
       },
       button: {
         margin: theme.spacing(1),
@@ -32,8 +35,6 @@ function Login() {
   }));
 
   const classes = useStyles();
-
-  const loginRedux = useSelector((state) => state.users.length);
 
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -44,11 +45,12 @@ function Login() {
   function handlerLogin(e) {
     e.preventDefault();
     dispatch(loginPersonThunk({ email, pass }));
-    history.push('/lk');
+    history.push('/makewrong');
   }
 
   return (
     <div className={style.formDiv}>
+      {/* <img className={style.headerNewLogo} src={newLogo} alt="pic" /> */}
       <h2>Вход</h2>
       <form className={classes.root} autoComplete="off">
         <TextField
@@ -77,6 +79,16 @@ function Login() {
           onClick={handlerLogin}
         >
           Войти
+        </RandomButton>
+        <p>Еще не зарегистрированы?</p>
+        <RandomButton
+          variant="outlined"
+          endIcon={<Icon>how_to_reg</Icon>}
+          onClick={() => {
+            history.push('/register');
+          }}
+        >
+          Создать аккаунт
         </RandomButton>
       </form>
     </div>

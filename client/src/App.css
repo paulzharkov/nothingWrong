@@ -1,7 +1,6 @@
 body {
   height: 100vh;
-
-  font-family: "Balsamiq Sans", cursive !important;
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiInput-underline:after {
@@ -19,13 +18,13 @@ h3,
 .MuiInputBase-root {
   color: #67a3a3 !important;
   text-decoration: none;
-  font-family: "Balsamiq Sans", cursive !important;
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiInputBase-input,
 .MuiInput-input,
 .MuiButton-label {
-  font-family: "Balsamiq Sans", cursive !important;
+  font-family: 'Balsamiq Sans', cursive !important;
 }
 
 .MuiListItem-root {
@@ -39,4 +38,41 @@ a:focus {
   text-decoration: none;
   outline: none;
   box-shadow: none;
+}
+
+.MuiListItemIcon-root {
+  color: rgb(0, 0, 0) !important;
+  min-width: 40px !important;
+  margin-top: -5px;
+}
+
+.makeStyles-paper {
+  height: 91.4vh !important;
+}
+
+.MuiPaper-elevation6 {
+  box-shadow: none !important;
+}
+
+.formaObidka {
+  width: 100vw;
+  height: 93vh;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-items: center;
+  padding: 25px 0;
+}
+
+.chatForm {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-items: center;
+  padding: 25px 0;
 }

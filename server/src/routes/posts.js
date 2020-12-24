@@ -11,11 +11,11 @@ router.get('/lenta/:id', postsController.postId);
 
 router.post('/lenta/:id', postsController.postComment);
 
-router.patch('/lenta/:id', postsController.patchPost);
+// router.patch('/lenta/:id', postsController.patchPost);
 
 router.delete('/lenta/:id', postsController.deletePost);
 
-router.post('/lenta/:id/like', postsController.likePost);
+router.patch('/lenta/:id', postsController.likePost);
 
 router.get('/peoples/all', postsController.peoplesAll);
 
