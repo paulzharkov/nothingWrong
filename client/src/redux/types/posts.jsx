@@ -14,6 +14,8 @@ export const ADD_ID = 'ADD_ID'
 
 export const ADD_ON_ME_ALL = 'ADD_ON_ME_ALL'
 
+export const GET_WRONG = 'GET_WRONG'
+
 
 
 

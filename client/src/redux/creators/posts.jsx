@@ -43,6 +43,23 @@ export const addId = (id = '') => ({
   payload: id
 })
 
+export const getWrong = (id = {}) => ({
+  type: TYPES.GET_WRONG,
+  payload: id
+})
+
+export const getWrongThunk = (id) => async (dispatch) => {
+  const response = await fetch(`http://localhost:8000/wrong/${id}`, {
+    credentials: "include"
+  })
+  const oneWrong = await response.json()
+  console.log(oneWrong)
+  if (oneWrong) {
+    dispatch(getWrong(oneWrong))
+  }
+}
+
+
 export const getLentaPostsThunk = () => async (dispatch) => {
   const response = await fetch('http://localhost:8000/lenta', {
     credentials: "include"

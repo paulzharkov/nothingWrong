@@ -37,6 +37,8 @@ import {
 } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
 import useStyles from './customHooks/useStyles';
+import { getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
+
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -49,9 +51,12 @@ function App() {
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(checkAuth());
-    const mySocket = io.connect('/');
-    dispatch(setSocket(mySocket));
+    if(login) {
+      const mySocket = io.connect('/')
+      dispatch(setSocket(mySocket))
+    dispatch(checkAuth())
+    dispatch(getAllMyPostsThunk())
+    dispatch(getAllToMePostsThunk())
 
     mySocket.on('wrong notification', (body) => {
       dispatch(
@@ -95,8 +100,8 @@ function App() {
             options: {
               key: new Date().getTime() + Math.random(),
               variant: 'success',
-              autoHideDuration: 2000,
-              action: (key) => (
+              autoHideDuration: 10000,
+              action: key => (
                 <>
                   <Button
                     className={classes.whiteText}
@@ -119,11 +124,14 @@ function App() {
               ),
             },
           },
-          wrongID: body.wrongID,
-        })
-      );
-    });
-  }, []);
+        wrongID: body.wrongID}))
+    
+    })
+  
+  }
+  }, [login])
+
+
 
   return (
     <>
