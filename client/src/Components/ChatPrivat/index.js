@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { chatPrivatThunk } from '../../redux/creators/posts';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-
+import Icon from '@material-ui/core/Icon';
 
 function Chat() {
 
@@ -20,15 +20,10 @@ function Chat() {
   const ID = posts.socket.id
 
   useEffect(() => {
-
-
     dispatch(chatPrivatThunk(id))
-
     socket.on("private message", async (allMessages) => {
       hashMessege(allMessages)
     })
-
-
     return () => {
       dispatch(chatPrivatThunk())
     }
@@ -56,9 +51,16 @@ function Chat() {
       offenderSocketID: socket.id
     })
     socket.emit("message", messageObjectPrivate)
-
   }
 
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+      alignItems: 'start',
+      border: '1px solid #d6d6d6',
+    },
+  }))(Button);
 
   return (
     <>
@@ -76,11 +78,31 @@ function Chat() {
         </section>
 
         <form onSubmit={submitHandler} name="chatForm" className="chatForm">
-          <label>
-            Сообщение:
-            <input value={message} onChange={handleChange} placeholder="Say something..." name="message2" type="text" />
-          </label>
-          <button>Отправить</button>
+          <input style={{
+            width: "80%",
+            height: "50px",
+            marginBottom: "10px",
+            cursor: 'text',
+            display: 'inline-flex',
+            position: 'relative',
+            fontSize: '1rem',
+            alignItems: 'center',
+            borderRadius: '4px',
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontWeight: '400',
+            lineHeight: '1.1876em',
+            letterSpacing: '0.00938em',
+            color: '#67a3a3',
+            border: '1px solid #d6d6d6',
+            padding: '0px 10px',
+          }}
+          value={message} required onChange={handleChange} name="message2" type="text" placeholder="Say something..."
+          />
+          <RandomButton
+            type="submit" variant="outlined" color="primary"
+            endIcon={<Icon>send</Icon>}>
+            Отправить!
+        </RandomButton>
         </form>
       </div>
     </>
