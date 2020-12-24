@@ -25,6 +25,11 @@ const postId = async (req, res) => {
   res.json(currentPost.comments);
 };
 
+const oneWrong = async (req, res) => {
+  const wrong = await Post.findOne({ _id: req.params.id }); // Находим конкретный пост
+  res.json(wrong);
+};
+
 const postComment = async (req, res) => {
   // Добавить try-catch block
   const currentPost = await Post.findOne({ _id: req.params.id });
@@ -164,6 +169,10 @@ const chatSendMessage = async (req, res) => {
   res.sendStatus(200);
 };
 
+const allMessages = async (req, res) => {
+  const wrong = await Post.findById(req.params.id)
+  res.json(wrong.sms)
+}
 module.exports = {
   cabinet,
   lenta,
@@ -180,4 +189,6 @@ module.exports = {
   makewrong,
   chat,
   chatSendMessage,
+  allMessages,
+  oneWrong,
 };

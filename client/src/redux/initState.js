@@ -8,7 +8,9 @@ const initState = {
   comments: [],
   socket: {},
   notifications: [],
-  advicesList: []
+  advicesList: [],
+  messages: [],
+  oneWrong: {},
 };
 
 export default initState;

@@ -56,12 +56,13 @@ io.on('connection', async (socket) => {
   const session = socket.request.session;
 
   if (session.user) {
+    console.log('9999999999999999999999')
     session.connections++;
     session.save();
     socket.emit("your id", socket.id);
-    console.log('<>>>>>>>>>>>>',socket.id)
+    console.log('<>>>>>>>>>>>>', socket.id)
 
-    await User.findOneAndUpdate({_id: session.user.id}, {socketID: socket.id})
+    await User.findOneAndUpdate({ _id: session.user.id }, { socketID: socket.id })
 
 
 
@@ -71,7 +72,7 @@ io.on('connection', async (socket) => {
     })
 
 
-    socket.on("message notification",  async body => {
+    socket.on("message notification", async body => {
       console.log("message notification", body.offenderSocketID)
       const wrong = await Post.findById(body.wrongID)
       // console.log(wrong);
@@ -81,47 +82,50 @@ io.on('connection', async (socket) => {
       console.log(author.socketID);
       if (body.offenderSocketID === offender.socketID) {
         return io.to(author.socketID).emit("message notification", body)
-      } 
+      }
       return io.to(offender.socketID).emit("message notification", body)
-      })
+    })
 
-    socket.on("message", body => {
-      io.emit("private message", body)})
-     
-      // console.log('body', body);
-      // const post = await Post.findOne({ _id: body.idOne})
-      // post.sms.push({ body: body.body, id: body.id })
-      // await post.save()
+    socket.on("message", async body => {
+      const wrong = await Post.findById(body.id)
+      wrong.sms.push({ message: body.message, login: body.login})
+      await wrong.save()
+      console.log(wrong);
 
-      // const myName = await User.findOne({ _id: body.userId })
-      // const yourName = await User.findOne({ _id: body.authorId})
+      io.emit("private message", wrong.sms)
+    })
 
-      // function idToSrting(arr) {
-      //   return arr.map((e) => {
-      //     return e.toString()
-      //     })
-      // }
-      // const myNameMyHurt = idToSrting(myName.myHurt)
-      // const myNameToMeHurt = idToSrting(myName.toMeHurt)
-      // const yourNameMyHurt = idToSrting(yourName.myHurt)
-      // const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
+    // console.log('body', body);
 
-      // const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
+    // const myName = await User.findOne({ _id: body.userId })
+    // const yourName = await User.findOne({ _id: body.authorId})
 
+    // function idToSrting(arr) {
+    //   return arr.map((e) => {
+    //     return e.toString()
+    //     })
+    // }
+    // const myNameMyHurt = idToSrting(myName.myHurt)
+    // const myNameToMeHurt = idToSrting(myName.toMeHurt)
+    // const yourNameMyHurt = idToSrting(yourName.myHurt)
+    // const yourNameToMeHurt = idToSrting(yourName.toMeHurt)
 
-      // console.log('yourName', yourName);
-      // console.log('myName', myName);
-      // // const body2 = [{}, {}]
+    // const userHurtIdMy = myNameMyHurt.find((e) => e === body.idOne)
 
 
-      // const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
-      // const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
-      // const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
-      
-      // io.emit("private message", post.sms)
-      // if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
-      //   io.emit(`${body.idOne}`, body)
-      // }
+    // console.log('yourName', yourName);
+    // console.log('myName', myName);
+    // // const body2 = [{}, {}]
+
+
+    // const userHurtIdApponent = myNameToMeHurt.find((e) => e === body.idOne)
+    // const apponentHurtIdMy = yourNameMyHurt.find((e) => e === body.idOne)
+    // const apponentHurtIdUser = yourNameToMeHurt.find((e) => e === body.idOne)
+
+    // io.emit("private message", post.sms)
+    // if (userHurtIdMy === apponentHurtIdUser || userHurtIdApponent === apponentHurtIdMy) {
+    //   io.emit(`${body.idOne}`, body)
+    // }
   }
 });
 
