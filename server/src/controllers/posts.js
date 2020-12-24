@@ -7,16 +7,18 @@ const checkAuth = require('../middleware/auth');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const cabinet = (checkAuth, async (req, res) => {
-  const user = req.session.user.id; // Узнаем юзера
-  const userPosts = await Post.find({ authorId: user });
-  const toMeWrongs = await Post.find({ offenderId: user });
+const cabinet =
+  (checkAuth,
+  async (req, res) => {
+    const user = req.session.user.id; // Узнаем юзера
+    const userPosts = await Post.find({ authorId: user });
+    const toMeWrongs = await Post.find({ offenderId: user });
 
-  res.json({ userPosts, toMeWrongs });
-});
+    res.json({ userPosts, toMeWrongs });
+  });
 
 const lenta = async (req, res) => {
-  const lentaPosts = await Post.find(); // Отдаем в ленту все посты из базы
+  const lentaPosts = await Post.find({ state: 'Публичная' }); // Отдаем в ленту все посты из базы
   res.json(lentaPosts);
 };
 
@@ -63,18 +65,20 @@ const deletePost = async (req, res) => {
   res.sendStatus(200);
 };
 
-const likePost = (checkAuth, async (req, res) => {
-  const currentPost = await Post.findOne({ _id: req.params.id });
-  const user = req.session.user.login;
-  if (!currentPost.likes.includes(user)) {
-    currentPost.likes.push(user);
-    await currentPost.save();
-    res.sendStatus(200);
-  } else {
-    await Post.updateOne({ _id: req.params.id }, { $pull: { likes: user } });
-    res.sendStatus(404);
-  }
-});
+const likePost =
+  (checkAuth,
+  async (req, res) => {
+    const currentPost = await Post.findOne({ _id: req.params.id });
+    const user = req.session.user.login;
+    if (!currentPost.likes.includes(user)) {
+      currentPost.likes.push(user);
+      await currentPost.save();
+      res.sendStatus(200);
+    } else {
+      await Post.updateOne({ _id: req.params.id }, { $pull: { likes: user } });
+      res.sendStatus(404);
+    }
+  });
 
 const peoplesAll = async (req, res) => {
   const peoplesAll = await User.find();
@@ -86,17 +90,21 @@ const peoplesSubscribers = async (req, res) => {
   res.json(peoplesSubscribers.subscribers);
 };
 
-const statsOffended =(checkAuth, async (req, res) => {
-  const user = await User.findOne({ login: req.session.user.login });
-  const statsOffended = await Post.find({ authorId: user._id });
-  res.json(statsOffended); // Добавить сразу параметр status ?
-});
+const statsOffended =
+  (checkAuth,
+  async (req, res) => {
+    const user = await User.findOne({ login: req.session.user.login });
+    const statsOffended = await Post.find({ authorId: user._id });
+    res.json(statsOffended); // Добавить сразу параметр status ?
+  });
 
-const statsOffender = (checkAuth, async (req, res) => {
-  const user = await User.findOne({ login: req.session.user.login });
-  const statsOffender = await Post.find({ offenderId: user._id });
-  res.json(statsOffender); // Добавить сразу параметр status ?
-});
+const statsOffender =
+  (checkAuth,
+  async (req, res) => {
+    const user = await User.findOne({ login: req.session.user.login });
+    const statsOffender = await Post.find({ offenderId: user._id });
+    res.json(statsOffender); // Добавить сразу параметр status ?
+  });
 
 const advices = async (req, res) => {
   let parsingResultArray = [];
@@ -156,9 +164,9 @@ const makewrong =
   });
 
 const allMessages = async (req, res) => {
-  const wrong = await Post.findById(req.params.id)
-  res.json(wrong.sms)
-}
+  const wrong = await Post.findById(req.params.id);
+  res.json(wrong.sms);
+};
 module.exports = {
   cabinet,
   lenta,
