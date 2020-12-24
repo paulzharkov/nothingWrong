@@ -8,6 +8,7 @@
   width: 369px;
   height: 600px;
   border: 3px solid green;
+  overflow-y: scroll;
 }
 
 .chatForm {
@@ -15,21 +16,25 @@
 }
 
 .myRow {
-  display: flex;
+  /* display: flex;
   border: 2px solid #dedede;
   background-color: #f1f1f1;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  justify-content: flex-end; */
+  width: 100%;
+  display: flex;
   justify-content: flex-end;
+  margin-top: 10px;
 }
 .partnerRow{
-  border: 2px solid #dedede;
+  /* border: 2px solid #dedede;
   background-color: #ddd;
   border-color: #ccc;
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px; */
+  margin-top: 5px;
   justify-content: flex-start;
 }
 
@@ -41,22 +46,25 @@
 
 .myMessage {
   width: 45%;
-  /* background-color: pink; */
-  /* color: #46516e; */
-  /* padding: 10px; */
-  /* margin-right: 5px; */
-  text-align: end;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
+  background-color: #d7eef19c;
+  color: #46516ec7;
+  padding: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  text-align: center;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 .partnerMessage {
   width: 45%;
-  /* background-color: transparent; */
-  /* color: #46516e; */
-  /* border: 1px solid lightgray; */
-  /* padding: 10px; */
-  /* margin-left: 5px; */
-  text-align: start;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
+  background-color: powderblue;
+  color: #ffffff;
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
