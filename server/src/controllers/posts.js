@@ -134,7 +134,7 @@ const advices = async (req, res) => {
       img: photosArray[i],
     }));
   });
-  res.json(parsingResultArray); // Добавить fetch на какой то сайт с советами
+  res.json(parsingResultArray); 
 };
 
 const makewrong =
