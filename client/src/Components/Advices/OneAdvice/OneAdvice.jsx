@@ -24,11 +24,17 @@ const useStyles = makeStyles({
 function OneAdvice({ text, img, title, link }) {
   const RandomButton = withStyles(() => ({
     root: {
-      color: '#67a3a3',
       '&:hover': {
-        backgroundColor: '#FFE0A1',
+        backgroundColor: '#b0e0e6',
         color: 'white !important',
       },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
 
@@ -57,7 +63,7 @@ function OneAdvice({ text, img, title, link }) {
         <div className={classes.button}>
           <RandomButton
             variant="outlined"
-            endIcon={<Icon>menu_book_rounded</Icon>}
+            endIcon={<Icon style={{ marginTop: '-6px' }}>menu_book_rounded</Icon>}
             onClick={() => { window.open(link) }}
           >
             Подробнее...

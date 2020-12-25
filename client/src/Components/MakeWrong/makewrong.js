@@ -98,7 +98,7 @@ function Makewrong() {
   return (
     <form className="formaObidka" onSubmit={handlerSubmit}>
       <div style={{ marginTop: '15px' }}>
-      <h1>Создайте свою обидку:</h1>
+        <h1>Создайте свою обидку:</h1>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -132,7 +132,7 @@ function Makewrong() {
           (не более 140 символов)  <progress value={counterReason} max="140">{counterReason}</progress>
         </FormHelperText>
       </div>
-      <div style={{ marginTop: '10px'}}>
+      <div style={{ marginTop: '10px' }}>
         <TextField
           id="outlined-multiline-static"
           label="Чего вы хотите от обидчика"
@@ -158,7 +158,7 @@ function Makewrong() {
           className={classes.selectEmpty}
         >
           <MenuItem value="" disabled>
-          Укажите обидчика:
+            Укажите обидчика:
           </MenuItem>
           {usersList.length &&
             usersList.map((el) => (
@@ -166,7 +166,7 @@ function Makewrong() {
             ))}
         </Select>
       </div>
-      <div style={{ marginTop: '30px', marginBottom: '20px'}}>
+      <div style={{ marginTop: '30px', marginBottom: '20px' }}>
         <FormControl component="stateForm">
           <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
           <RadioGroup className={classes.selectEmpty} aria-label="state" name="state" value={state} onChange={stateHandler}>
@@ -176,13 +176,13 @@ function Makewrong() {
         </FormControl>
 
       </div>
-      <div style={{marginBottom: '10px'}}>
+      <div style={{ marginBottom: '10px' }}>
         <FormControl component="ratingForm">
-          <FormLabel component="rating">Выберите уровень злости:</FormLabel>
+          <FormLabel component="rating">Выберите уровень недовольства:</FormLabel>
           <RadioGroup className={classes.selectEmpty} aria-label="rating" name="rating" value={rating} onChange={ratingHandler}>
-            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }} />} label="😠" />
-            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }} />} label="😡" />
-            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }} />} label="🤬" />
+            <FormControlLabel value="1" className={classes.emodji} control={<Radio style={{ color: 'green' }} />} label="😠" />
+            <FormControlLabel value="2" className={classes.emodji} control={<Radio style={{ color: 'yellow' }} />} label="😡" />
+            <FormControlLabel value="3" className={classes.emodji} control={<Radio style={{ color: 'red' }} />} label="🤬" />
           </RadioGroup>
         </FormControl>
       </div>

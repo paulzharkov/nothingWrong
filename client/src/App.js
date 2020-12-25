@@ -34,7 +34,7 @@ import {
 } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
 import useStyles from './customHooks/useStyles';
-import { changeAnswer, getAllMyPostsThunk, getAllToMePostsThunk } from './redux/creators/posts';
+import { changeAnswer, getAllMyPostsThunk, getAllToMePostsThunk, getLentaPostsThunk } from './redux/creators/posts';
 import Answer from './Components/Answer/answer';
 
 
@@ -54,6 +54,7 @@ function App() {
     dispatch(checkAuth())
     dispatch(getAllMyPostsThunk())
     dispatch(getAllToMePostsThunk())
+    dispatch(getLentaPostsThunk())
     mySocket.on("wrong notification", body => {
       dispatch(enqueueSnackbar({
         message: body.title,
