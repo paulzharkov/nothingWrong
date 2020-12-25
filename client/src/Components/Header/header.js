@@ -141,7 +141,7 @@ function Header() {
               />
             ) : (
               <div className={style.bell}>
-                {login}, 🔔{toMePost.length}
+                {login}, 🔔 {toMePost.length}
               </div>
             )}
           </div>

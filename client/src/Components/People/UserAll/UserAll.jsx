@@ -37,7 +37,7 @@ function UserAll({ login, email, id }) {
       <RandomButton
         onClick={subscribeHandler}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 20 }}>add_box</Icon>}
+        endIcon={<Icon style={{ fontSize: 20, marginTop: '-6px' }}>add_box</Icon>}
       >
         Подписаться
         </RandomButton>

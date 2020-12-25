@@ -24,14 +24,14 @@ function Header() {
         <RandomButton
           onClick={() => history.push('/people/followers')}
           variant="outlined"
-          endIcon={<Icon style={{ fontSize: 40 }}>people</Icon>}
+          endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px'}}>people</Icon>}
         >
           Мои подписчики
         </RandomButton>
         <RandomButton
           onClick={() => history.push('/people/allpeople')}
           variant="outlined"
-          endIcon={<Icon style={{ fontSize: 40 }}>add_circle</Icon>}
+          endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>add_circle</Icon>}
         >
           Найти обидчиков
         </RandomButton>

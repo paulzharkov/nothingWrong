@@ -12,8 +12,19 @@ import style from './index.module.css';
 function Register() {
   const RandomButton = withStyles(() => ({
     root: {
-      backgroundColor: '#FFF',
-      color: '#67a3a3',
+      marginTop: '20px',
+      marginLeft: '65%',
+      '&:hover': {
+        backgroundColor: '#b0e0e6',
+        color: 'white !important',
+      },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
   const useStyles = makeStyles((theme) => ({
@@ -71,7 +82,7 @@ function Register() {
         />
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>how_to_reg</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>how_to_reg</Icon>}
           onClick={handlerReg}
           size="large"
         >
@@ -80,7 +91,7 @@ function Register() {
         <p>Уже есть аккаунт?</p>
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>login</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>login</Icon>}
           onClick={() => {
             history.push('/');
           }}

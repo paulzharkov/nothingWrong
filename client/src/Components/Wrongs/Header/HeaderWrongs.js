@@ -35,7 +35,7 @@ function HeaderWrongs() {
       <RandomButton
         onClick={() => history.push('/lk/myWrongs')}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 40 }}>mood</Icon>}
+        endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood</Icon>}
       >
         Мои
       </RandomButton>
@@ -43,7 +43,7 @@ function HeaderWrongs() {
       <RandomButton
         onClick={() => history.push('/lk/toMeWrongs')}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 40 }}>mood_bad</Icon>}
+        endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood_bad</Icon>}
       >
         На меня
       </RandomButton>

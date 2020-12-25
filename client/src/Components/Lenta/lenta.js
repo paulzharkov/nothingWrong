@@ -23,35 +23,36 @@ function Lenta() {
     dispatch(getLentaPostsThunk());
   }, [dispatch]);
 
-  // const comment
   return (
     <div>
       <h1>Общая лента</h1>
+      {lentaPosts ?
+        
+          lentaPosts.length ? (
+            lentaPosts.map((el) => (
 
-      {lentaPosts.length ? (
-        lentaPosts.map((el) => (
+              <Post className={classes.root}
+                key={el._id}
+                id={el._id}
+                likes={el.likes}
+                reason={el.reason}
+                solve={el.solve}
+                status={el.status}
+                rating={el.rating}
+                date={el.date}
+                comments={el.comments}
+                category={el.category}
+                offenderName={el.offenderName}
+                authorName={el.authorName}
+              />
 
-          <Post className={classes.root}
-            key={el._id}
-            id={el._id}
-            likes={el.likes}
-            reason={el.reason}
-            solve={el.solve}
-            status={el.status}
-            rating={el.rating}
-            date={el.date}
-            comments={el.comments}
-            category={el.category}
-            offenderName={el.offenderName}
-            authorName={el.authorName}
-          />
-
-        ))
-      ) : (
-          <div>Добавьте друзей, чтобы увидеть их публичные посты</div>
-        )
-      }
-    </div >
-  );
+            ))
+          ) : (
+              <div>Добавьте друзей, чтобы увидеть их публичные посты</div>
+            ) 
+      
+   : null}
+   </div >
+  )
 }
 export default Lenta

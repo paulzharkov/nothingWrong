@@ -46,10 +46,18 @@ function CommentPage() {
 
   const RandomButton = withStyles(() => ({
     root: {
-      backgroundColor: '#FFF',
-      color: '#67a3a3',
-      alignItems: 'start',
-      border: '1px solid #d6d6d6',
+      marginTop: '20px',
+      '&:hover': {
+        backgroundColor: '#b0e0e6',
+        color: 'white !important',
+      },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
 
@@ -76,7 +84,7 @@ function CommentPage() {
             color="primary"
             className={classes.button}
             onClick={handlerComment}
-            endIcon={<Icon>comment</Icon>}>
+            endIcon={<Icon style={{ marginTop: '-6px' }}>comment</Icon>}>
             Comment!
         </RandomButton>
         </form>
