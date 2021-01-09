@@ -5,15 +5,15 @@ const router = Router();
 
 router.get('/account', postsController.account);
 
+router.get('/advice', postsController.advice);
+
+router.get('/post/:id', postsController.allMessages);
+
 router.get('/stats/offended', postsController.statsOffended);
 
 router.get('/stats/offender', postsController.statsOffender);
 
-router.get('/advice', postsController.advice);
-
 router.post('/wrong', postsController.makewrong);
-
-router.get('/post/:id', postsController.allMessages);
 
 router.get('/wrong/:id', postsController.oneWrong);
 

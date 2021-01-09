@@ -6,7 +6,7 @@ export const setAdvice = (adviceList) => ({
 })
 
 export const addAdviceThunk = () => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/advice`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/advice`, {
     credentials: "include"
   })
   const adviceList = await response.json()

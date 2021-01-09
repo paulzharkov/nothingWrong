@@ -1,7 +1,5 @@
 const User = require('../models/user.model');
 const Post = require('../models/post.model');
-const Chat = require('../models/chat.model');
-const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
 const { checkAuth } = require('../middleware/auth');
 const axios = require('axios');

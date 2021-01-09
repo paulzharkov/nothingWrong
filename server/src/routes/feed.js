@@ -3,7 +3,7 @@ const feedController = require('../controllers/feed');
 
 const router = Router();
 
-router.get('/', feedController.lenta);
+router.get('/', feedController.feed);
 
 router.get('/:id', feedController.postId);
 

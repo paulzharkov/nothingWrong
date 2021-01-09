@@ -49,7 +49,7 @@ export const getWrong = (id = {}) => ({
 })
 
 export const getWrongThunk = (id) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/wrong/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong/${id}`, {
     credentials: "include"
   })
   const oneWrong = await response.json()
@@ -60,7 +60,7 @@ export const getWrongThunk = (id) => async (dispatch) => {
 
 
 export const getFeedPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/feed', {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed`, {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -70,7 +70,7 @@ export const getFeedPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllMyPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/account', {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/account`, {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -80,7 +80,7 @@ export const getAllMyPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllToMePostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/account', {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/account`, {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -95,7 +95,7 @@ export const createPostThunk = ({ category,
   offender,
   rating,
   state }) => async (dispatch, getState) => {
-    const response = await fetch('http://localhost:8000/wrong', {
+    const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -126,14 +126,14 @@ export const createPostThunk = ({ category,
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
-  fetch(`http://localhost:8000/feed/${id}`, {
+  fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
     method: 'DELETE',
     credentials: "include"
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
 
 export const likePostThunk = ({ id, login }) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/feed/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
     method: 'PATCH',
     credentials: "include"
   })
@@ -149,7 +149,7 @@ export const chatPrivatThunk = (id) => (dispatch) => {
 }
 
 export const changeAnswer = ({ id, answer, user }) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/wrong/answer/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong/answer/${id}`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'

@@ -2,7 +2,7 @@ const Post = require('../models/post.model');
 // Добавить мидлвар проверки авторизации ?
 const { checkAuth } = require('../middleware/auth');
 
-const lenta = async (req, res) => {
+const feed = async (req, res) => {
   const feed = await Post.find({ state: 'Публичная' }); // Отдаем в ленту все посты из базы
   res.json(feed);
 };
@@ -61,7 +61,7 @@ const likePost =
   });
 
 module.exports = {
-  lenta,
+  feed,
   postId,
   postComment,
   // patchPost,
