@@ -24,8 +24,8 @@ const postSchema = new Schema({
   date: String, // format: 'YYYY-MM-DD'
   state: String, // Private or Public
   sms: [],
-  offenderAnswer: {type: Boolean, default: false },
-  authorAnswer: {type: Boolean, default: false },
+  offenderAnswer: { type: Boolean, default: false },
+  authorAnswer: { type: Boolean, default: false },
 });
 
 module.exports = model('Post', postSchema);

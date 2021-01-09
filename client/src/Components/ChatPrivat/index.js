@@ -19,7 +19,6 @@ function Chat() {
   const user = useSelector(state => state.users)
   const dispatch = useDispatch()
   const socket = useSelector(state => state.socket)
-  console.log('socket',socket)
   const messages = useSelector(state => state.messages)
   const wrong = useSelector(state => state.oneWrong)
 
@@ -58,10 +57,6 @@ function Chat() {
     })
     socket.emit("message", messageObjectPrivate)
   }
-  console.log(messages)
-  console.log('wrong',wrong)
-  console.log('user',user)
-  console.log('offenderName',wrong.offenderName)
 
   const RandomButton = withStyles(() => ({
     root: {

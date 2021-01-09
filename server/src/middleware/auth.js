@@ -1,7 +1,6 @@
 const User = require('../models/user.model');
 
 const checkAuth = async (req, res, next) => {
-  console.log('>>>>>>>>>>>>>>>>>>>', userId)
   const userId = req.session?.user?.id;
   const userLogin = req.session?.user?.login;
   if (userId) {

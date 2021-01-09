@@ -53,7 +53,6 @@ export const getWrongThunk = (id) => async (dispatch) => {
     credentials: "include"
   })
   const oneWrong = await response.json()
-  console.log(oneWrong)
   if (oneWrong) {
     dispatch(getWrong(oneWrong))
   }
@@ -113,10 +112,8 @@ export const createPostThunk = ({ category,
     })
     const data = await response.json()
     if (data.newPost) {
-      console.log('Create wrong', data.newPost)
       dispatch(createPost(data.newPost))
       const {socket} = getState()
-      console.log('Socket', socket)
       if (Object.keys(socket).length) {
         socket.emit('wrong notification', {
           title: 'Вам обидка!',

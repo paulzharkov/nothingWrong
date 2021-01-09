@@ -44,7 +44,6 @@ function App() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  console.log('login', login);
   const classes = useStyles();
 
   useEffect(() => {

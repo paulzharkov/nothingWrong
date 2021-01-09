@@ -3,20 +3,21 @@ const Post = require('../models/post.model');
 const Chat = require('../models/chat.model');
 const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
-const {checkAuth} = require('../middleware/auth');
+const { checkAuth } = require('../middleware/auth');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const cabinet =
+  (checkAuth,
+  async (req, res) => {
+    const user = req.session.user; // Узнаем юзера
+    if (user) {
+      const userPosts = await Post.find({ authorId: user.id });
+      const toMeWrongs = await Post.find({ offenderId: user.id });
 
-const cabinet = (checkAuth, async (req, res) => {
-  const user = req.session.user; // Узнаем юзера
-  if(user) {
-    const userPosts = await Post.find({ authorId: user.id });
-    const toMeWrongs = await Post.find({ offenderId: user.id});
-  
-    res.json({ userPosts, toMeWrongs });
- 
-}});
+      res.json({ userPosts, toMeWrongs });
+    }
+  });
 
 const lenta = async (req, res) => {
   const lentaPosts = await Post.find({ state: 'Публичная' }); // Отдаем в ленту все посты из базы
@@ -135,7 +136,7 @@ const advices = async (req, res) => {
       img: photosArray[i],
     }));
   });
-  res.json(parsingResultArray); 
+  res.json(parsingResultArray);
 };
 
 const makewrong =
@@ -167,34 +168,28 @@ const makewrong =
   });
 
 const allMessages = async (req, res) => {
-  const wrong = await Post.findById(req.params.id)
-  res.json(wrong.sms)
-}
+  const wrong = await Post.findById(req.params.id);
+  res.json(wrong.sms);
+};
 
 const changeAnswer = async (req, res) => {
-  console.log('req.body',req.body)
-  const wrong = await Post.findById(req.body.id)
+  const wrong = await Post.findById(req.body.id);
   if (wrong) {
-    console.log(wrong.offenderName, req.body.user, wrong.offenderAnswer, req.body.answer)
-    if(wrong.offenderName === req.body.user) {
-      wrong.offenderAnswer = req.body.answer
+    if (wrong.offenderName === req.body.user) {
+      wrong.offenderAnswer = req.body.answer;
     } else {
-      wrong.authorAnswer = req.body.answer
+      wrong.authorAnswer = req.body.answer;
     }
-    await wrong.save()
-    console.log(wrong)
-    console.log('----------',wrong.authorAnswer)
-    console.log('----------', wrong.offenderAnswer)
-    if(!wrong.authorAnswer || !wrong.offenderAnswer) {
-      console.log('>>>>>>>>>>>>>>>>>>', wrong)
-      wrong.state = 'Публичная'
-      await wrong.save()
+    await wrong.save();
+    if (!wrong.authorAnswer || !wrong.offenderAnswer) {
+      wrong.state = 'Публичная';
+      await wrong.save();
     }
-    if(wrong.authorAnswer === true && wrong.offenderAnswer === true) {
-     return wrong.remove()
+    if (wrong.authorAnswer === true && wrong.offenderAnswer === true) {
+      return wrong.remove();
     }
-  } 
-}
+  }
+};
 module.exports = {
   cabinet,
   lenta,

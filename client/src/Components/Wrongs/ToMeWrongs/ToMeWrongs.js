@@ -14,8 +14,6 @@ function ToMeWrongs() {
     dispatch(getAllToMePostsThunk())
   }, [dispatch]);
 
-  console.log('>>>>>>>', posts)
-
   return (
 
     <div className={style.cabinetPage}>

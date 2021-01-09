@@ -52,12 +52,10 @@ io.use((socket, next) => {
 });
 
 io.on('connection', async (socket) => {
-  console.log('9999999999999999999999')
 
   const session = socket.request.session;
 
   if (session.user) {
-    console.log('88888888888888888')
     session.connections++;
     session.save();
 
@@ -65,7 +63,6 @@ io.on('connection', async (socket) => {
 
 
     socket.on("wrong notification", async body => {
-      console.log('wrong', body.offenderSocketID)
       io.to(body.offenderSocketID).emit("wrong notification", body);
     })
 
@@ -85,13 +82,9 @@ io.on('connection', async (socket) => {
 
 
     socket.on("message notification", async body => {
-      console.log("message notification", body.offenderSocketID)
       const wrong = await Post.findById(body.wrongID)
-      // console.log(wrong);
       const offender = await User.findById(wrong.offenderId);
       const author = await User.findById(wrong.authorId);
-      console.log(offender.socketID);
-      console.log(author.socketID);
       if (body.offenderSocketID === offender.socketID) {
         return io.to(author.socketID).emit("message notification", body)
       }
@@ -102,7 +95,6 @@ io.on('connection', async (socket) => {
       const wrong = await Post.findById(body.id)
       wrong.sms.push({ message: body.message, login: body.login})
       await wrong.save()
-      console.log(wrong);
 
       io.emit("private message", wrong.sms)
     })
