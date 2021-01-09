@@ -7,7 +7,7 @@ const { checkAuth } = require('../middleware/auth');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const cabinet =
+const account =
   (checkAuth,
   async (req, res) => {
     const user = req.session.user; // Узнаем юзера
@@ -123,7 +123,7 @@ const changeAnswer = async (req, res) => {
   }
 };
 module.exports = {
-  cabinet,
+  account,
   statsOffended,
   statsOffender,
   advice,

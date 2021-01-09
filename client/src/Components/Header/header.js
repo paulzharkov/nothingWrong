@@ -7,7 +7,7 @@ import people from './people.png';
 import news from './new.png';
 import advice from './advice.png';
 import tape from './tape.png';
-import cabinet from './cabinet.png';
+import account from './account.png';
 import newLogo from './NothingWrong.png';
 import entry from './entry.png';
 import reg from './reg.png';
@@ -49,7 +49,7 @@ function Header() {
 
   const login = useSelector((state) => state.users);
   const toMePost = useSelector((state) => state.toMePost);
-  const emoji = [cabinet, tape, people, news, advice];
+  const emoji = [account, tape, people, news, advice];
   const emoji2 = [entry, reg];
 
   const classes = useStyles();

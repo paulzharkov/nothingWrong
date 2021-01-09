@@ -3,7 +3,7 @@ const postsController = require('../controllers/posts');
 
 const router = Router();
 
-router.get('/account', postsController.cabinet);
+router.get('/account', postsController.account);
 
 router.get('/stats/offended', postsController.statsOffended);
 
