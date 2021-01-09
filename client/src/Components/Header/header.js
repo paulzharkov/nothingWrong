@@ -9,6 +9,8 @@ import advice from './advice.png';
 import tape from './tape.png';
 import cabinet from './cabinet.png';
 import newLogo from './NothingWrong.png';
+import entry from './entry.png';
+import reg from './reg.png';
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -48,7 +50,7 @@ function Header() {
   const login = useSelector((state) => state.users);
   const toMePost = useSelector((state) => state.toMePost);
   const emoji = [cabinet, tape, people, news, advice];
-  const emoji2 = ['👣', '🚶‍♂️'];
+  const emoji2 = [entry, reg];
 
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -111,7 +113,9 @@ function Header() {
               <Link to="/register">Регистрация</Link>,
             ].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+              <ListItemIcon>
+                  <img className={style.headerLogo3} src={emoji2[index]} alt="pic"/>
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}

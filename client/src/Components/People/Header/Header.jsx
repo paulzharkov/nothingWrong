@@ -16,6 +16,7 @@ function Header() {
       justifyContent: 'center',
       marginTop: '10px',
       height: '7vh',
+      boxShadow: '3px 4px 5px #0000003b',
     },
   }))(Button);
   return (
