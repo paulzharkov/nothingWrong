@@ -70,7 +70,7 @@ export const getFeedPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllMyPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lk', {
+  const response = await fetch('http://localhost:8000/account', {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -80,7 +80,7 @@ export const getAllMyPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllToMePostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lk', {
+  const response = await fetch('http://localhost:8000/account', {
     credentials: "include"
   })
   const postsList = await response.json()

@@ -87,7 +87,7 @@ function Header() {
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
 
             {[
-              <Link to="/lk">Все обидки</Link>,
+              <Link to="/account">Все обидки</Link>,
               <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,

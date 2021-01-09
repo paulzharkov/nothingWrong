@@ -240,13 +240,13 @@ function App() {
                   <Route path="/register">
                     <Register />
                   </Route>
-                  <Route exact path="/lk">
+                  <Route exact path="/account">
                     <HeaderWrongs />
                   </Route>
-                  <Route exact path="/lk/myWrongs">
+                  <Route exact path="/account/myWrongs">
                     <MyWrongs />
                   </Route>
-                  <Route exact path="/lk/toMeWrongs">
+                  <Route exact path="/account/toMeWrongs">
                     <ToMeWrongs />
                   </Route>
                   <Route path="/feed/:id">
