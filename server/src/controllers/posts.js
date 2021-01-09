@@ -22,22 +22,6 @@ const oneWrong = async (req, res) => {
   res.json(wrong);
 };
 
-const statsOffended =
-  (checkAuth,
-  async (req, res) => {
-    const user = await User.findOne({ login: req.session.user.login });
-    const statsOffended = await Post.find({ authorId: user._id });
-    res.json(statsOffended); // Добавить сразу параметр status ?
-  });
-
-const statsOffender =
-  (checkAuth,
-  async (req, res) => {
-    const user = await User.findOne({ login: req.session.user.login });
-    const statsOffender = await Post.find({ offenderId: user._id });
-    res.json(statsOffender); // Добавить сразу параметр status ?
-  });
-
 const advice = async (req, res) => {
   let parsingResultArray = [];
   await axios.get('https://www.psychologies.ru/articles/').then((res) => {
@@ -122,8 +106,6 @@ const changeAnswer = async (req, res) => {
 };
 module.exports = {
   account,
-  statsOffended,
-  statsOffender,
   advice,
   makewrong,
   allMessages,

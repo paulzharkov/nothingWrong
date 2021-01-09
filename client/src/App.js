@@ -5,7 +5,6 @@ import Feed from './Components/Feed/feed';
 import Login from './Components/Login/login';
 import People from './Components/People/people';
 import Register from './Components/Register/register';
-import Stats from './Components/Stats/stats';
 import Advice from './Components/Advice/advice';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
@@ -257,9 +256,6 @@ function App() {
                   </Route>
                   <Route path="/people">
                     <People />
-                  </Route>
-                  <Route path="/stats">
-                    <Stats />
                   </Route>
                   <Route path="/advice">
                     <Advice />
