@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const usersRouter = require('./src/routes/users');
 const postsRouter = require('./src/routes/posts');
 const peopleRouter = require('./src/routes/people');
+const feedRouter = require('./src/routes/feed');
 const dbConnect = require('./src/config/db');
 const http = require('http');
 const cors = require('cors');
@@ -96,6 +97,7 @@ io.on('connection', async (socket) => {
 });
 
 app.use('/', postsRouter);
+app.use('/feed', feedRouter);
 app.use('/users', usersRouter);
 app.use('/users/people', peopleRouter);
 

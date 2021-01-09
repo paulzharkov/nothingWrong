@@ -88,7 +88,7 @@ function Header() {
 
             {[
               <Link to="/lk">Все обидки</Link>,
-              <Link to="/lenta">Лента</Link>,
+              <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
               <Link to="/advices">Советы</Link>,

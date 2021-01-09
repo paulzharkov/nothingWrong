@@ -65,7 +65,7 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   }
 
   const handlerComments = () => {
-    history.push(`/lenta/${id}`)
+    history.push(`/feed/${id}`)
   }
 
   let picture = imgShout

@@ -12,7 +12,7 @@ export const setPosts = (postsList) => ({
 
 })
 
-export const setLentaPosts = (postsList) => ({
+export const setFeedPosts = (postsList) => ({
   type: TYPES.ADD_ALL_LENTA,
   payload: postsList
 
@@ -59,13 +59,13 @@ export const getWrongThunk = (id) => async (dispatch) => {
 }
 
 
-export const getLentaPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lenta', {
+export const getFeedPostsThunk = () => async (dispatch) => {
+  const response = await fetch('http://localhost:8000/feed', {
     credentials: "include"
   })
   const postsList = await response.json()
   if (postsList) {
-    dispatch(setLentaPosts(postsList))
+    dispatch(setFeedPosts(postsList))
   }
 }
 
@@ -113,7 +113,7 @@ export const createPostThunk = ({ category,
     const data = await response.json()
     if (data.newPost) {
       dispatch(createPost(data.newPost))
-      const {socket} = getState()
+      const { socket } = getState()
       if (Object.keys(socket).length) {
         socket.emit('wrong notification', {
           title: 'Вам обидка!',
@@ -126,14 +126,14 @@ export const createPostThunk = ({ category,
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
-  fetch(`http://localhost:8000/lenta/${id}`, {
+  fetch(`http://localhost:8000/feed/${id}`, {
     method: 'DELETE',
     credentials: "include"
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
 
 export const likePostThunk = ({ id, login }) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/lenta/${id}`, {
+  const response = await fetch(`http://localhost:8000/feed/${id}`, {
     method: 'PATCH',
     credentials: "include"
   })
@@ -148,19 +148,19 @@ export const chatPrivatThunk = (id) => (dispatch) => {
   dispatch(addId(id))
 }
 
-export const changeAnswer = ({id, answer, user}) => async (dispatch) => {
+export const changeAnswer = ({ id, answer, user }) => async (dispatch) => {
   const response = await fetch(`http://localhost:8000/wrong/answer/${id}`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        answer,
-        id,
-        user
-      }),
-      credentials: 'include'
-    })
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      answer,
+      id,
+      user
+    }),
+    credentials: 'include'
+  })
 
 }
 
