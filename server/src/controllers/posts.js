@@ -53,14 +53,14 @@ const postComment = async (req, res) => {
   }
 };
 
-const patchPost = async (req, res) => {
-  const { category, postText, postWishText, status, rating, state } = req.body;
-  const soundUpdate = await Post.findByIdAndUpdate(
-    { _id: req.params.id },
-    { category, postText, postWishText, status, rating, state }
-  );
-  res.sendStatus(200);
-};
+// const patchPost = async (req, res) => {
+//   const { category, postText, postWishText, status, rating, state } = req.body;
+//   const soundUpdate = await Post.findByIdAndUpdate(
+//     { _id: req.params.id },
+//     { category, postText, postWishText, status, rating, state }
+//   );
+//   res.sendStatus(200);
+// };
 
 const deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete({ _id: req.params.id });
@@ -195,7 +195,7 @@ module.exports = {
   lenta,
   postId,
   postComment,
-  patchPost,
+  // patchPost,
   deletePost,
   likePost,
   peoplesAll,
