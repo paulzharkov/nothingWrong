@@ -37,7 +37,7 @@ function UserFollowers({ login, email, id }) {
       <RandomButton
         onClick={unSubscribeHandler}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 20 }}>clear</Icon>}
+        endIcon={<Icon style={{ fontSize: 20, marginTop: '-6px' }}>clear</Icon>}
       >
         Отписаться
         </RandomButton>

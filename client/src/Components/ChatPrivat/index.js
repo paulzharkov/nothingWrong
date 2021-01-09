@@ -65,10 +65,15 @@ function Chat() {
 
   const RandomButton = withStyles(() => ({
     root: {
-      backgroundColor: '#FFF',
-      color: '#67a3a3',
       alignItems: 'start',
-      border: '1px solid #d6d6d6',
+      margin: '3px',
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '14px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
 
@@ -80,13 +85,13 @@ function Chat() {
         offenderSocketID: socket.id
       })
       socket.emit('stop machine 2', {
-        title: `Юзер ${user} хочет заврешить обидку. Вы решили проблему?`,
+        title: `Юзер ${user} хочет завершить обидку. Вы решили проблему?`,
         wrongID: id,
         offenderSocketID: socket.id
       })
   } else {
     socket.emit('stop machine', {
-      title: `Юзер ${user} хочет заврешить обидку. Вы решили проблему?`,
+      title: `Юзер ${user} хочет завершить обидку. Вы решили проблему?`,
       wrongID: id,
       offenderSocketID: socket.id
     })
@@ -135,18 +140,20 @@ function Chat() {
           }}
           value={message} required onChange={handleChange} name="message2" type="text" placeholder="Say something..."
           />
+          <div>
           <RandomButton
             type="submit" variant="outlined" color="primary"
-            endIcon={<Icon>send</Icon>}>
+            endIcon={<Icon style={{ marginTop: '-6px' }}>send</Icon>}>
             Отправить!
         </RandomButton>
         {messages.length >= 10 ?
         <RandomButton
         onClick={stopMachine}
             type="submit" variant="outlined" color="secondary"
-            endIcon={<Icon>send</Icon>}>
-            Заврешить
+            endIcon={<Icon  style={{ marginTop: '-6px' }}>clear</Icon>}>
+            Завершить
         </RandomButton> : null }
+        </div>
         </form>
       </div>
     </>

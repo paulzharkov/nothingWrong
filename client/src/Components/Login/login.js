@@ -14,13 +14,19 @@ import style from './index.module.css';
 function Login() {
   const RandomButton = withStyles(() => ({
     root: {
-      color: '#67a3a3',
       marginTop: '20px',
       marginLeft: '65%',
       '&:hover': {
-        backgroundColor: '#FFE0A1',
+        backgroundColor: '#b0e0e6',
         color: 'white !important',
       },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
   const useStyles = makeStyles((theme) => ({
@@ -73,9 +79,10 @@ function Login() {
           error={pass === ' '}
           helperText={pass === ' ' ? 'Empty!' : ' '}
         />
+        <div></div>
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>login</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>login</Icon>}
           onClick={handlerLogin}
         >
           Войти
@@ -83,7 +90,7 @@ function Login() {
         <p>Еще не зарегистрированы?</p>
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>how_to_reg</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>how_to_reg</Icon>}
           onClick={() => {
             history.push('/register');
           }}

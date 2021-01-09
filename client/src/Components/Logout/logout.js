@@ -17,13 +17,19 @@ function Logout() {
 
   const RandomButton = withStyles(() => ({
     root: {
-      color: '#67a3a3',
       marginTop: '20px',
       marginLeft: '65%',
-      "&:hover": {
-        backgroundColor: '#FFE0A1',
-        color: 'white !important'
-      }
+      '&:hover': {
+        backgroundColor: '#b0e0e6',
+        color: 'white !important',
+      },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button)
 
@@ -43,7 +49,7 @@ function Logout() {
     <div>
       <RandomButton
         variant="outlined"
-        endIcon={<Icon>exit_to_app</Icon>}
+        endIcon={<Icon style={{ marginTop: '-6px' }}>exit_to_app</Icon>}
         onClick={handlerOut}
       >
         Выйти
