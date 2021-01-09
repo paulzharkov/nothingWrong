@@ -3,8 +3,8 @@ const Post = require('../models/post.model');
 const { checkAuth } = require('../middleware/auth');
 
 const lenta = async (req, res) => {
-  const lentaPosts = await Post.find({ state: 'Публичная' }); // Отдаем в ленту все посты из базы
-  res.json(lentaPosts);
+  const feed = await Post.find({ state: 'Публичная' }); // Отдаем в ленту все посты из базы
+  res.json(feed);
 };
 
 const postId = async (req, res) => {

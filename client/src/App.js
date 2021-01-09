@@ -6,7 +6,7 @@ import Login from './Components/Login/login';
 import People from './Components/People/people';
 import Register from './Components/Register/register';
 import Stats from './Components/Stats/stats';
-import Advices from './Components/Advices/advices';
+import Advice from './Components/Advice/advice';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
@@ -261,8 +261,8 @@ function App() {
                   <Route path="/stats">
                     <Stats />
                   </Route>
-                  <Route path="/advices">
-                    <Advices />
+                  <Route path="/advice">
+                    <Advice />
                   </Route>
                   <Route path="/makewrong">
                     <Makewrong />

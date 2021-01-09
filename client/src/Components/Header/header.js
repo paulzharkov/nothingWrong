@@ -91,11 +91,15 @@ function Header() {
               <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/advices">Советы</Link>,
+              <Link to="/advice">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
-                  <img className={style.headerLogo2} src={emoji[index]} alt="pic"/>
+                  <img
+                    className={style.headerLogo2}
+                    src={emoji[index]}
+                    alt="pic"
+                  />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -113,8 +117,12 @@ function Header() {
               <Link to="/register">Регистрация</Link>,
             ].map((text, index) => (
               <ListItem button key={text}>
-              <ListItemIcon>
-                  <img className={style.headerLogo3} src={emoji2[index]} alt="pic"/>
+                <ListItemIcon>
+                  <img
+                    className={style.headerLogo3}
+                    src={emoji2[index]}
+                    alt="pic"
+                  />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

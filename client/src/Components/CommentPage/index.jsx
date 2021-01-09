@@ -16,8 +16,8 @@ function CommentPage() {
   const dispatch = useDispatch()
 
   const commentsList = useSelector((state) => state.comments)
-  const lentaPosts = useSelector((state) => state.lentaPosts)
-  const post = lentaPosts.find((el) => el._id === id)
+  const feed = useSelector((state) => state.feed)
+  const post = feed.find((el) => el._id === id)
 
   const [text, setText] = useState('');
 
@@ -79,7 +79,7 @@ function CommentPage() {
         <form className={classes.root} noValidate autoComplete="off">
           <TextField value={text} onChange={(e) => setText(e.target.value)} label="Введите комментарий" type='text' />
 
-        <RandomButton
+          <RandomButton
             variant="contained"
             color="primary"
             className={classes.button}

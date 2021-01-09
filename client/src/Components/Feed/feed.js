@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 function Feed() {
-  const lentaPosts = useSelector((state) => state.lentaPosts);
+  const feed = useSelector((state) => state.feed);
 
   const classes = useStyles();
 
@@ -25,9 +25,9 @@ function Feed() {
   return (
     <div>
       <h1>Общая лента</h1>
-      {lentaPosts ? (
-        lentaPosts.length ? (
-          lentaPosts.map((el) => (
+      {feed ? (
+        feed.length ? (
+          feed.map((el) => (
             <Post
               className={classes.root}
               key={el._id}

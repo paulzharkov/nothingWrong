@@ -24,16 +24,6 @@ const oneWrong = async (req, res) => {
   res.json(wrong);
 };
 
-const peoplesAll = async (req, res) => {
-  const peoplesAll = await User.find();
-  res.json(peoplesAll.login);
-};
-
-const peoplesSubscribers = async (req, res) => {
-  const peoplesSubscribers = await User.find();
-  res.json(peoplesSubscribers.subscribers);
-};
-
 const statsOffended =
   (checkAuth,
   async (req, res) => {
@@ -50,7 +40,7 @@ const statsOffender =
     res.json(statsOffender); // Добавить сразу параметр status ?
   });
 
-const advices = async (req, res) => {
+const advice = async (req, res) => {
   let parsingResultArray = [];
   await axios.get('https://www.psychologies.ru/articles/').then((res) => {
     const data = res.data.trim();
@@ -134,11 +124,9 @@ const changeAnswer = async (req, res) => {
 };
 module.exports = {
   cabinet,
-  peoplesAll,
-  peoplesSubscribers,
   statsOffended,
   statsOffender,
-  advices,
+  advice,
   makewrong,
   allMessages,
   oneWrong,
