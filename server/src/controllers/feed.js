@@ -1,4 +1,5 @@
 const Post = require('../models/post.model');
+const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
 const { checkAuth } = require('../middleware/auth');
 
@@ -8,23 +9,27 @@ const feed = async (req, res) => {
 };
 
 const postId = async (req, res) => {
-  const currentPost = await Post.findOne({ _id: req.params.id }); // Находим конкретный пост
+  const currentPost = await Post.findOne({ _id: req.params.id }).populate(
+    'comments'
+  );
   res.json(currentPost.comments);
 };
 
 const postComment = async (req, res) => {
   // Добавить try-catch block
-  const currentPost = await Post.findOne({ _id: req.params.id });
   const author = req.session.user.login;
   const text = req.body.text;
   if (author && text) {
-    const newComment = {
-      _id: Math.random(),
+    const newComment = await Comment.create({
       author,
       text,
-    };
-    currentPost.comments.push(newComment);
-    await currentPost.save();
+    });
+
+    await Post.updateOne(
+      { _id: req.params.id },
+      { $push: { comments: newComment._id } }
+    );
+
     res.json(newComment);
   } else {
     res.sendStatus(404);
