@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { makeStyles, TextField, Button } from '@material-ui/core';
+import { makeStyles, TextField, Button, Icon, withStyles } from '@material-ui/core';
 import { getCommentsThunk, addCommentThunk } from '../../redux/creators/comments';
 import OneComment from './OneComment/OneComment'
 import Post from '../Post/Post'
-import { withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-
 
 function CommentPage() {
 
@@ -27,6 +24,7 @@ function CommentPage() {
 
 
   function handlerComment(e) {
+    console.log(e.key);
     e.preventDefault()
     dispatch(addCommentThunk({ id, text }));
     setText('')
