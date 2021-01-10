@@ -7,7 +7,7 @@ function Answer() {
   return (
     <div>
     <h1>Отобразилось</h1>
-    <button onClick={() => history.push('/lenta')}>Перейти в ленту</button>
+    <button onClick={() => history.push('/feed')}>Перейти в ленту</button>
     </div>
   )
 }

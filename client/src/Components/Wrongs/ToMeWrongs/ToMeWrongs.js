@@ -3,22 +3,18 @@ import { useEffect } from 'react';
 import { getAllToMePostsThunk } from '../../../redux/creators/posts';
 import Post from '../../Post/Post';
 import HeaderWrongs from '../Header/HeaderWrongs';
-import style from '../index.module.css'
-
+import style from '../index.module.css';
 
 function ToMeWrongs() {
   const posts = useSelector((state) => state.toMePost);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllToMePostsThunk())
+    dispatch(getAllToMePostsThunk());
   }, [dispatch]);
 
-  console.log('>>>>>>>', posts)
-
   return (
-
-    <div className={style.cabinetPage}>
+    <div className={style.accountPage}>
       <HeaderWrongs />
       <div>
         <h1>На меня обиделись:</h1>
@@ -42,11 +38,10 @@ function ToMeWrongs() {
             />
           ))
         ) : (
-            <div>На вас никто не обиделся😅</div>
-          )}
+          <div>На вас никто не обиделся😅</div>
+        )}
       </div>
     </div>
-
   );
 }
 

@@ -3,7 +3,6 @@ import * as TYPES from '../types/users';
 import { LOGOUT } from '../types/users';
 
 import links from '../../helpers/links'
-console.log(links)
 
 export const createLogin = (log) => ({
   type: TYPES.ADD_USERS_LOGIN,

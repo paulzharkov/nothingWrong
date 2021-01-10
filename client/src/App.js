@@ -1,22 +1,16 @@
 import './App.css';
 import React, { useEffect } from 'react';
 import Header from './Components/Header/header';
-import Lenta from './Components/Lenta/lenta';
+import Feed from './Components/Feed/feed';
 import Login from './Components/Login/login';
 import People from './Components/People/people';
 import Register from './Components/Register/register';
-import Stats from './Components/Stats/stats';
-import Advices from './Components/Advices/advices';
+import Advice from './Components/Advice/advice';
 import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import io from 'socket.io-client';
-import {
-  Switch,
-  Route,
-  useHistory,
-  useParams,
-} from 'react-router-dom';
+import { Switch, Route, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -34,9 +28,13 @@ import {
 } from './redux/creators/notifier';
 import Notifier from './Components/Notifier/Notifier';
 import useStyles from './customHooks/useStyles';
-import { changeAnswer, getAllMyPostsThunk, getAllToMePostsThunk, getLentaPostsThunk } from './redux/creators/posts';
+import {
+  changeAnswer,
+  getAllMyPostsThunk,
+  getAllToMePostsThunk,
+  getFeedPostsThunk,
+} from './redux/creators/posts';
 import Answer from './Components/Answer/answer';
-
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -44,114 +42,185 @@ function App() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  console.log('login', login);
   const classes = useStyles();
 
   useEffect(() => {
-
-    const mySocket = io.connect('/')
-    dispatch(setSocket(mySocket))
-    dispatch(checkAuth())
-    dispatch(getAllMyPostsThunk())
-    dispatch(getAllToMePostsThunk())
-    dispatch(getLentaPostsThunk())
-    mySocket.on("wrong notification", body => {
-      dispatch(enqueueSnackbar({
-        message: body.title,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'warning',
-          autoHideDuration: 25000,
-          action: key => (
-            <>
-              <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
-                В чат
-                </Button>
-              <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
-                Отклонить
-                </Button>
-            </>
-          )
-        },
-      }))
-
-    })
-    // if(login) {
-
-   
-    mySocket.on("message notification", body => {
-      dispatch(enqueueSnackbarThunk({
-        notification: {
+    const mySocket = io.connect('/');
+    dispatch(setSocket(mySocket));
+    dispatch(checkAuth());
+    dispatch(getAllMyPostsThunk());
+    dispatch(getAllToMePostsThunk());
+    dispatch(getFeedPostsThunk());
+    mySocket.on('wrong notification', (body) => {
+      dispatch(
+        enqueueSnackbar({
           message: body.title,
           options: {
             key: new Date().getTime() + Math.random(),
-            variant: 'success',
-            autoHideDuration: 10000,
-            action: key => (
+            variant: 'warning',
+            autoHideDuration: 25000,
+            action: (key) => (
               <>
-                <Button className={classes.whiteText} onClick={() => { history.push(`/chat/${body.wrongID}`); dispatch(closeSnackbar(key)) }}>
+                <Button
+                  className={classes.whiteText}
+                  onClick={() => {
+                    history.push(`/chat/${body.wrongID}`);
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
                   В чат
-                    </Button>
-                <Button color="secondary" onClick={() => { dispatch(closeSnackbar(key)) }}>
+                </Button>
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
                   Отклонить
-                    </Button>
+                </Button>
               </>
-            )
+            ),
           },
-        },
-        wrongID: body.wrongID
-      }))
+        })
+      );
+    });
+    // if(login) {
 
-    })
+    mySocket.on('message notification', (body) => {
+      dispatch(
+        enqueueSnackbarThunk({
+          notification: {
+            message: body.title,
+            options: {
+              key: new Date().getTime() + Math.random(),
+              variant: 'success',
+              autoHideDuration: 10000,
+              action: (key) => (
+                <>
+                  <Button
+                    className={classes.whiteText}
+                    onClick={() => {
+                      history.push(`/chat/${body.wrongID}`);
+                      dispatch(closeSnackbar(key));
+                    }}
+                  >
+                    В чат
+                  </Button>
+                  <Button
+                    color="secondary"
+                    onClick={() => {
+                      dispatch(closeSnackbar(key));
+                    }}
+                  >
+                    Отклонить
+                  </Button>
+                </>
+              ),
+            },
+          },
+          wrongID: body.wrongID,
+        })
+      );
+    });
 
-    mySocket.on("stop machine", body => {
-      dispatch(enqueueSnackbar({
-        message: body.title,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'info',
-          autoHideDuration: 25000,
-          action: key => (
-            <>
-              <Button className={classes.whiteText} onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: true, user: login})); dispatch(closeSnackbar(key)) }}>
-                Да
+    mySocket.on('stop machine', (body) => {
+      dispatch(
+        enqueueSnackbar({
+          message: body.title,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'info',
+            autoHideDuration: 25000,
+            action: (key) => (
+              <>
+                <Button
+                  className={classes.whiteText}
+                  onClick={() => {
+                    history.push(`/wrong/answer/${body.wrongID}`);
+                    dispatch(
+                      changeAnswer({
+                        id: body.wrongID,
+                        answer: true,
+                        user: login,
+                      })
+                    );
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
+                  Да
                 </Button>
-              <Button color="secondary" onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: false, user: login})); dispatch(closeSnackbar(key)) }}>
-                Нет
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    history.push(`/wrong/answer/${body.wrongID}`);
+                    dispatch(
+                      changeAnswer({
+                        id: body.wrongID,
+                        answer: false,
+                        user: login,
+                      })
+                    );
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
+                  Нет
                 </Button>
-            </>
-          )
-        },
-      }))
+              </>
+            ),
+          },
+        })
+      );
+    });
 
-    })
-
-    mySocket.on("stop machine 2", body => {
-      dispatch(enqueueSnackbar({
-        message: body.title,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'info',
-          autoHideDuration: 25000,
-          action: key => (
-            <>
-            <Button className={classes.whiteText} onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: true, user: login})); dispatch(closeSnackbar(key)) }}>
-              Да
-              </Button>
-            <Button color="secondary" onClick={() => {history.push(`/wrong/answer/${body.wrongID}`); dispatch(changeAnswer({id: body.wrongID, answer: false, user: login})); dispatch(closeSnackbar(key)) }}>
-              Нет
-              </Button>
-          </>
-          )
-        },
-      }))
-
-    })
-
-
-  }, [login])
-
-
+    mySocket.on('stop machine 2', (body) => {
+      dispatch(
+        enqueueSnackbar({
+          message: body.title,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'info',
+            autoHideDuration: 25000,
+            action: (key) => (
+              <>
+                <Button
+                  className={classes.whiteText}
+                  onClick={() => {
+                    history.push(`/wrong/answer/${body.wrongID}`);
+                    dispatch(
+                      changeAnswer({
+                        id: body.wrongID,
+                        answer: true,
+                        user: login,
+                      })
+                    );
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
+                  Да
+                </Button>
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    history.push(`/wrong/answer/${body.wrongID}`);
+                    dispatch(
+                      changeAnswer({
+                        id: body.wrongID,
+                        answer: false,
+                        user: login,
+                      })
+                    );
+                    dispatch(closeSnackbar(key));
+                  }}
+                >
+                  Нет
+                </Button>
+              </>
+            ),
+          },
+        })
+      );
+    });
+  }, [login]);
 
   return (
     <>
@@ -170,29 +239,26 @@ function App() {
                   <Route path="/register">
                     <Register />
                   </Route>
-                  <Route exact path="/lk">
+                  <Route exact path="/account">
                     <HeaderWrongs />
                   </Route>
-                  <Route exact path="/lk/myWrongs">
+                  <Route exact path="/account/myWrongs">
                     <MyWrongs />
                   </Route>
-                  <Route exact path="/lk/toMeWrongs">
+                  <Route exact path="/account/toMeWrongs">
                     <ToMeWrongs />
                   </Route>
-                  <Route path="/lenta/:id">
+                  <Route path="/feed/:id">
                     <CommentPage />
                   </Route>
-                  <Route path="/lenta">
-                    <Lenta />
+                  <Route path="/feed">
+                    <Feed />
                   </Route>
                   <Route path="/people">
                     <People />
                   </Route>
-                  <Route path="/stats">
-                    <Stats />
-                  </Route>
-                  <Route path="/advices">
-                    <Advices />
+                  <Route path="/advice">
+                    <Advice />
                   </Route>
                   <Route path="/makewrong">
                     <Makewrong />
@@ -208,17 +274,17 @@ function App() {
                   </Route>
                 </Switch>
               ) : (
-                  <>
-                    <Switch>
-                      <Route path="/register">
-                        <Register />
-                      </Route>
-                      <Route exact path="/">
-                        <Login />
-                      </Route>
-                    </Switch>
-                  </>
-                )}
+                <>
+                  <Switch>
+                    <Route path="/register">
+                      <Register />
+                    </Route>
+                    <Route exact path="/">
+                      <Login />
+                    </Route>
+                  </Switch>
+                </>
+              )}
             </Paper>
           </Grid>
         </Grid>

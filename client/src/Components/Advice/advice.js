@@ -1,21 +1,21 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as AC from '../../redux/creators/advices';
+import * as AC from '../../redux/creators/advice';
 import OneAdvice from './OneAdvice/OneAdvice';
 
-function Advices() {
+function Advice() {
   const dispatch = useDispatch();
 
-  const advicesList = useSelector((state) => state.advicesList);
+  const adviceList = useSelector((state) => state.adviceList);
 
   useEffect(() => {
-    dispatch(AC.addAdvicesThunk());
+    dispatch(AC.addAdviceThunk());
   }, []);
 
   return (
     <div>
-      {advicesList.length ? (
-        advicesList.map((el, i) => (
+      {adviceList.length ? (
+        adviceList.map((el, i) => (
           <OneAdvice
             key={i}
             text={el.text}
@@ -31,4 +31,4 @@ function Advices() {
   );
 }
 
-export default Advices;
+export default Advice;
