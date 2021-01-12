@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.resolve('../client/build/')))
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://nothingwrong.herokuapp.com'],
     credentials: true,
   })
 );

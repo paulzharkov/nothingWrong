@@ -3,7 +3,7 @@ const Post = require('../models/post.model');
 
 const faker = require('faker');
 
-mongoose.connect('mongodb://localhost:27017/nothingWrongDB');
+mongoose.connect('mongodb+srv://Paul:R7WRVKuuz8pMw6a@nothingwrongcluster.nkdm7.mongodb.net/NOTHINGWRONGDB?retryWrites=true&w=majority');
 
 async function seedBase() {
   for (let i = 0; i < 20; i++) {
