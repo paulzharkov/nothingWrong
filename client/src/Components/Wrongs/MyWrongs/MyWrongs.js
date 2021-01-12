@@ -6,7 +6,6 @@ import HeaderWrongs from '../Header/HeaderWrongs';
 import style from '../index.module.css';
 
 function MyWrongs() {
-  const login = useSelector((state) => state.users);
   const posts = useSelector((state) => state.myPost);
   const dispatch = useDispatch();
 

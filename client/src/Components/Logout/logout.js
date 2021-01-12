@@ -1,12 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser, logoutThunk } from '../../redux/creators/users';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import { makeStyles, withStyles, Icon, Button } from '@material-ui/core';
 
 function Logout() {
-
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
@@ -31,7 +28,7 @@ function Logout() {
       paddingTop: '10px',
       backgroundColor: '#67a3a3',
     },
-  }))(Button)
+  }))(Button);
 
   const classes = useStyles();
 

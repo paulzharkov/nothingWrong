@@ -1,4 +1,4 @@
-import { ADD_ALL_MESSAGES } from '../types/Messages';
+import { ADD_ALL_MESSAGES } from '../types/messages';
 
 export const setAllMessages = (allMessages = []) => ({
   type: ADD_ALL_MESSAGES,

@@ -10,17 +10,14 @@ import Makewrong from './Components/MakeWrong/makewrong';
 import ChatPrivat from './Components/ChatPrivat';
 import CommentPage from './Components/CommentPage';
 import io from 'socket.io-client';
-import { Switch, Route, useHistory, useParams } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Paper, Grid, Button } from '@material-ui/core';
 import { checkAuth } from './redux/creators/users';
 import { setSocket } from './redux/creators/socket';
 import HeaderWrongs from './Components/Wrongs/Header/HeaderWrongs';
 import MyWrongs from './Components/Wrongs/MyWrongs/MyWrongs';
 import ToMeWrongs from './Components/Wrongs/ToMeWrongs/ToMeWrongs';
-// import sky from './Components/sky.png';
-import Button from '@material-ui/core/Button';
 import {
   closeSnackbar,
   enqueueSnackbar,
@@ -32,9 +29,8 @@ import {
   changeAnswer,
   getAllMyPostsThunk,
   getAllToMePostsThunk,
-  getFeedPostsThunk,
+  // getFeedPostsThunk,
 } from './redux/creators/posts';
-import Answer from './Components/Answer/answer';
 
 function App() {
   const login = useSelector((state) => state.users);
@@ -50,7 +46,7 @@ function App() {
     dispatch(checkAuth());
     dispatch(getAllMyPostsThunk());
     dispatch(getAllToMePostsThunk());
-    dispatch(getFeedPostsThunk());
+    // dispatch(getFeedPostsThunk());
     mySocket.on('wrong notification', (body) => {
       dispatch(
         enqueueSnackbar({
@@ -84,7 +80,6 @@ function App() {
         })
       );
     });
-    // if(login) {
 
     mySocket.on('message notification', (body) => {
       dispatch(

@@ -4,8 +4,6 @@ import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFollowersUsersThunk } from '../../redux/creators/usersList';
-import Icon from '@material-ui/core/Icon';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Select,
   FormHelperText,
@@ -17,6 +15,9 @@ import {
   Radio,
   FormControlLabel,
   RadioGroup,
+  Icon,
+  makeStyles,
+  withStyles,
 } from '@material-ui/core';
 
 function Makewrong() {

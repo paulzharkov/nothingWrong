@@ -18,7 +18,7 @@ const account =
   });
 
 const oneWrong = async (req, res) => {
-  const wrong = await Post.findOne({ _id: req.params.id }); // Находим конкретный пост
+  const wrong = await Post.findById(req.params.id); // Находим конкретный пост
   res.json(wrong);
 };
 
