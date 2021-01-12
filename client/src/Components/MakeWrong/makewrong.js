@@ -4,8 +4,6 @@ import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFollowersUsersThunk } from '../../redux/creators/usersList';
-import Icon from '@material-ui/core/Icon';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Select,
   FormHelperText,
@@ -17,7 +15,9 @@ import {
   Radio,
   FormControlLabel,
   RadioGroup,
-
+  Icon,
+  makeStyles,
+  withStyles,
 } from '@material-ui/core';
 
 function Makewrong() {
@@ -92,13 +92,13 @@ function Makewrong() {
     dispatch(
       createPostThunk({ category, reason, solve, offender, rating, state })
     );
-    history.push('/lk/myWrongs');
+    history.push('/account/myWrongs');
   };
 
   return (
     <form className="formaObidka" onSubmit={handlerSubmit}>
       <div style={{ marginTop: '15px' }}>
-      <h1>Создайте свою обидку:</h1>
+        <h1>Создайте свою обидку:</h1>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -107,9 +107,13 @@ function Makewrong() {
           displayEmpty
           className={classes.selectEmpty}
         >
-          <MenuItem value="" disabled>Выберите категорию:</MenuItem>
+          <MenuItem value="" disabled>
+            Выберите категорию:
+          </MenuItem>
           <MenuItem value="Финансовая">Финансовая</MenuItem>
-          <MenuItem value="Невыполненные обещания">Невыполненные обещания</MenuItem>
+          <MenuItem value="Невыполненные обещания">
+            Невыполненные обещания
+          </MenuItem>
           <MenuItem value="Женская">Женская</MenuItem>
           <MenuItem value="Воспитательная">Воспитательная</MenuItem>
           <MenuItem value="Бытовая">Бытовая</MenuItem>
@@ -129,10 +133,13 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)  <progress value={counterReason} max="140">{counterReason}</progress>
+          (не более 140 символов){' '}
+          <progress value={counterReason} max="140">
+            {counterReason}
+          </progress>
         </FormHelperText>
       </div>
-      <div style={{ marginTop: '10px'}}>
+      <div style={{ marginTop: '10px' }}>
         <TextField
           id="outlined-multiline-static"
           label="Чего вы хотите от обидчика"
@@ -145,7 +152,10 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)  <progress value={counterSolve} max="140">{counterSolve}</progress>
+          (не более 140 символов){' '}
+          <progress value={counterSolve} max="140">
+            {counterSolve}
+          </progress>
         </FormHelperText>
       </div>
       <div>
@@ -158,7 +168,7 @@ function Makewrong() {
           className={classes.selectEmpty}
         >
           <MenuItem value="" disabled>
-          Укажите обидчика:
+            Укажите обидчика:
           </MenuItem>
           {usersList.length &&
             usersList.map((el) => (
@@ -166,31 +176,70 @@ function Makewrong() {
             ))}
         </Select>
       </div>
-      <div style={{ marginTop: '30px', marginBottom: '20px'}}>
+      <div style={{ marginTop: '30px', marginBottom: '20px' }}>
         <FormControl component="stateForm">
           <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
-          <RadioGroup className={classes.selectEmpty} aria-label="state" name="state" value={state} onChange={stateHandler}>
-            <FormControlLabel value="Приватная" control={<Radio style={{ color: 'blue' }} />} label="Приватная" />
-            <FormControlLabel value="Публичная" control={<Radio style={{ color: 'black' }} />} label="Публичная" />
+          <RadioGroup
+            className={classes.selectEmpty}
+            aria-label="state"
+            name="state"
+            value={state}
+            onChange={stateHandler}
+          >
+            <FormControlLabel
+              value="Приватная"
+              control={<Radio style={{ color: 'blue' }} />}
+              label="Приватная"
+            />
+            <FormControlLabel
+              value="Публичная"
+              control={<Radio style={{ color: 'black' }} />}
+              label="Публичная"
+            />
           </RadioGroup>
         </FormControl>
-
       </div>
-      <div style={{marginBottom: '10px'}}>
+      <div style={{ marginBottom: '10px' }}>
         <FormControl component="ratingForm">
-          <FormLabel component="rating">Выберите уровень злости:</FormLabel>
-          <RadioGroup className={classes.selectEmpty} aria-label="rating" name="rating" value={rating} onChange={ratingHandler}>
-            <FormControlLabel value="1" control={<Radio style={{ color: 'green' }} />} label="😠" />
-            <FormControlLabel value="2" control={<Radio style={{ color: 'yellow' }} />} label="😡" />
-            <FormControlLabel value="3" control={<Radio style={{ color: 'red' }} />} label="🤬" />
+          <FormLabel component="rating">
+            Выберите уровень недовольства:
+          </FormLabel>
+          <RadioGroup
+            className={classes.selectEmpty}
+            aria-label="rating"
+            name="rating"
+            value={rating}
+            onChange={ratingHandler}
+          >
+            <FormControlLabel
+              value="1"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'green' }} />}
+              label="😠"
+            />
+            <FormControlLabel
+              value="2"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'yellow' }} />}
+              label="😡"
+            />
+            <FormControlLabel
+              value="3"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'red' }} />}
+              label="🤬"
+            />
           </RadioGroup>
         </FormControl>
       </div>
       <RandomButton
-        type="submit" variant="outlined" color="primary"
-        endIcon={<Icon>send</Icon>}>
+        type="submit"
+        variant="outlined"
+        color="primary"
+        endIcon={<Icon>send</Icon>}
+      >
         Обидеться!
-        </RandomButton>
+      </RandomButton>
     </form>
   );
 }

@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import style from '../index.module.css';
-import { withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import { withStyles, Icon, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { getAllToMePostsThunk } from '../../../redux/creators/posts';
 
@@ -27,23 +25,26 @@ function HeaderWrongs() {
       marginTop: '10px',
       height: '7vh',
       marginBottom: '10px',
+      boxShadow: '3px 4px 5px #0000003b',
     },
   }))(Button);
 
   return (
     <div className={style.lkLinks}>
       <RandomButton
-        onClick={() => history.push('/lk/myWrongs')}
+        onClick={() => history.push('/account/myWrongs')}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 40 }}>mood</Icon>}
+        endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood</Icon>}
       >
         Мои
       </RandomButton>
 
       <RandomButton
-        onClick={() => history.push('/lk/toMeWrongs')}
+        onClick={() => history.push('/account/toMeWrongs')}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 40 }}>mood_bad</Icon>}
+        endIcon={
+          <Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood_bad</Icon>
+        }
       >
         На меня
       </RandomButton>

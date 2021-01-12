@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './index.module.css';
 import { Link } from 'react-router-dom';
@@ -7,18 +8,21 @@ import people from './people.png';
 import news from './new.png';
 import advice from './advice.png';
 import tape from './tape.png';
-import cabinet from './cabinet.png';
+import account from './account.png';
 import newLogo from './NothingWrong.png';
-import React from 'react';
+import entry from './entry.png';
+import reg from './reg.png';
+import WrongIs from '../Header/WrongIs.png';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import WrongIs from '../Header/WrongIs.png';
+import {
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
   list: {
@@ -47,8 +51,8 @@ function Header() {
 
   const login = useSelector((state) => state.users);
   const toMePost = useSelector((state) => state.toMePost);
-  const emoji = [cabinet, tape, people, news, advice];
-  const emoji2 = ['👣', '🚶‍♂️'];
+  const emoji = [account, tape, people, news, advice];
+  const emoji2 = [entry, reg];
 
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -85,15 +89,19 @@ function Header() {
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
 
             {[
-              <Link to="/lk">Все обидки</Link>,
-              <Link to="/lenta">Лента</Link>,
+              <Link to="/account">Все обидки</Link>,
+              <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/advices">Советы</Link>,
+              <Link to="/advice">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
-                  <img className={style.headerLogo2} src={emoji[index]} alt="pic"/>
+                  <img
+                    className={style.headerLogo2}
+                    src={emoji[index]}
+                    alt="pic"
+                  />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -111,7 +119,13 @@ function Header() {
               <Link to="/register">Регистрация</Link>,
             ].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                <ListItemIcon>
+                  <img
+                    className={style.headerLogo3}
+                    src={emoji2[index]}
+                    alt="pic"
+                  />
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
@@ -141,7 +155,7 @@ function Header() {
               />
             ) : (
               <div className={style.bell}>
-                {login}, 🔔{toMePost.length}
+                {login}, 🔔 {toMePost.length}
               </div>
             )}
           </div>

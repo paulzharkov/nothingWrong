@@ -1,12 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser, logoutThunk } from '../../redux/creators/users';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import { makeStyles, withStyles, Icon, Button } from '@material-ui/core';
 
 function Logout() {
-
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
@@ -17,15 +14,21 @@ function Logout() {
 
   const RandomButton = withStyles(() => ({
     root: {
-      color: '#67a3a3',
       marginTop: '20px',
       marginLeft: '65%',
-      "&:hover": {
-        backgroundColor: '#FFE0A1',
-        color: 'white !important'
-      }
+      '&:hover': {
+        backgroundColor: '#b0e0e6',
+        color: 'white !important',
+      },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
-  }))(Button)
+  }))(Button);
 
   const classes = useStyles();
 
@@ -43,7 +46,7 @@ function Logout() {
     <div>
       <RandomButton
         variant="outlined"
-        endIcon={<Icon>exit_to_app</Icon>}
+        endIcon={<Icon style={{ marginTop: '-6px' }}>exit_to_app</Icon>}
         onClick={handlerOut}
       >
         Выйти

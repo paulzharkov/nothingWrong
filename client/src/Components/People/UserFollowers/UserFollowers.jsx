@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import * as AC from '../../../redux/creators/usersList'
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles, Icon, Button, Typography } from '@material-ui/core';
 import style from '../style.module.css'
 
 
@@ -37,7 +34,7 @@ function UserFollowers({ login, email, id }) {
       <RandomButton
         onClick={unSubscribeHandler}
         variant="outlined"
-        endIcon={<Icon style={{ fontSize: 20 }}>clear</Icon>}
+        endIcon={<Icon style={{ fontSize: 20, marginTop: '-6px' }}>clear</Icon>}
       >
         Отписаться
         </RandomButton>

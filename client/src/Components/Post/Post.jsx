@@ -32,6 +32,13 @@ const useStyles = makeStyles({
   imageStyle: {
     width: '100%',
     maxWidth: '180px'
+  },
+  LikeButton: {
+    fontSize: '20px',
+  },
+  CommentButton: {
+    fontSize: '20px',
+    margin: '5px',
   }
 });
 
@@ -55,12 +62,10 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
   const handlerChatPrivat = () => {
     dispatch(AC.chatPrivatThunk(id))
     history.push(`/chat/${id}`)
-    // console.log('сюда пришло');
-
   }
 
   const handlerComments = () => {
-    history.push(`/lenta/${id}`)
+    history.push(`/feed/${id}`)
   }
 
   let picture = imgShout
@@ -105,12 +110,12 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
           <div className={classes.buttons}>
             {
               date ?
-                <Button size="large" color="primary" onClick={handlerComments}>💬{comments.length}</Button> :
+                <Button size="large" className={classes.CommentButton} color="primary" onClick={handlerComments}>💬{' '}{comments.length}</Button> :
                 null
             }
-            <Button size="large" color="primary" onClick={handlerLike}>{likes.includes(login) ? "❤️" : "🤍"}{likes.length}</Button>
+            <Button size="large" className={classes.LikeButton} color="primary" onClick={handlerLike}>{likes.includes(login) ? "❤️" : "🤍"}{' '}{likes.length}</Button>
             {offender ? <Button size="large" color="primary" onClick={handlerDelete}>Удалить</Button> : null}
-            {state ? <Button size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
+            {state ? <Button  size="large" color="primary" onClick={handlerChatPrivat}>Обсудить в чате</Button> : null}
           </div>
         </CardActions>
       </Card>

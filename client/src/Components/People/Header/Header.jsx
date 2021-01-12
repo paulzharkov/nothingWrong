@@ -1,7 +1,5 @@
 import style from './style.module.css';
-import { withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import { Button, Icon, withStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 function Header() {
@@ -16,6 +14,7 @@ function Header() {
       justifyContent: 'center',
       marginTop: '10px',
       height: '7vh',
+      boxShadow: '3px 4px 5px #0000003b',
     },
   }))(Button);
   return (
@@ -24,14 +23,14 @@ function Header() {
         <RandomButton
           onClick={() => history.push('/people/followers')}
           variant="outlined"
-          endIcon={<Icon style={{ fontSize: 40 }}>people</Icon>}
+          endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>people</Icon>}
         >
           Мои подписчики
         </RandomButton>
         <RandomButton
           onClick={() => history.push('/people/allpeople')}
           variant="outlined"
-          endIcon={<Icon style={{ fontSize: 40 }}>add_circle</Icon>}
+          endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>add_circle</Icon>}
         >
           Найти обидчиков
         </RandomButton>

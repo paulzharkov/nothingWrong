@@ -8,7 +8,7 @@ import commentsReducer from './commentsReducer';
 import { LOGOUT } from '../types/users';
 import socketReducer from './socketReducer';
 import notifierReducer from './notifierReducer';
-import advicesReducer from './advices';
+import adviceReducer from './advice';
 import messageReducer from './messageReducer';
 import wrongReducer from './wrongReducer';
 
@@ -16,13 +16,13 @@ const appReducer = combineReducers({
   users: usersReducer,
   myPost: postsReducer,
   toMePost: toMePostsReducer,
-  lentaPosts: postsReducer,
+  feed: postsReducer,
   idOne: idReducer,
   usersList: usersListReducer,
   socket: socketReducer,
   comments: commentsReducer,
   notifications: notifierReducer,
-  advicesList: advicesReducer,
+  adviceList: adviceReducer,
   messages: messageReducer,
   oneWrong: wrongReducer,
 });
