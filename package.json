@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/paulzharkov/nothingWrong/issues"
   },
-  "homepage": "https://github.com/paulzharkov/nothingWrong#readme"
+  "homepage": "https://github.com/paulzharkov/nothingWrong#readme",
+  "engines": {
+    "node": "14.x"
+  }
 }
