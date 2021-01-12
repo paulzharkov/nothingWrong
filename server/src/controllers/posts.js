@@ -1,96 +1,56 @@
 const User = require('../models/user.model');
 const Post = require('../models/post.model');
-const Chat = require('../models/chat.model');
-const Comment = require('../models/comment.model');
 // Добавить мидлвар проверки авторизации ?
-const checkAuth = require('../middleware/auth');
+const { checkAuth } = require('../middleware/auth');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-const cabinet = async (req, res) => {
-  const user = req.session.user.id; // Узнаем юзера
-  const userPosts = await Post.find({ authorId: user });
-  const toMeWrongs = await Post.find({ offenderId: user });
+const account =
+  (checkAuth,
+  async (req, res) => {
+    const user = req.session.user; // Узнаем юзера
+    if (user) {
+      const userPosts = await Post.find({ authorId: user.id });
+      const toMeWrongs = await Post.find({ offenderId: user.id });
 
-  res.json({ userPosts, toMeWrongs });
+      res.json({ userPosts, toMeWrongs });
+    }
+  });
+
+const oneWrong = async (req, res) => {
+  const wrong = await Post.findById(req.params.id); // Находим конкретный пост
+  res.json(wrong);
 };
 
-const lenta = async (req, res) => {
-  const lentaPosts = await Post.find(); // Отдаем в ленту все посты из базы
-  res.json(lentaPosts);
-};
-
-const postId = async (req, res) => {
-  const currentPost = await Post.findOne({ _id: req.params.id }); // Находим конкретный пост
-  res.json(currentPost.comments);
-};
-
-const postComment = async (req, res) => {
-  // Добавить try-catch block
-  const currentPost = await Post.findOne({ _id: req.params.id });
-  const author = req.session.user.login;
-  const text = req.body.text;
-  if (author && text) {
-    const newComment = {
-      _id: Math.random(),
-      author,
-      text,
-    };
-    currentPost.comments.push(newComment);
-    await currentPost.save();
-    res.json(newComment);
-  } else {
-    res.sendStatus(404);
-  }
-};
-
-const patchPost = async (req, res) => {
-  const { category, postText, postWishText, status, rating, state } = req.body;
-  const soundUpdate = await Post.findByIdAndUpdate(
-    { _id: req.params.id },
-    { category, postText, postWishText, status, rating, state }
-  );
-  res.sendStatus(200);
-};
-
-const deletePost = async (req, res) => {
-  const post = await Post.findByIdAndDelete({ _id: req.params.id });
-  res.sendStatus(200);
-};
-
-const likePost = async (req, res) => {
-  const currentPost = await Post.findOne({ _id: req.params.id });
-  const user = req.session.user.login;
-  if (!currentPost.likes.includes(user)) {
-    currentPost.likes.push(user);
-    await user.save();
-  }
-  res.json({ likes: sound.likes.length });
-};
-
-const peoplesAll = async (req, res) => {
-  const peoplesAll = await User.find();
-  res.json(peoplesAll.login);
-};
-
-const peoplesSubscribers = async (req, res) => {
-  const peoplesSubscribers = await User.find();
-  res.json(peoplesSubscribers.subscribers);
-};
-
-const statsOffended = async (req, res) => {
-  const user = await User.findOne({ login: req.session.user.login });
-  const statsOffended = await Post.find({ authorId: user._id });
-  res.json(statsOffended); // Добавить сразу параметр status ?
-};
-
-const statsOffender = async (req, res) => {
-  const user = await User.findOne({ login: req.session.user.login });
-  const statsOffender = await Post.find({ offenderId: user._id });
-  res.json(statsOffender); // Добавить сразу параметр status ?
-};
-
-const advices = async (req, res) => {
-  const someFetch = { text: 'advice' };
-  res.json(someFetch); // Добавить fetch на какой то сайт с советами
+const advice = async (req, res) => {
+  let parsingResultArray = [];
+  await axios.get('https://www.psychologies.ru/articles/').then((res) => {
+    const data = res.data.trim();
+    const $ = cheerio.load(data, { xmlMode: true });
+    let titleArray = [];
+    let textArray = [];
+    let linksArray = [];
+    let photosArray = [];
+    let title = $('a.rubric-anons_title').each((i, elem) => {
+      titleArray.push($(elem).text());
+    });
+    let text = $('div.rubric-anons_text').each((i, elem) => {
+      textArray.push($(elem).text());
+    });
+    let links = $('a.rubric-anons_title').each((i, elem) => {
+      linksArray.push('https://www.psychologies.ru' + $(elem).attr().href);
+    });
+    let photos = $('img.images').each((i, elem) => {
+      photosArray.push($(elem).attr().src);
+    });
+    parsingResultArray = titleArray.map((el, i) => ({
+      title: el,
+      text: textArray[i],
+      link: linksArray[i],
+      img: photosArray[i],
+    }));
+  });
+  res.json(parsingResultArray);
 };
 
 const makewrong =
@@ -110,43 +70,45 @@ const makewrong =
         offenderId: offender._id,
         offenderName: req.body.offender,
         authorId: user._id,
+        authorName: req.session.user.login,
         date: new Date().toLocaleDateString(),
+        authorName: req.session.user.login,
       });
       await newPost.save();
-      return res.status(200).json(newPost);
+      return res.json({ newPost, offenderSocketID: offender.socketID });
     } else {
       return res.sendStatus(406);
     }
   });
 
-const chat = async (req, res) => {
-  const chat = await Chat.findOne({ postId: req.params.post });
-  res.json(chat);
+const allMessages = async (req, res) => {
+  const wrong = await Post.findById(req.params.id);
+  res.json(wrong.sms);
 };
 
-const chatSendMessage = async (req, res) => {
-  const chat = await Chat.findOne({ postId: req.params.post });
-  const messageAuthor = await User.findOne({ login: req.session.user.login });
-  const message = req.body.message;
-  chat.messages.push({ messageAuthor: message });
-  await chat.save();
-  res.sendStatus(200);
+const changeAnswer = async (req, res) => {
+  const wrong = await Post.findById(req.body.id);
+  if (wrong) {
+    if (wrong.offenderName === req.body.user) {
+      wrong.offenderAnswer = req.body.answer;
+    } else {
+      wrong.authorAnswer = req.body.answer;
+    }
+    await wrong.save();
+    if (!wrong.authorAnswer || !wrong.offenderAnswer) {
+      wrong.state = 'Публичная';
+      await wrong.save();
+    }
+    if (wrong.authorAnswer === true && wrong.offenderAnswer === true) {
+      return wrong.remove();
+    }
+  }
 };
-
 module.exports = {
-  cabinet,
-  lenta,
-  postId,
-  postComment,
-  patchPost,
-  deletePost,
-  likePost,
-  peoplesAll,
-  peoplesSubscribers,
-  statsOffended,
-  statsOffender,
-  advices,
+  account,
+  advice,
   makewrong,
-  chat,
-  chatSendMessage,
+  allMessages,
+  oneWrong,
+  changeAnswer,
 };

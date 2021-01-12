@@ -2,10 +2,15 @@ const initState = {
   users: '',
   myPost: [],
   toMePost: [],
-  lentaPosts: [],
+  feed: [],
   idOne: '',
   usersList: [],
   comments: [],
+  socket: {},
+  notifications: [],
+  adviceList: [],
+  messages: [],
+  oneWrong: {},
 };
 
 export default initState;

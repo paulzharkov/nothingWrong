@@ -1,12 +1,8 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MyWrongs from './MyWrongs/MyWrongs';
 import HeaderWrongs from './Header/HeaderWrongs';
 import ToMeWrongs from './ToMeWrongs/ToMeWrongs';
-
+import ChatPrivat from '../ChatPrivat/index.js';
 
 function Wrongs() {
   return (
@@ -14,21 +10,21 @@ function Wrongs() {
       <Router>
         <HeaderWrongs />
         <Switch>
-
-          <Route exact path='/lk/myWrongs'>
+          <Route exact path="/account/myWrongs">
             <MyWrongs />
           </Route>
 
-          <Route exact path='/lk/toMeWrongs'>
+          <Route exact path="/account/toMeWrongs">
             <ToMeWrongs />
           </Route>
 
+          <Route exact path="/chat/:id">
+            <ChatPrivat />
+          </Route>
         </Switch>
-
       </Router>
-
     </div>
-  )
+  );
 }
 
-export default Wrongs
+export default Wrongs;

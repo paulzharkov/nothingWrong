@@ -30,7 +30,7 @@ function Followers() {
           />
         ))
       ) : (
-          <div>wasted</div>
+          <div>У вас пока нет подписчиков</div>
         )}
     </div>
   );

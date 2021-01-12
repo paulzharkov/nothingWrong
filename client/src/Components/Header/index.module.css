@@ -7,20 +7,26 @@
   margin: 0;
 }
 
+.headerDiv a {
+  color: #67a3a3 !important;
+  margin-left: 7px;
+  font-size: 22px !important;
+}
+
 .headerLogo {
   width: 100px;
   height: 100px;
   margin-left: 20%;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .headerLogoEnter {
   width: 100px;
   height: 100px;
-  margin-left: 40%;
+  margin-left: 70px;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .btnMenu {
   color: #67a3a3;
@@ -30,6 +36,40 @@
 }
 
 .headerNewLogo {
-  width: 180px;
-  height: 250px;
+  width: 200px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+.flexBox {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+.forImg {
+  margin-top: 20px;
+  margin-left: 80px;
+}
+
+.bell {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  align-self: center;
+  flex-direction: row;
+  width: 100%;
+  text-align: end;
+  padding-right: 5%;
+  margin-top: 10px;
+}
+
+.headerLogo2{
+  width: 50px;
+  height: 50px;
+}
+
+
+.headerLogo3 {
+  width: 70px;
+  height: 120px;
 }

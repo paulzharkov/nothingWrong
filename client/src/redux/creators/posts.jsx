@@ -12,7 +12,7 @@ export const setPosts = (postsList) => ({
 
 })
 
-export const setLentaPosts = (postsList) => ({
+export const setFeedPosts = (postsList) => ({
   type: TYPES.ADD_ALL_LENTA,
   payload: postsList
 
@@ -28,23 +28,49 @@ export const deletePost = (id) => ({
   payload: id
 })
 
-export const addId = (id) => ({
+export const likePost = (data) => ({
+  type: TYPES.LIKE,
+  payload: data
+})
+
+export const disLikePost = (data) => ({
+  type: TYPES.DISLIKE,
+  payload: data
+})
+
+export const addId = (id = '') => ({
   type: TYPES.ADD_ID,
   payload: id
 })
 
-export const getLentaPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lenta', {
+export const getWrong = (id = {}) => ({
+  type: TYPES.GET_WRONG,
+  payload: id
+})
+
+export const getWrongThunk = (id) => async (dispatch) => {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong/${id}`, {
+    credentials: "include"
+  })
+  const oneWrong = await response.json()
+  if (oneWrong) {
+    dispatch(getWrong(oneWrong))
+  }
+}
+
+
+export const getFeedPostsThunk = () => async (dispatch) => {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed`, {
     credentials: "include"
   })
   const postsList = await response.json()
   if (postsList) {
-    dispatch(setLentaPosts(postsList))
+    dispatch(setFeedPosts(postsList))
   }
 }
 
 export const getAllMyPostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lk', {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/account`, {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -54,7 +80,7 @@ export const getAllMyPostsThunk = () => async (dispatch) => {
 }
 
 export const getAllToMePostsThunk = () => async (dispatch) => {
-  const response = await fetch('http://localhost:8000/lk', {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/account`, {
     credentials: "include"
   })
   const postsList = await response.json()
@@ -68,8 +94,8 @@ export const createPostThunk = ({ category,
   solve,
   offender,
   rating,
-  state }) => async (dispatch) => {
-    const response = await fetch('http://localhost:8000/wrong', {
+  state }) => async (dispatch, getState) => {
+    const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -85,19 +111,57 @@ export const createPostThunk = ({ category,
       credentials: 'include'
     })
     const data = await response.json()
-    data && dispatch(createPost(data))
+    if (data.newPost) {
+      dispatch(createPost(data.newPost))
+      const { socket } = getState()
+      if (Object.keys(socket).length) {
+        socket.emit('wrong notification', {
+          title: 'Вам обидка!',
+          wrongID: data.newPost._id,
+          offender: data.newPost.offenderId,
+          offenderSocketID: data.offenderSocketID
+        })
+      }
+    }
   };
 
 export const deletePostThunk = (id) => (dispatch) => {
-  fetch(`http://localhost:8000/lenta/${id}`, {
+  fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
     method: 'DELETE',
     credentials: "include"
   }).then(res => res.status === 200 && dispatch(deletePost(id)))
 }
 
-export const chatPrivatThunk = (id) => (dispatch) => {
+export const likePostThunk = ({ id, login }) => async (dispatch) => {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
+    method: 'PATCH',
+    credentials: "include"
+  })
+  if (response.status === 200) {
+    dispatch(likePost({ id, login }))
+  } else {
+    dispatch(disLikePost({ id, login }))
+  }
+}
 
+export const chatPrivatThunk = (id) => (dispatch) => {
   dispatch(addId(id))
+}
+
+export const changeAnswer = ({ id, answer, user }) => async (dispatch) => {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/wrong/answer/${id}`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      answer,
+      id,
+      user
+    }),
+    credentials: 'include'
+  })
+
 }
 
 

@@ -8,11 +8,10 @@ export const createComment = (data) => ({
 export const setComments = (commentsList) => ({
   type: TYPES.ADD_ALL_COMMENTS,
   payload: commentsList
-
 })
 
 export const addCommentThunk = ({ text, id }) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/lenta/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -27,7 +26,7 @@ export const addCommentThunk = ({ text, id }) => async (dispatch) => {
 };
 
 export const getCommentsThunk = ({ id }) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8000/lenta/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_DEVELOPMENT_BACK}/feed/${id}`, {
     credentials: "include"
   })
   const commentsList = await response.json()

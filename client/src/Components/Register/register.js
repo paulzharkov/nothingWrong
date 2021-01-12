@@ -1,33 +1,44 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createPersonThunk } from '../../redux/creators/users';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import style from './index.module.css'
+import {
+  makeStyles,
+  withStyles,
+  TextField,
+  Icon,
+  Button,
+} from '@material-ui/core';
+import style from './index.module.css';
 
 function Register() {
-
   const RandomButton = withStyles(() => ({
     root: {
-      backgroundColor: '#FFF',
-      color: '#67a3a3',
-
+      marginTop: '20px',
+      marginLeft: '65%',
+      '&:hover': {
+        backgroundColor: '#b0e0e6',
+        color: 'white !important',
+      },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
-  }))(Button)
+  }))(Button);
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(3),
+        margin: theme.spacing(2),
       },
       button: {
         margin: theme.spacing(1),
       },
     },
   }));
-  const loginRedux = useSelector((state) => state.users.length);
 
   const classes = useStyles();
 
@@ -41,9 +52,7 @@ function Register() {
   function handlerReg(e) {
     e.preventDefault();
     dispatch(createPersonThunk({ login, email, pass }));
-    if (loginRedux === true) {
-      history.push('/lk');
-    }
+    history.push('/makewrong');
   }
 
   return (
@@ -73,11 +82,21 @@ function Register() {
         />
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>how_to_reg</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>how_to_reg</Icon>}
           onClick={handlerReg}
           size="large"
         >
           Продолжить
+        </RandomButton>
+        <p>Уже есть аккаунт?</p>
+        <RandomButton
+          variant="outlined"
+          endIcon={<Icon style={{ marginTop: '-6px' }}>login</Icon>}
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          Войти
         </RandomButton>
       </form>
     </div>

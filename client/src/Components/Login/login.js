@@ -1,29 +1,38 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginPersonThunk } from '../../redux/creators/users';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import {
+  makeStyles,
+  Button,
+  withStyles,
+  TextField,
+  Icon,
+} from '@material-ui/core';
 import style from './index.module.css';
 
 function Login() {
   const RandomButton = withStyles(() => ({
     root: {
-      color: '#67a3a3',
       marginTop: '20px',
       marginLeft: '65%',
       '&:hover': {
-        backgroundColor: '#FFE0A1',
+        backgroundColor: '#b0e0e6',
         color: 'white !important',
       },
+      color: '#FFF',
+      border: '2px solid #67a3a3',
+      fontSize: '16px',
+      boxShadow: '3px 4px 5px #0000003b',
+      fontWeight: 'bold',
+      paddingTop: '10px',
+      backgroundColor: '#67a3a3',
     },
   }))(Button);
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(1.5),
       },
       button: {
         margin: theme.spacing(1),
@@ -32,8 +41,6 @@ function Login() {
   }));
 
   const classes = useStyles();
-
-  const loginRedux = useSelector((state) => state.users.length);
 
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -44,11 +51,12 @@ function Login() {
   function handlerLogin(e) {
     e.preventDefault();
     dispatch(loginPersonThunk({ email, pass }));
-    history.push('/lk');
+    history.push('/makewrong');
   }
 
   return (
     <div className={style.formDiv}>
+      {/* <img className={style.headerNewLogo} src={newLogo} alt="pic" /> */}
       <h2>Вход</h2>
       <form className={classes.root} autoComplete="off">
         <TextField
@@ -71,12 +79,23 @@ function Login() {
           error={pass === ' '}
           helperText={pass === ' ' ? 'Empty!' : ' '}
         />
+        <div></div>
         <RandomButton
           variant="outlined"
-          endIcon={<Icon>login</Icon>}
+          endIcon={<Icon style={{ marginTop: '-6px' }}>login</Icon>}
           onClick={handlerLogin}
         >
           Войти
+        </RandomButton>
+        <p>Еще не зарегистрированы?</p>
+        <RandomButton
+          variant="outlined"
+          endIcon={<Icon style={{ marginTop: '-6px' }}>how_to_reg</Icon>}
+          onClick={() => {
+            history.push('/register');
+          }}
+        >
+          Создать аккаунт
         </RandomButton>
       </form>
     </div>

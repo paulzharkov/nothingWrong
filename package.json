@@ -1,0 +1,26 @@
+{
+  "name": "nothingWrong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && npm install && npm start",
+    "build": "cd client && yarn && yarn build",
+    "installall": "(cd server && npm i)  & (cd client && yarn) & npm seeder",
+    "seeder": "cd server/src/seeder && (node post & node user)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulzharkov/nothingWrong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulzharkov/nothingWrong/issues"
+  },
+  "homepage": "https://github.com/paulzharkov/nothingWrong#readme",
+  "engines": {
+    "node": "14.x"
+  }
+}

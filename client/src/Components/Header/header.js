@@ -1,19 +1,28 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './index.module.css';
 import { Link } from 'react-router-dom';
 import Logout from '../Logout/logout';
 import logo from './logo2.jpg';
+import people from './people.png';
+import news from './new.png';
+import advice from './advice.png';
+import tape from './tape.png';
+import account from './account.png';
 import newLogo from './NothingWrong.png';
-
-import React from 'react';
+import entry from './entry.png';
+import reg from './reg.png';
+import WrongIs from '../Header/WrongIs.png';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import {
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
   list: {
@@ -28,18 +37,22 @@ function Header() {
   const RandomButton = withStyles(() => ({
     root: {
       color: '#67a3a3',
-      fontWeight: 'bold',
-      fontSize: '16px',
-      marginTop: '10px',
-      marginLeft: '10px',
-      border: '2px solid white',
       width: '100px',
+      border: '2px solid white',
+      fontSize: '16px',
+      boxShadow: '0 0 10px #0000007d',
+      marginTop: '10px',
+      fontWeight: 'bold',
+      marginLeft: '10px',
+      paddingTop: '10px',
+      backgroundColor: '#FFF',
     },
   }))(Button);
 
   const login = useSelector((state) => state.users);
-  const emoji = ['👺', '🎞', '👨‍👨‍👧‍👧', '📊', '💩', '📝', '🗣'];
-  const emoji2 = ['👣', '🚶‍♂️'];
+  const toMePost = useSelector((state) => state.toMePost);
+  const emoji = [account, tape, people, news, advice];
+  const emoji2 = [entry, reg];
 
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -76,16 +89,20 @@ function Header() {
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
 
             {[
-              <Link to="/lk">Личный кабинет</Link>,
-              <Link to="/lenta">Лента</Link>,
+              <Link to="/account">Все обидки</Link>,
+              <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
-              <Link to="/stats">Статистика</Link>,
-              <Link to="/advices">Советы</Link>,
               <Link to="/makewrong">Создать обидку</Link>,
-              <Link to="/chatprivate">Обсудить Приватно</Link>,
+              <Link to="/advice">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>
-                <ListItemIcon>{emoji[index]}</ListItemIcon>
+                <ListItemIcon>
+                  <img
+                    className={style.headerLogo2}
+                    src={emoji[index]}
+                    alt="pic"
+                  />
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
@@ -96,12 +113,19 @@ function Header() {
         <div className={style.headerDiv}>
           <List>
             <img className={style.headerLogoEnter} src={logo} alt="pic" />
+            <img className={style.headerNewLogo} src={newLogo} alt="pic" />
             {[
               <Link to="/">Войти</Link>,
               <Link to="/register">Регистрация</Link>,
             ].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>{emoji2[index]}</ListItemIcon>
+                <ListItemIcon>
+                  <img
+                    className={style.headerLogo3}
+                    src={emoji2[index]}
+                    alt="pic"
+                  />
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
@@ -115,9 +139,26 @@ function Header() {
     <>
       {
         <React.Fragment key={'left'}>
-          <RandomButton onClick={toggleDrawer('left', true)}>
-            {'Меню'}
-          </RandomButton>
+          <div className={style.flexBox}>
+            <div>
+              <RandomButton onClick={toggleDrawer('left', true)}>
+                {'Меню'}
+              </RandomButton>
+            </div>
+            {!(login && toMePost) ? (
+              <img
+                className={style.forImg}
+                src={WrongIs}
+                width="180"
+                height="35"
+                alt="pic"
+              />
+            ) : (
+              <div className={style.bell}>
+                {login}, 🔔 {toMePost.length}
+              </div>
+            )}
+          </div>
           <Drawer
             anchor={'left'}
             open={state['left']}
@@ -132,29 +173,3 @@ function Header() {
 }
 
 export default Header;
-// {/* <div className={style.headerDiv}>
-//         <div>
-//           <img className={style.headerLogo} src={logo} alt="logo" />
-//         </div>
-//         {login ? (
-//           <div className={style.headerLinks} >
-//             <div><Link to="/lk">Личный кабинет</Link></div>
-//             <div><Link to="/lenta">Лента</Link></div>
-//             <div><Link to="/people">Люди</Link></div>
-//             <div><Link to="/stats">Статистика</Link></div>
-//             <div><Link to="/advices">Советы</Link></div>
-//             <div><Link to="/makewrong">Создать обидку</Link></div>
-//             <div><Link to="/chat">Обсудить</Link></div>
-//             <hr />
-//             <div><Logout /></div>
-//             <div><Link to="/chatprivate">Обсудить Приватно</Link></div>
-//           </div>
-//         ) : (
-//             <div className={style.headerLink}>
-//               <div><Link to="/">Войти</Link></div>
-//               <div><Link to="/register">Регистрация</Link></div>
-//               <hr />
-//             </div>
-//           )}
-
-//       </div> */}

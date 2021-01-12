@@ -1,16 +1,23 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { createPostThunk } from '../../redux/creators/posts';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFollowersUsersThunk } from '../../redux/creators/usersList';
-import { makeStyles } from '@material-ui/core/styles';
 import {
-  InputLabel,
   Select,
   FormHelperText,
   TextField,
   MenuItem,
   Button,
+  FormControl,
+  FormLabel,
+  Radio,
+  FormControlLabel,
+  RadioGroup,
+  Icon,
+  makeStyles,
+  withStyles,
 } from '@material-ui/core';
 
 function Makewrong() {
@@ -30,8 +37,20 @@ function Makewrong() {
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      width: '340px',
     },
   }));
+
+  const RandomButton = withStyles(() => ({
+    root: {
+      backgroundColor: '#FFF',
+      color: '#67a3a3',
+      alignItems: 'start',
+    },
+  }))(Button);
 
   const history = useHistory();
 
@@ -73,15 +92,13 @@ function Makewrong() {
     dispatch(
       createPostThunk({ category, reason, solve, offender, rating, state })
     );
-    history.push('/lk');
+    history.push('/account/myWrongs');
   };
 
   return (
-    <form onSubmit={handlerSubmit}>
-      <div>
-        <InputLabel id="demo-simple-select-outlined-label">
-          Выберите категорию:
-        </InputLabel>
+    <form className="formaObidka" onSubmit={handlerSubmit}>
+      <div style={{ marginTop: '15px' }}>
+        <h1>Создайте свою обидку:</h1>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -91,7 +108,7 @@ function Makewrong() {
           className={classes.selectEmpty}
         >
           <MenuItem value="" disabled>
-            Список
+            Выберите категорию:
           </MenuItem>
           <MenuItem value="Финансовая">Финансовая</MenuItem>
           <MenuItem value="Невыполненные обещания">
@@ -102,10 +119,11 @@ function Makewrong() {
           <MenuItem value="Бытовая">Бытовая</MenuItem>
         </Select>
       </div>
-      <div>
+
+      <div style={{ marginTop: '20px' }}>
         <TextField
           id="outlined-multiline-static"
-          label="Укажите причину"
+          label="Напишите причину обиды"
           multiline
           rows={3}
           value={reason}
@@ -115,16 +133,16 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)
+          (не более 140 символов){' '}
+          <progress value={counterReason} max="140">
+            {counterReason}
+          </progress>
         </FormHelperText>
-        <progress value={counterReason} max="140">
-          {counterReason}
-        </progress>
       </div>
-      <div>
+      <div style={{ marginTop: '10px' }}>
         <TextField
           id="outlined-multiline-static"
-          label="Чего я хочу от обидчика"
+          label="Чего вы хотите от обидчика"
           multiline
           rows={3}
           value={solve}
@@ -134,16 +152,13 @@ function Makewrong() {
           type="text"
         />
         <FormHelperText id="my-helper-text">
-          (не более 140 символов)
+          (не более 140 символов){' '}
+          <progress value={counterSolve} max="140">
+            {counterSolve}
+          </progress>
         </FormHelperText>
-        <meter max="140" value={counterSolve} low="70" high="120">
-          {counterSolve}
-        </meter>
       </div>
       <div>
-        <InputLabel id="demo-simple-select-outlined-label">
-          Укажите обидчика:
-        </InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -153,7 +168,7 @@ function Makewrong() {
           className={classes.selectEmpty}
         >
           <MenuItem value="" disabled>
-            Выберите из списка
+            Укажите обидчика:
           </MenuItem>
           {usersList.length &&
             usersList.map((el) => (
@@ -161,45 +176,70 @@ function Makewrong() {
             ))}
         </Select>
       </div>
-      <div>
-        <InputLabel id="demo-simple-select-outlined-label">
-          Кому будет доступна обидка:
-        </InputLabel>
-        <Select
-          value={state}
-          onChange={stateHandler}
-          displayEmpty
-          className={classes.selectEmpty}
-        >
-          <MenuItem value="" disabled>
-            Стэйт
-          </MenuItem>
-          <MenuItem value="Приватная">Приватная</MenuItem>
-          <MenuItem value="Публичная">Публичная</MenuItem>
-        </Select>
+      <div style={{ marginTop: '30px', marginBottom: '20px' }}>
+        <FormControl component="stateForm">
+          <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
+          <RadioGroup
+            className={classes.selectEmpty}
+            aria-label="state"
+            name="state"
+            value={state}
+            onChange={stateHandler}
+          >
+            <FormControlLabel
+              value="Приватная"
+              control={<Radio style={{ color: 'blue' }} />}
+              label="Приватная"
+            />
+            <FormControlLabel
+              value="Публичная"
+              control={<Radio style={{ color: 'black' }} />}
+              label="Публичная"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-      <div>
-        <InputLabel id="demo-simple-select-outlined-label">
-          Уровень злости:
-        </InputLabel>
-        <Select
-          value={rating}
-          onChange={ratingHandler}
-          displayEmpty
-          className={classes.selectEmpty}
-        >
-          <MenuItem value="" disabled>
-            Выберите от 1 до 3
-          </MenuItem>
-          <MenuItem value="1">1</MenuItem>
-          <MenuItem value="2">2</MenuItem>
-          <MenuItem value="3">3</MenuItem>
-        </Select>
+      <div style={{ marginBottom: '10px' }}>
+        <FormControl component="ratingForm">
+          <FormLabel component="rating">
+            Выберите уровень недовольства:
+          </FormLabel>
+          <RadioGroup
+            className={classes.selectEmpty}
+            aria-label="rating"
+            name="rating"
+            value={rating}
+            onChange={ratingHandler}
+          >
+            <FormControlLabel
+              value="1"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'green' }} />}
+              label="😠"
+            />
+            <FormControlLabel
+              value="2"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'yellow' }} />}
+              label="😡"
+            />
+            <FormControlLabel
+              value="3"
+              className={classes.emodji}
+              control={<Radio style={{ color: 'red' }} />}
+              label="🤬"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-      {/* <button type="submit">Отправить</button> */}
-      <Button type="submit" variant="outlined" color="primary">
+      <RandomButton
+        type="submit"
+        variant="outlined"
+        color="primary"
+        endIcon={<Icon>send</Icon>}
+      >
         Обидеться!
-      </Button>
+      </RandomButton>
     </form>
   );
 }
