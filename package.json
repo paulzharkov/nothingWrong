@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && yarn && yarn build",
     "start": "cd server && npm install && npm start",
+    "build": "cd client && yarn && yarn build",
     "installall": "(cd server && npm i)  & (cd client && yarn) & npm seeder",
-    "seeder": "cd server/src/seeder && (node post & node user)",
+    "seeder": "cd server/src/seeder && (node post & node user)"
   },
   "repository": {
     "type": "git",
