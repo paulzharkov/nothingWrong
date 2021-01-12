@@ -6,8 +6,6 @@
   "scripts": {
     "build": "cd client && yarn && yarn start",
     "start": "cd server && npm i && npm start"
-    // "installall": "(cd server && npm i)  & (cd client && yarn) & npm seeder",
-    // "seeder": "cd server/src/seeder && (node post & node user)"
   },
   "repository": {
     "type": "git",
