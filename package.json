@@ -1,0 +1,22 @@
+{
+  "name": "nothingwrong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installall": "(cd server && npm i)  & (cd client && yarn) & npm seeder",
+    "seeder": "cd server/src/seeder && (node post & node user)",
+    "start": "(cd client && yarn start) & (cd server && node app.js)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulzharkov/nothingWrong.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulzharkov/nothingWrong/issues"
+  },
+  "homepage": "https://github.com/paulzharkov/nothingWrong#readme"
+}

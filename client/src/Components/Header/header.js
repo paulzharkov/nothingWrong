@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './index.module.css';
 import { Link } from 'react-router-dom';
@@ -11,16 +12,17 @@ import account from './account.png';
 import newLogo from './NothingWrong.png';
 import entry from './entry.png';
 import reg from './reg.png';
-import React from 'react';
+import WrongIs from '../Header/WrongIs.png';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import WrongIs from '../Header/WrongIs.png';
+import {
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
   list: {

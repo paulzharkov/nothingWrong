@@ -9,9 +9,7 @@ const feed = async (req, res) => {
 };
 
 const postId = async (req, res) => {
-  const currentPost = await Post.findOne({ _id: req.params.id }).populate(
-    'comments'
-  );
+  const currentPost = await Post.findById(req.params.id).populate('comments');
   res.json(currentPost.comments);
 };
 
@@ -53,7 +51,7 @@ const deletePost = async (req, res) => {
 const likePost =
   (checkAuth,
   async (req, res) => {
-    const currentPost = await Post.findOne({ _id: req.params.id });
+    const currentPost = await Post.findById(req.params.id);
     const user = req.session.user.login;
     if (!currentPost.likes.includes(user)) {
       currentPost.likes.push(user);

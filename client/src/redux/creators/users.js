@@ -1,4 +1,3 @@
-import useLinks from '../../helpers/links';
 import * as TYPES from '../types/users';
 import { LOGOUT } from '../types/users';
 
