@@ -10,6 +10,7 @@ const postsRouter = require('./src/routes/posts');
 const peopleRouter = require('./src/routes/people');
 const feedRouter = require('./src/routes/feed');
 const dbConnect = require('./src/config/db');
+const path = require('path');
 const http = require('http');
 const cors = require('cors');
 const User = require('../server/src/models/user.model');
@@ -23,12 +24,15 @@ dbConnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.resolve('../client/build/')))
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://nothingwrong.herokuapp.com'],
     credentials: true,
   })
 );
+
+
 
 const sessionMiddleware = session({
   name: 'sid',
