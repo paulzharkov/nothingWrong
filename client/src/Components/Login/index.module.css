@@ -1,8 +1,15 @@
 .formDiv {
-  margin-top: 40%;
+  margin-top: 17%;
+  margin-left: 30%;
 }
 
 /* .forLink {
   margin-top: 100px;
 } */
 
+@media (max-width: 767px) {
+  .formDiv {
+    margin-top: 40%;
+    margin-left: 0%;
+  }
+}

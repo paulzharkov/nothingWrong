@@ -1,3 +1,12 @@
 .regDiv {
-  margin-top: 25%;
+  margin-top: 15%;
+  margin-left: 18%;
+}
+
+
+@media (max-width: 767px) {
+  .regDiv {
+    margin-top: 25%;
+    margin-left: 0%;
+  }
 }
