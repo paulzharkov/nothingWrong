@@ -48,7 +48,6 @@ a:focus {
 
 .makeStyles-paper {
   height: 91.4vh !important;
- 
 }
 
 .makeStyles-paper-3 {
@@ -93,7 +92,6 @@ a:focus {
   margin-top: 15px !important;
 }
 
-.MuiFormControlLabel-label  {
+.MuiFormControlLabel-label {
   font-size: 20px !important;
 }
-

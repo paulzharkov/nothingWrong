@@ -32,7 +32,7 @@ function Header() {
           variant="outlined"
           endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>add_circle</Icon>}
         >
-          Найти обидчиков
+          Найти людей
         </RandomButton>
         {/* {history.location.pathname === '/people' ? <Followers /> : null} */}
       </div>

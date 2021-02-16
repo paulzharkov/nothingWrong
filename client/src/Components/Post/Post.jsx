@@ -87,14 +87,14 @@ function Post({ category, reason, solve, status, rating, state, offender, likes,
               <div>
                 {
                   authorName &&
-                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обиженный:</span> {authorName}</Typography>
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Адресант:</span> {authorName}</Typography>
                 }
                 {
                   offenderName &&
-                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Обидчик:</span> {offenderName}</Typography>
+                  <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Адресат:</span> {offenderName}</Typography>
                 }
                 <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Причина:</span> {reason}</Typography>
-                <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути Решения:</span> {solve}</Typography>
+                <Typography variant="body1" color="textPrimary" component="p"><span className={style.colortext}>Пути решения:</span> {solve}</Typography>
               </div>
             </CardContent>
           </div>

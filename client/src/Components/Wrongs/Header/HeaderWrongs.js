@@ -36,7 +36,7 @@ function HeaderWrongs() {
         variant="outlined"
         endIcon={<Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood</Icon>}
       >
-        Мои
+        Мои посты
       </RandomButton>
 
       <RandomButton
@@ -46,7 +46,7 @@ function HeaderWrongs() {
           <Icon style={{ fontSize: 40, marginTop: '-6px' }}>mood_bad</Icon>
         }
       >
-        На меня
+        На меня посты
       </RandomButton>
     </div>
   );

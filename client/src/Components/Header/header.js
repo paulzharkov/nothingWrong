@@ -89,10 +89,10 @@ function Header() {
             <img className={style.headerNewLogo} src={newLogo} alt="pic" />
 
             {[
-              <Link to="/account">Все обидки</Link>,
+              <Link to="/account">Все посты</Link>,
               <Link to="/feed">Лента</Link>,
               <Link to="/people">Люди</Link>,
-              <Link to="/makewrong">Создать обидку</Link>,
+              <Link to="/makewrong">Создать пост</Link>,
               <Link to="/advice">Советы</Link>,
             ].map((text, index) => (
               <ListItem button key={index}>

@@ -17,7 +17,7 @@ function ToMeWrongs() {
     <div className={style.accountPage}>
       <HeaderWrongs />
       <div>
-        <h1>На меня обиделись:</h1>
+        <h1>На меня посты:</h1>
 
         {posts.length ? (
           posts.map((el) => (
@@ -38,7 +38,7 @@ function ToMeWrongs() {
             />
           ))
         ) : (
-          <div>На вас никто не обиделся😅</div>
+          <div>На вас ничего не публиковали😅</div>
         )}
       </div>
     </div>

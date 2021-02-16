@@ -98,7 +98,7 @@ function Makewrong() {
   return (
     <form className="formaObidka" onSubmit={handlerSubmit}>
       <div style={{ marginTop: '15px' }}>
-        <h1>Создайте свою обидку:</h1>
+        <h1>Создайте свой пост:</h1>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -123,7 +123,7 @@ function Makewrong() {
       <div style={{ marginTop: '20px' }}>
         <TextField
           id="outlined-multiline-static"
-          label="Напишите причину обиды"
+          label="Напишите причину..."
           multiline
           rows={3}
           value={reason}
@@ -142,7 +142,7 @@ function Makewrong() {
       <div style={{ marginTop: '10px' }}>
         <TextField
           id="outlined-multiline-static"
-          label="Чего вы хотите от обидчика"
+          label="Чего вы ожидаете..."
           multiline
           rows={3}
           value={solve}
@@ -168,7 +168,7 @@ function Makewrong() {
           className={classes.selectEmpty}
         >
           <MenuItem value="" disabled>
-            Укажите обидчика:
+            Укажите человека:
           </MenuItem>
           {usersList.length &&
             usersList.map((el) => (
@@ -178,7 +178,7 @@ function Makewrong() {
       </div>
       <div style={{ marginTop: '30px', marginBottom: '20px' }}>
         <FormControl component="stateForm">
-          <FormLabel component="state">Кому будет доступна обидка:</FormLabel>
+          <FormLabel component="state">Кому будет доступен пост:</FormLabel>
           <RadioGroup
             className={classes.selectEmpty}
             aria-label="state"
@@ -189,12 +189,12 @@ function Makewrong() {
             <FormControlLabel
               value="Приватная"
               control={<Radio style={{ color: 'blue' }} />}
-              label="Приватная"
+              label="Приватный"
             />
             <FormControlLabel
               value="Публичная"
               control={<Radio style={{ color: 'black' }} />}
-              label="Публичная"
+              label="Публичный"
             />
           </RadioGroup>
         </FormControl>
@@ -238,7 +238,7 @@ function Makewrong() {
         color="primary"
         endIcon={<Icon>send</Icon>}
       >
-        Обидеться!
+        Опубликовать
       </RandomButton>
     </form>
   );
